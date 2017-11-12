@@ -7,21 +7,57 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		503CEE511FB8471500AADC7B /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503CEE501FB8471500AADC7B /* Globals.swift */; };
+		503CEE531FB8478100AADC7B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503CEE521FB8478100AADC7B /* Extensions.swift */; };
+		503CEE5F1FB8497300AADC7B /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 503CEE551FB8497300AADC7B /* OpenSans-Bold.ttf */; };
+		503CEE601FB8497300AADC7B /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 503CEE561FB8497300AADC7B /* OpenSans-BoldItalic.ttf */; };
+		503CEE611FB8497300AADC7B /* OpenSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 503CEE571FB8497300AADC7B /* OpenSans-ExtraBold.ttf */; };
+		503CEE621FB8497300AADC7B /* OpenSans-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 503CEE581FB8497300AADC7B /* OpenSans-ExtraBoldItalic.ttf */; };
+		503CEE631FB8497300AADC7B /* OpenSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 503CEE591FB8497300AADC7B /* OpenSans-Italic.ttf */; };
+		503CEE641FB8497300AADC7B /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 503CEE5A1FB8497300AADC7B /* OpenSans-Light.ttf */; };
+		503CEE651FB8497300AADC7B /* OpenSans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 503CEE5B1FB8497300AADC7B /* OpenSans-LightItalic.ttf */; };
+		503CEE661FB8497300AADC7B /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 503CEE5C1FB8497300AADC7B /* OpenSans-Regular.ttf */; };
+		503CEE671FB8497300AADC7B /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 503CEE5D1FB8497300AADC7B /* OpenSans-Semibold.ttf */; };
+		503CEE681FB8497300AADC7B /* OpenSans-SemiboldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 503CEE5E1FB8497300AADC7B /* OpenSans-SemiboldItalic.ttf */; };
+		504600171FB8913100F5BED9 /* Designs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504600161FB8913100F5BED9 /* Designs.swift */; };
+		504600191FB891A400F5BED9 /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504600181FB891A400F5BED9 /* SignInVC.swift */; };
+		509076AA1FB8BCCC00585348 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509076A91FB8BCCC00585348 /* TextField.swift */; };
 		50B2511F1FB80FC30083776E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B2511E1FB80FC30083776E /* AppDelegate.swift */; };
-		50B251211FB80FC30083776E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B251201FB80FC30083776E /* ViewController.swift */; };
+		50B251211FB80FC30083776E /* LaunchPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B251201FB80FC30083776E /* LaunchPageVC.swift */; };
 		50B251241FB80FC30083776E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50B251221FB80FC30083776E /* Main.storyboard */; };
 		50B251261FB80FC30083776E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50B251251FB80FC30083776E /* Assets.xcassets */; };
 		50B251291FB80FC30083776E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50B251271FB80FC30083776E /* LaunchScreen.storyboard */; };
+		50B251311FB813680083776E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 50B251301FB813680083776E /* GoogleService-Info.plist */; };
+		EBA1D15ADF8442E1F452E8A5 /* Pods_SocialApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A61FD965C9960807BB7482F /* Pods_SocialApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		178988839FA4DF203354E75D /* Pods-SocialApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-SocialApp/Pods-SocialApp.release.xcconfig"; sourceTree = "<group>"; };
+		1A61FD965C9960807BB7482F /* Pods_SocialApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SocialApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		503CEE501FB8471500AADC7B /* Globals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
+		503CEE521FB8478100AADC7B /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		503CEE551FB8497300AADC7B /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
+		503CEE561FB8497300AADC7B /* OpenSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-BoldItalic.ttf"; sourceTree = "<group>"; };
+		503CEE571FB8497300AADC7B /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; };
+		503CEE581FB8497300AADC7B /* OpenSans-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		503CEE591FB8497300AADC7B /* OpenSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Italic.ttf"; sourceTree = "<group>"; };
+		503CEE5A1FB8497300AADC7B /* OpenSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Light.ttf"; sourceTree = "<group>"; };
+		503CEE5B1FB8497300AADC7B /* OpenSans-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-LightItalic.ttf"; sourceTree = "<group>"; };
+		503CEE5C1FB8497300AADC7B /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
+		503CEE5D1FB8497300AADC7B /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
+		503CEE5E1FB8497300AADC7B /* OpenSans-SemiboldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiboldItalic.ttf"; sourceTree = "<group>"; };
+		504600161FB8913100F5BED9 /* Designs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Designs.swift; sourceTree = "<group>"; };
+		504600181FB891A400F5BED9 /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
+		509076A91FB8BCCC00585348 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		50B2511B1FB80FC30083776E /* SocialApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SocialApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50B2511E1FB80FC30083776E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		50B251201FB80FC30083776E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		50B251201FB80FC30083776E /* LaunchPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchPageVC.swift; sourceTree = "<group>"; };
 		50B251231FB80FC30083776E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		50B251251FB80FC30083776E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		50B251281FB80FC30083776E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		50B2512A1FB80FC30083776E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		50B251301FB813680083776E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D789B9C7927729D56EDFA201 /* Pods-SocialApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SocialApp/Pods-SocialApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +65,46 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBA1D15ADF8442E1F452E8A5 /* Pods_SocialApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		14F5C884F856A4886ACDE1E2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D789B9C7927729D56EDFA201 /* Pods-SocialApp.debug.xcconfig */,
+				178988839FA4DF203354E75D /* Pods-SocialApp.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		503CEE541FB8497300AADC7B /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				503CEE551FB8497300AADC7B /* OpenSans-Bold.ttf */,
+				503CEE561FB8497300AADC7B /* OpenSans-BoldItalic.ttf */,
+				503CEE571FB8497300AADC7B /* OpenSans-ExtraBold.ttf */,
+				503CEE581FB8497300AADC7B /* OpenSans-ExtraBoldItalic.ttf */,
+				503CEE591FB8497300AADC7B /* OpenSans-Italic.ttf */,
+				503CEE5A1FB8497300AADC7B /* OpenSans-Light.ttf */,
+				503CEE5B1FB8497300AADC7B /* OpenSans-LightItalic.ttf */,
+				503CEE5C1FB8497300AADC7B /* OpenSans-Regular.ttf */,
+				503CEE5D1FB8497300AADC7B /* OpenSans-Semibold.ttf */,
+				503CEE5E1FB8497300AADC7B /* OpenSans-SemiboldItalic.ttf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
 		50B251121FB80FC30083776E = {
 			isa = PBXGroup;
 			children = (
 				50B2511D1FB80FC30083776E /* SocialApp */,
 				50B2511C1FB80FC30083776E /* Products */,
+				14F5C884F856A4886ACDE1E2 /* Pods */,
+				98BF67F718A45585F84F135F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,14 +119,69 @@
 		50B2511D1FB80FC30083776E /* SocialApp */ = {
 			isa = PBXGroup;
 			children = (
+				50B251351FB813820083776E /* Resources */,
+				50B251361FB813880083776E /* Extensions */,
+				50B251341FB8137D0083776E /* Model */,
+				50B251331FB813790083776E /* View */,
+				50B251321FB8136D0083776E /* Controller */,
 				50B2511E1FB80FC30083776E /* AppDelegate.swift */,
-				50B251201FB80FC30083776E /* ViewController.swift */,
-				50B251221FB80FC30083776E /* Main.storyboard */,
 				50B251251FB80FC30083776E /* Assets.xcassets */,
+				50B251221FB80FC30083776E /* Main.storyboard */,
 				50B251271FB80FC30083776E /* LaunchScreen.storyboard */,
+				50B251301FB813680083776E /* GoogleService-Info.plist */,
 				50B2512A1FB80FC30083776E /* Info.plist */,
 			);
 			path = SocialApp;
+			sourceTree = "<group>";
+		};
+		50B251321FB8136D0083776E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				50B251201FB80FC30083776E /* LaunchPageVC.swift */,
+				504600181FB891A400F5BED9 /* SignInVC.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		50B251331FB813790083776E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				509076A91FB8BCCC00585348 /* TextField.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		50B251341FB8137D0083776E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		50B251351FB813820083776E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				503CEE541FB8497300AADC7B /* Font */,
+				503CEE501FB8471500AADC7B /* Globals.swift */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		50B251361FB813880083776E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				503CEE521FB8478100AADC7B /* Extensions.swift */,
+				504600161FB8913100F5BED9 /* Designs.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		98BF67F718A45585F84F135F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1A61FD965C9960807BB7482F /* Pods_SocialApp.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +191,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 50B2512D1FB80FC30083776E /* Build configuration list for PBXNativeTarget "SocialApp" */;
 			buildPhases = (
+				B40480A9B716866D649B566F /* [CP] Check Pods Manifest.lock */,
 				50B251171FB80FC30083776E /* Sources */,
 				50B251181FB80FC30083776E /* Frameworks */,
 				50B251191FB80FC30083776E /* Resources */,
+				0EAAE4E04A1AA5908FD6A11F /* [CP] Embed Pods Frameworks */,
+				06D570B7F032A92C5D8E1EB9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -123,21 +246,85 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				503CEE631FB8497300AADC7B /* OpenSans-Italic.ttf in Resources */,
+				503CEE601FB8497300AADC7B /* OpenSans-BoldItalic.ttf in Resources */,
 				50B251291FB80FC30083776E /* LaunchScreen.storyboard in Resources */,
+				503CEE671FB8497300AADC7B /* OpenSans-Semibold.ttf in Resources */,
+				503CEE611FB8497300AADC7B /* OpenSans-ExtraBold.ttf in Resources */,
+				50B251311FB813680083776E /* GoogleService-Info.plist in Resources */,
+				503CEE651FB8497300AADC7B /* OpenSans-LightItalic.ttf in Resources */,
 				50B251261FB80FC30083776E /* Assets.xcassets in Resources */,
+				503CEE5F1FB8497300AADC7B /* OpenSans-Bold.ttf in Resources */,
 				50B251241FB80FC30083776E /* Main.storyboard in Resources */,
+				503CEE681FB8497300AADC7B /* OpenSans-SemiboldItalic.ttf in Resources */,
+				503CEE641FB8497300AADC7B /* OpenSans-Light.ttf in Resources */,
+				503CEE661FB8497300AADC7B /* OpenSans-Regular.ttf in Resources */,
+				503CEE621FB8497300AADC7B /* OpenSans-ExtraBoldItalic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		06D570B7F032A92C5D8E1EB9 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SocialApp/Pods-SocialApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		0EAAE4E04A1AA5908FD6A11F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SocialApp/Pods-SocialApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B40480A9B716866D649B566F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		50B251171FB80FC30083776E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				50B251211FB80FC30083776E /* ViewController.swift in Sources */,
+				50B251211FB80FC30083776E /* LaunchPageVC.swift in Sources */,
 				50B2511F1FB80FC30083776E /* AppDelegate.swift in Sources */,
+				504600191FB891A400F5BED9 /* SignInVC.swift in Sources */,
+				509076AA1FB8BCCC00585348 /* TextField.swift in Sources */,
+				504600171FB8913100F5BED9 /* Designs.swift in Sources */,
+				503CEE511FB8471500AADC7B /* Globals.swift in Sources */,
+				503CEE531FB8478100AADC7B /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,6 +459,7 @@
 		};
 		50B2512E1FB80FC30083776E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D789B9C7927729D56EDFA201 /* Pods-SocialApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -287,6 +475,7 @@
 		};
 		50B2512F1FB80FC30083776E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 178988839FA4DF203354E75D /* Pods-SocialApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
