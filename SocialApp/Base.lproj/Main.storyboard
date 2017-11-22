@@ -62,7 +62,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="signInPage:" destination="BYZ-38-t0r" eventType="touchUpInside" id="twS-y8-k0D"/>
+                                            <action selector="signInPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="enK-KC-Vfj"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -93,15 +93,24 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabel" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y1h-Si-x0r">
+                                <rect key="frame" x="30" y="244" width="315" height="41"/>
+                                <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="15"/>
+                                <color key="textColor" red="0.87069717639593902" green="0.048852796568272169" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.1764705882352941" green="0.24313725490196078" blue="0.30980392156862746" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="y1h-Si-x0r" firstAttribute="leading" secondItem="G02-4E-VWk" secondAttribute="leading" id="9g2-Wu-55h"/>
                             <constraint firstItem="VDt-Ka-dyg" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="9wF-Pp-s9j"/>
                             <constraint firstItem="VDt-Ka-dyg" firstAttribute="top" secondItem="G02-4E-VWk" secondAttribute="bottom" constant="30" id="F5O-PZ-XNu"/>
                             <constraint firstItem="ubK-Dv-E9O" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="QSf-0i-z9m"/>
                             <constraint firstItem="ubK-Dv-E9O" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="TYx-Ok-IfL"/>
                             <constraint firstItem="G02-4E-VWk" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="U7R-WA-aMW"/>
+                            <constraint firstItem="y1h-Si-x0r" firstAttribute="trailing" secondItem="G02-4E-VWk" secondAttribute="trailing" id="XmP-mm-C9q"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="G02-4E-VWk" secondAttribute="trailing" constant="30" id="boH-2Q-vW4"/>
+                            <constraint firstItem="G02-4E-VWk" firstAttribute="top" secondItem="y1h-Si-x0r" secondAttribute="bottom" constant="8.5" id="eA1-PQ-hJG"/>
                             <constraint firstItem="G02-4E-VWk" firstAttribute="top" secondItem="JwN-Su-NU1" secondAttribute="bottom" constant="90" id="f8q-1Q-Uh1"/>
                             <constraint firstItem="G02-4E-VWk" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="50" id="jrH-X7-S8h"/>
                             <constraint firstItem="JwN-Su-NU1" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="19" id="lrN-ye-0X4"/>
@@ -111,7 +120,10 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="emailField" destination="vmR-bj-Npg" id="32V-V1-J71"/>
+                        <outlet property="errorLbl" destination="y1h-Si-x0r" id="mha-Wq-MZX"/>
                         <outlet property="facebook" destination="VDt-Ka-dyg" id="HVd-68-c5R"/>
+                        <outlet property="passField" destination="pcT-co-etu" id="IMm-Me-Vuw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
