@@ -62,7 +62,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="registerPage:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yzH-XF-rTF"/>
+                                            <action selector="signInPage:" destination="BYZ-38-t0r" eventType="touchUpInside" id="twS-y8-k0D"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -70,8 +70,8 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SDU Logo" translatesAutoresizingMaskIntoConstraints="NO" id="JwN-Su-NU1">
                                 <rect key="frame" x="110.5" y="62.5" width="191" height="141"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VDt-Ka-dyg">
-                                <rect key="frame" x="179.5" y="503" width="16" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VDt-Ka-dyg">
+                                <rect key="frame" x="180" y="503.5" width="16" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="GJT-4c-Ryu"/>
                                     <constraint firstAttribute="width" secondItem="VDt-Ka-dyg" secondAttribute="height" multiplier="27:50" id="nwQ-XT-b1K"/>
@@ -80,6 +80,9 @@
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="imageColor" value="white"/>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="fbRegisterBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9TB-2b-MNF"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If you haven't signed in before, an account will automatically created for you" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ubK-Dv-E9O">
                                 <rect key="frame" x="36" y="615" width="303" height="52"/>
