@@ -11,6 +11,7 @@ import FBSDKLoginKit
 import FBSDKCoreKit
 import Firebase
 import FirebaseAuth
+import SwiftKeychainWrapper
 
 class LaunchPageVC: UIViewController {
 
@@ -21,17 +22,32 @@ class LaunchPageVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         facebook.setImage(#imageLiteral(resourceName: "facebook").maskWithColor(color: UIColor(lightBlue)), for: .highlighted)
         errorLbl.isHidden = true
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.textFieldShouldReturn(_:)))
+        view.addGestureRecognizer(tap)
     }
-
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if let _ = KeychainWrapper.standard.string(forKey: keyUID) {
+            performSegue(withIdentifier: "accessApp", sender: nil)
+        }
+    }
+    
+    @objc func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+    
     @IBAction func signInPressed(_ sender: Any) {
         if let email = emailField.text, let pass = passField.text {
             if pass.count >= 6 {
             Auth.auth().signIn(withEmail: email, password: pass, completion: { (user, error) in
                 if error == nil {
                     print("MSG: User authenticated with firebase using email")
+                    if let user = user {
+                        self.completeSignIn(id: user.uid)
+                    }
                 } else {
                     let errCode = AuthErrorCode(rawValue: error!._code)
                     if errCode == AuthErrorCode.userNotFound{
@@ -40,6 +56,9 @@ class LaunchPageVC: UIViewController {
                                 print("MSG: Unable to authenticate with firebase using email")
                             } else {
                                 print("MSG: New user was created usting email")
+                                if let user = user {
+                                    self.completeSignIn(id: user.uid)
+                                }
                             }
                         })
                     } else if errCode == AuthErrorCode.invalidEmail {
@@ -83,11 +102,21 @@ class LaunchPageVC: UIViewController {
                 print("MSG: Unable to authenticate with firebase \(String(describing: error))")
             } else {
                 print("MSG: Succesfully authenticated with firebase")
+                if let user = user {
+                    self.completeSignIn(id: user.uid)
+                }
+                
             }
         }
     }
-        
-        
+    
+    func completeSignIn(id: String) {
+        let saveSuccessful: Bool = KeychainWrapper.standard.set(id, forKey: keyUID)
+        if saveSuccessful {
+            print("MSG: Data saved to keychain")
+        }
+        performSegue(withIdentifier: "accessApp", sender: nil)
+    }
     
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //        if segue.identifier == "SignInVC" {

@@ -8,6 +8,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -124,15 +125,177 @@
                         <outlet property="errorLbl" destination="y1h-Si-x0r" id="mha-Wq-MZX"/>
                         <outlet property="facebook" destination="VDt-Ka-dyg" id="HVd-68-c5R"/>
                         <outlet property="passField" destination="pcT-co-etu" id="IMm-Me-Vuw"/>
+                        <segue destination="IQA-uo-oQT" kind="show" identifier="accessApp" id="Asx-Nc-As7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="133.5832083958021"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="AnZ-fp-xxl">
+            <objects>
+                <navigationController id="ode-RT-Csp" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="homeIcon" id="DSy-I4-REn">
+                        <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-7"/>
+                    </tabBarItem>
+                    <navigationBar key="navigationBar" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="Jsc-rZ-1ps">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.23255220055580139" green="0.3085860013961792" blue="0.38350129127502441" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.23255220055580139" green="0.3085860013961792" blue="0.38350129127502441" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="22"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="HkG-0F-0m5" kind="relationship" relationship="rootViewController" id="LgY-mb-jWo"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8FZ-De-Gx2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1852" y="-603"/>
+        </scene>
+        <!--Passanger-->
+        <scene sceneID="eQB-Pp-Pff">
+            <objects>
+                <viewController id="HkG-0F-0m5" customClass="FeedVC" customModule="SocialApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="YQn-AW-QKZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="9uI-76-VHs"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Passanger" id="2si-1H-Gvm">
+                        <barButtonItem key="backBarButtonItem" title=" " id="YiM-26-Tv0"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oaN-o0-4QO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2665" y="-603"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="EqV-nH-Qn9">
+            <objects>
+                <navigationController id="gbZ-CM-l1Q" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="carIcon" id="Fj0-7v-ohP">
+                        <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-7"/>
+                    </tabBarItem>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="BjM-x8-kAN">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.23255220055580139" green="0.3085860013961792" blue="0.38350129127502441" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="22"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="il0-xc-4Ec" kind="relationship" relationship="rootViewController" id="9vc-ZD-hUs"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QzM-Kx-GCD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1852" y="134"/>
+        </scene>
+        <!--Account-->
+        <scene sceneID="vGl-ZW-sHU">
+            <objects>
+                <viewController id="Dog-LY-1Uf" customClass="AccountVC" customModule="SocialApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hCR-fJ-2aQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="Zp9-yg-bCX"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Account" id="S2X-X3-aKg">
+                        <barButtonItem key="backBarButtonItem" title=" " id="coQ-Gx-hue"/>
+                        <leftBarButtonItems>
+                            <barButtonItem id="Qps-Wu-soz"/>
+                            <barButtonItem title="SignOut" id="cfa-Af-glM"/>
+                        </leftBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="pW3-KY-F5o"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="y9P-Tc-9OV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2665" y="916"/>
+        </scene>
+        <!--Drivers-->
+        <scene sceneID="w9x-qy-g9L">
+            <objects>
+                <viewController id="il0-xc-4Ec" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="c8v-9H-S7u">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="uyT-d1-8Wb"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Drivers" id="65M-X1-z4P">
+                        <barButtonItem key="backBarButtonItem" title=" " id="fi5-mR-M2q"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2g0-6p-bZI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2665" y="134"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="C9O-Oq-udh">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="IQA-uo-oQT" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleAspectFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="0Ic-ze-pAV">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.23255220055580139" green="0.3085860013961792" blue="0.38350129127502441" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="selectedImageTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="ode-RT-Csp" kind="relationship" relationship="viewControllers" id="cZd-aq-a0U"/>
+                        <segue destination="gbZ-CM-l1Q" kind="relationship" relationship="viewControllers" id="oUu-ME-xtc"/>
+                        <segue destination="pUR-Pl-YX1" kind="relationship" relationship="viewControllers" id="nGw-44-Oes"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cqL-Mj-iv3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="999" y="134"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="uky-jL-x5d">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="pUR-Pl-YX1" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="people" id="hR9-W3-wNT">
+                        <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-7"/>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="P5s-JT-RoT">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.23255220055580139" green="0.3085860013961792" blue="0.38350129127502441" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="22"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Dog-LY-1Uf" kind="relationship" relationship="rootViewController" id="tBz-iu-oRZ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6ch-d4-VOr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1852" y="915"/>
+        </scene>
     </scenes>
     <resources>
         <image name="SDU Logo" width="191" height="141"/>
+        <image name="carIcon" width="28" height="25"/>
         <image name="facebook" width="27" height="50"/>
+        <image name="homeIcon" width="22" height="24"/>
+        <image name="people" width="22" height="25"/>
     </resources>
+    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
