@@ -15,7 +15,7 @@ import SwiftKeychainWrapper
 
 class LaunchPageVC: UIViewController {
 
-    @IBOutlet weak var prosessingIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var processingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var logo: UIImageView!
     @IBOutlet weak var facebook: UIButton!
@@ -27,9 +27,9 @@ class LaunchPageVC: UIViewController {
 //    var isEditingMode = false
     
     override func viewWillAppear(_ animated: Bool) {
-        prosessingIndicator.isHidden = true
+        processingIndicator.isHidden = true
         view.alpha = 1
-        prosessingIndicator.isHidden = true
+        processingIndicator.stopAnimating()
         signInBtn.isEnabled = true
         emailField.text = ""
         passField.text = ""
@@ -42,7 +42,8 @@ class LaunchPageVC: UIViewController {
         view.backgroundColor = UIColor(darkBlue)
         facebook.setImage(#imageLiteral(resourceName: "facebook").maskWithColor(color: UIColor(lightBlue)), for: .highlighted)
         view.alpha = 1
-        prosessingIndicator.isHidden = true
+        processingIndicator.isHidden = true
+        processingIndicator.stopAnimating()
         signInBtn.isEnabled = true
         emailField.text = ""
         passField.text = ""
@@ -154,13 +155,15 @@ class LaunchPageVC: UIViewController {
     func firebaseAuth(_ credential: AuthCredential ) {
         signInBtn.isEnabled = false
         view.alpha = 0.5
-        prosessingIndicator.isHidden = false
+        processingIndicator.isHidden = false
+        processingIndicator.startAnimating()
         Auth.auth().signIn(with: credential) { (user, error) in
             if error != nil {
                 print("MSG: Unable to authenticate with firebase \(String(describing: error))")
                 self.signInBtn.isEnabled = true
                 self.view.alpha = 1
-                self.prosessingIndicator.isHidden = true
+                self.processingIndicator.isHidden = true
+                self.processingIndicator.stopAnimating()
             } else {
                 print("MSG: Succesfully authenticated with firebase")
                 if let user = user {

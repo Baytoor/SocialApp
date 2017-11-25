@@ -20,7 +20,7 @@ class AccountVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         getInfo()
-        profilePhotoView.layer.cornerRadius = 100
+        profilePhotoView.layer.cornerRadius = profilePhotoView.frame.width/2
         navigationItem.leftBarButtonItem?.action = #selector(self.signOutBtnPressed(_:))
     }
     
@@ -42,7 +42,11 @@ class AccountVC: UIViewController {
             if let photoURL = user.photoURL {
                 if let data = NSData(contentsOf: photoURL) {
                     profilePhotoView.image = UIImage(data: data as Data)
+                } else {
+                    profilePhotoView.image = #imageLiteral(resourceName: "people").maskWithColor(color: UIColor(darkBlue))
                 }
+            } else {
+                profilePhotoView.image = #imageLiteral(resourceName: "people").maskWithColor(color: UIColor(darkBlue))
             }
         }
     }
