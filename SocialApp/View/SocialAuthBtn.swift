@@ -9,16 +9,9 @@
 import UIKit
 
 class SocialAuthBtn: UIButton {
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-//        layer.cornerRadius = self.frame.width/2
-    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-//        layer.borderColor = UIColor.white.cgColor
-//        layer.borderWidth = 2
         self.imageView?.contentMode = .scaleAspectFit
     }
 

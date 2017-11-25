@@ -21,7 +21,7 @@ class AccountVC: UIViewController {
         super.viewDidLoad()
         getInfo()
         profilePhotoView.layer.cornerRadius = profilePhotoView.frame.width/2
-        navigationItem.leftBarButtonItem?.action = #selector(self.signOutBtnPressed(_:))
+        profilePhotoView.layer.masksToBounds = true
     }
     
     func getInfo(){

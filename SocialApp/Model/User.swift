@@ -18,14 +18,16 @@ import SwiftKeychainWrapper
 
 class User {
     
-//    private var _uid: String
-//    private var _displayName: String
-//    private var _email: String
-//    private var _photoURL: URL
-//    private var _phoneNumber: String
+    private var _uid: String = (Auth.auth().currentUser?.uid)!
+    private var _displayName: String = (Auth.auth().currentUser?.displayName)!
+    private var _email: String = (Auth.auth().currentUser?.email)!
+    private var _photoURL: URL = (Auth.auth().currentUser?.photoURL)!
+    private var _phoneNumber: String = (Auth.auth().currentUser?.phoneNumber)!
 //    private var _faculty: String
 //    private var _course: String
-//
+//    private var _interest: [String]
+//    private var _type: Bool
+    
 //    var uid: String {
 //        return _uid
 //    }

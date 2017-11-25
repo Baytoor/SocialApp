@@ -19,21 +19,13 @@ class FeedVC: UIViewController {
     @IBOutlet weak var timeFromField: UITextField!
     @IBOutlet weak var timeTillField: UITextField!
     
-    var isEditingMode = false
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         getUserInfo()
         popUp.isHidden = true
         view.backgroundColor = UIColor(darkBlue)
-//        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.textFieldShouldReturn(_:)))
-//        view.addGestureRecognizer(tap)
-        
-    }
-    
-    @objc func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.view.endEditing(true)
-        return false
+        tableView.delegate = self
+        tableView.dataSource = self
     }
     
     @IBAction func addBtnPressed(_ sender: Any) {
@@ -58,24 +50,37 @@ class FeedVC: UIViewController {
         popUp.isHidden = true
     }
     
-//    @IBAction func editingMode(_ sender: Any) {
-//        if !isEditingMode {
-//            UIView.animate(withDuration: 0.3, animations: {
-//                self.popUp.center.y = self.popUp.center.y-160
-//            })
-//            isEditingMode = true
-//        }
-//    }
-//
-//    func finishEditing() {
-//        self.view.endEditing(true)
-//        if isEditingMode{
-//            UIView.animate(withDuration: 0.3, animations: {
-//                self.popUp.center.y = self.popUp.center.y+160
-//            })
-//            isEditingMode = false
-//        }
-//    }
-    
-    
 }
+
+extension FeedVC: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 3
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return tableView.dequeueReusableCell(withIdentifier: "PassangerCell") as! PassangerCell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 132
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -20,6 +20,8 @@
 		503CEE671FB8497300AADC7B /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 503CEE5D1FB8497300AADC7B /* OpenSans-Semibold.ttf */; };
 		503CEE681FB8497300AADC7B /* OpenSans-SemiboldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 503CEE5E1FB8497300AADC7B /* OpenSans-SemiboldItalic.ttf */; };
 		504600171FB8913100F5BED9 /* Designs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504600161FB8913100F5BED9 /* Designs.swift */; };
+		50469F381FCA1512004639EB /* PassangerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50469F371FCA1512004639EB /* PassangerCell.swift */; };
+		50469F3A1FCA18AE004639EB /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50469F391FCA18AE004639EB /* ShadowView.swift */; };
 		50824ACB1FB964E000760C32 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50824AC71FB964DF00760C32 /* FBSDKLoginKit.framework */; };
 		50824ACC1FB964E000760C32 /* FBSDKMessengerShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50824AC81FB964E000760C32 /* FBSDKMessengerShareKit.framework */; };
 		50824ACD1FB964E000760C32 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50824AC91FB964E000760C32 /* FBSDKCoreKit.framework */; };
@@ -55,6 +57,8 @@
 		503CEE5D1FB8497300AADC7B /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
 		503CEE5E1FB8497300AADC7B /* OpenSans-SemiboldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiboldItalic.ttf"; sourceTree = "<group>"; };
 		504600161FB8913100F5BED9 /* Designs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Designs.swift; sourceTree = "<group>"; };
+		50469F371FCA1512004639EB /* PassangerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassangerCell.swift; sourceTree = "<group>"; };
+		50469F391FCA18AE004639EB /* ShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
 		50824AC71FB964DF00760C32 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		50824AC81FB964E000760C32 /* FBSDKMessengerShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKMessengerShareKit.framework; sourceTree = "<group>"; };
 		50824AC91FB964E000760C32 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
@@ -169,6 +173,8 @@
 			children = (
 				509076A91FB8BCCC00585348 /* TextField.swift */,
 				508D37821FC994890001598F /* SocialAuthBtn.swift */,
+				50469F371FCA1512004639EB /* PassangerCell.swift */,
+				50469F391FCA18AE004639EB /* ShadowView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -367,6 +373,7 @@
 			files = (
 				508857ED1FC75A8C006EFBD3 /* AccountVC.swift in Sources */,
 				50B251211FB80FC30083776E /* LaunchPageVC.swift in Sources */,
+				50469F381FCA1512004639EB /* PassangerCell.swift in Sources */,
 				50B2511F1FB80FC30083776E /* AppDelegate.swift in Sources */,
 				509076AA1FB8BCCC00585348 /* TextField.swift in Sources */,
 				50FFEAE21FC6D7F200A54BEB /* FeedVC.swift in Sources */,
@@ -374,6 +381,7 @@
 				50C9211F1FC96E2600E9048B /* Driver.swift in Sources */,
 				503CEE511FB8471500AADC7B /* Globals.swift in Sources */,
 				508D37831FC994890001598F /* SocialAuthBtn.swift in Sources */,
+				50469F3A1FCA18AE004639EB /* ShadowView.swift in Sources */,
 				50C921231FC96F4A00E9048B /* User.swift in Sources */,
 				503CEE531FB8478100AADC7B /* Extensions.swift in Sources */,
 			);
@@ -521,7 +529,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = SocialApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.unicorn.SocialApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -543,7 +551,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = SocialApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.unicorn.SocialApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
