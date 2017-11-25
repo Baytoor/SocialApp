@@ -28,7 +28,9 @@ class LaunchPageVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         prosessingIndicator.isHidden = true
-        outProcess()
+        view.alpha = 1
+        prosessingIndicator.isHidden = true
+        signInBtn.isEnabled = true
         emailField.text = ""
         passField.text = ""
         errorLbl.text = ""
@@ -37,10 +39,11 @@ class LaunchPageVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.backgroundColor = UIColor(darkBlue)
         facebook.setImage(#imageLiteral(resourceName: "facebook").maskWithColor(color: UIColor(lightBlue)), for: .highlighted)
-        outProcess()
+        view.alpha = 1
+        prosessingIndicator.isHidden = true
+        signInBtn.isEnabled = true
         emailField.text = ""
         passField.text = ""
         errorLbl.text = ""
@@ -83,13 +86,13 @@ class LaunchPageVC: UIViewController {
 //    }
     
     @IBAction func signInPressed(_ sender: Any) {
-        inProcess()
+        signInBtn.isEnabled = false
         if let email = emailField.text, let pass = passField.text {
             if email=="" {
                 self.errorLbl.isHidden = false
                 self.errorLbl.text = "Field is empty"
                 self.errorLbl.textColor = UIColor.red
-                outProcess()
+                signInBtn.isEnabled = true
             }else if pass.count >= 6 {
             Auth.auth().signIn(withEmail: email, password: pass, completion: { (user, error) in
                 if error == nil {
@@ -103,9 +106,9 @@ class LaunchPageVC: UIViewController {
                         Auth.auth().createUser(withEmail: email, password: pass, completion: { (user, error) in
                             if error != nil {
                                 print("MSG: Unable to authenticate with firebase using email")
-                                self.outProcess()
+                                self.signInBtn.isEnabled = true
                             } else {
-                                print("MSG: New user was created usting email")
+                                print("MSG: New user was created using email")
                                 if let user = user {
                                     self.completeSignIn(id: user.uid)
                                 }
@@ -115,12 +118,12 @@ class LaunchPageVC: UIViewController {
                         self.errorLbl.isHidden = false
                         self.errorLbl.text = "Invalid email"
                         self.errorLbl.textColor = UIColor.red
-                        self.outProcess()
+                        self.signInBtn.isEnabled = true
                     } else if errCode == AuthErrorCode.wrongPassword {
                         self.errorLbl.isHidden = false
                         self.errorLbl.text = "Wrong password"
                         self.errorLbl.textColor = UIColor.red
-                        self.outProcess()
+                        self.signInBtn.isEnabled = true
                     }
                 }
             })
@@ -128,7 +131,7 @@ class LaunchPageVC: UIViewController {
                 errorLbl.isHidden = false
                 errorLbl.text = "Password must have 6 characters"
                 errorLbl.textColor = UIColor.red
-                outProcess()
+                signInBtn.isEnabled = true
             }
         }
     }
@@ -149,30 +152,22 @@ class LaunchPageVC: UIViewController {
     }
 
     func firebaseAuth(_ credential: AuthCredential ) {
-        inProcess()
+        signInBtn.isEnabled = false
+        view.alpha = 0.5
+        prosessingIndicator.isHidden = false
         Auth.auth().signIn(with: credential) { (user, error) in
             if error != nil {
                 print("MSG: Unable to authenticate with firebase \(String(describing: error))")
-                self.outProcess()
+                self.signInBtn.isEnabled = true
+                self.view.alpha = 1
+                self.prosessingIndicator.isHidden = true
             } else {
                 print("MSG: Succesfully authenticated with firebase")
                 if let user = user {
                     self.completeSignIn(id: user.uid)
                 }
-                
             }
         }
-    }
-    
-    func inProcess(){
-        view.alpha = 0.5
-        prosessingIndicator.isHidden = false
-        self.signInBtn.isEnabled = false
-    }
-    func outProcess(){
-        view.alpha = 1
-        prosessingIndicator.isHidden = true
-        self.signInBtn.isEnabled = true
     }
     
     func completeSignIn(id: String) {
