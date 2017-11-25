@@ -8,6 +8,7 @@
 
 import Foundation
 import Firebase
+import SwiftKeychainWrapper
 
 let darkBlue = 0x2D3E4F
 let lightBlue = 0x1DB4DD

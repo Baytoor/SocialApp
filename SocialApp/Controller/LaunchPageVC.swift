@@ -15,15 +15,35 @@ import SwiftKeychainWrapper
 
 class LaunchPageVC: UIViewController {
 
+    @IBOutlet weak var prosessingIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var logo: UIImageView!
     @IBOutlet weak var facebook: UIButton!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passField: UITextField!
     @IBOutlet weak var errorLbl: UILabel!
+    @IBOutlet weak var signInBtn: UIButton!
+    
+//    var isEditingMode = false
+    
+    override func viewWillAppear(_ animated: Bool) {
+        prosessingIndicator.isHidden = true
+        outProcess()
+        emailField.text = ""
+        passField.text = ""
+        errorLbl.text = ""
+        self.signInBtn.isEnabled = true
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.backgroundColor = UIColor(darkBlue)
         facebook.setImage(#imageLiteral(resourceName: "facebook").maskWithColor(color: UIColor(lightBlue)), for: .highlighted)
-        errorLbl.isHidden = true
+        outProcess()
+        emailField.text = ""
+        passField.text = ""
+        errorLbl.text = ""
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.textFieldShouldReturn(_:)))
         view.addGestureRecognizer(tap)
     }
@@ -39,9 +59,38 @@ class LaunchPageVC: UIViewController {
         return false
     }
     
+//    @IBAction func editingMode(_ sender: Any) {
+//        if !isEditingMode {
+//            UIView.animate(withDuration: 0.3, animations: {
+//                self.errorLbl.center.y = self.errorLbl.center.y-178
+//                self.stackView.center.y = self.stackView.center.y-178
+//            })
+//            logo.isHidden = true
+//            isEditingMode = true
+//        }
+//    }
+//
+//    func finishEditing() {
+//        self.view.endEditing(true)
+//        if isEditingMode{
+//            UIView.animate(withDuration: 0.3, animations: {
+//                self.errorLbl.center.y = self.errorLbl.center.y+178
+//                self.stackView.center.y = self.stackView.center.y+178
+//            })
+//            logo.isHidden = false
+//            isEditingMode = false
+//        }
+//    }
+    
     @IBAction func signInPressed(_ sender: Any) {
+        inProcess()
         if let email = emailField.text, let pass = passField.text {
-            if pass.count >= 6 {
+            if email=="" {
+                self.errorLbl.isHidden = false
+                self.errorLbl.text = "Field is empty"
+                self.errorLbl.textColor = UIColor.red
+                outProcess()
+            }else if pass.count >= 6 {
             Auth.auth().signIn(withEmail: email, password: pass, completion: { (user, error) in
                 if error == nil {
                     print("MSG: User authenticated with firebase using email")
@@ -54,6 +103,7 @@ class LaunchPageVC: UIViewController {
                         Auth.auth().createUser(withEmail: email, password: pass, completion: { (user, error) in
                             if error != nil {
                                 print("MSG: Unable to authenticate with firebase using email")
+                                self.outProcess()
                             } else {
                                 print("MSG: New user was created usting email")
                                 if let user = user {
@@ -65,10 +115,12 @@ class LaunchPageVC: UIViewController {
                         self.errorLbl.isHidden = false
                         self.errorLbl.text = "Invalid email"
                         self.errorLbl.textColor = UIColor.red
+                        self.outProcess()
                     } else if errCode == AuthErrorCode.wrongPassword {
                         self.errorLbl.isHidden = false
                         self.errorLbl.text = "Wrong password"
                         self.errorLbl.textColor = UIColor.red
+                        self.outProcess()
                     }
                 }
             })
@@ -76,8 +128,8 @@ class LaunchPageVC: UIViewController {
                 errorLbl.isHidden = false
                 errorLbl.text = "Password must have 6 characters"
                 errorLbl.textColor = UIColor.red
+                outProcess()
             }
-            
         }
     }
     
@@ -97,9 +149,11 @@ class LaunchPageVC: UIViewController {
     }
 
     func firebaseAuth(_ credential: AuthCredential ) {
+        inProcess()
         Auth.auth().signIn(with: credential) { (user, error) in
             if error != nil {
                 print("MSG: Unable to authenticate with firebase \(String(describing: error))")
+                self.outProcess()
             } else {
                 print("MSG: Succesfully authenticated with firebase")
                 if let user = user {
@@ -110,6 +164,17 @@ class LaunchPageVC: UIViewController {
         }
     }
     
+    func inProcess(){
+        view.alpha = 0.5
+        prosessingIndicator.isHidden = false
+        self.signInBtn.isEnabled = false
+    }
+    func outProcess(){
+        view.alpha = 1
+        prosessingIndicator.isHidden = true
+        self.signInBtn.isEnabled = true
+    }
+    
     func completeSignIn(id: String) {
         let saveSuccessful: Bool = KeychainWrapper.standard.set(id, forKey: keyUID)
         if saveSuccessful {
@@ -118,12 +183,7 @@ class LaunchPageVC: UIViewController {
         performSegue(withIdentifier: "accessApp", sender: nil)
     }
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "SignInVC" {
-//            let destination = segue.destination as! SignInVC
-//
-//        }
-//    }
+    
 }
 
 

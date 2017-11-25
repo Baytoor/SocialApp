@@ -25,13 +25,16 @@
 		50824ACD1FB964E000760C32 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50824AC91FB964E000760C32 /* FBSDKCoreKit.framework */; };
 		50824ACE1FB964E000760C32 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50824ACA1FB964E000760C32 /* Bolts.framework */; };
 		508857ED1FC75A8C006EFBD3 /* AccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508857EC1FC75A8C006EFBD3 /* AccountVC.swift */; };
+		508D37811FC98EB10001598F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 508D37801FC98EB00001598F /* Assets.xcassets */; };
+		508D37831FC994890001598F /* SocialAuthBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508D37821FC994890001598F /* SocialAuthBtn.swift */; };
 		509076AA1FB8BCCC00585348 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509076A91FB8BCCC00585348 /* TextField.swift */; };
 		50B2511F1FB80FC30083776E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B2511E1FB80FC30083776E /* AppDelegate.swift */; };
 		50B251211FB80FC30083776E /* LaunchPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B251201FB80FC30083776E /* LaunchPageVC.swift */; };
 		50B251241FB80FC30083776E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50B251221FB80FC30083776E /* Main.storyboard */; };
-		50B251261FB80FC30083776E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50B251251FB80FC30083776E /* Assets.xcassets */; };
 		50B251291FB80FC30083776E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50B251271FB80FC30083776E /* LaunchScreen.storyboard */; };
 		50B251311FB813680083776E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 50B251301FB813680083776E /* GoogleService-Info.plist */; };
+		50C9211F1FC96E2600E9048B /* Driver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C9211E1FC96E2600E9048B /* Driver.swift */; };
+		50C921231FC96F4A00E9048B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C921221FC96F4A00E9048B /* User.swift */; };
 		50FFEAE21FC6D7F200A54BEB /* FeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFEAE11FC6D7F200A54BEB /* FeedVC.swift */; };
 		EBA1D15ADF8442E1F452E8A5 /* Pods_SocialApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A61FD965C9960807BB7482F /* Pods_SocialApp.framework */; };
 /* End PBXBuildFile section */
@@ -57,15 +60,18 @@
 		50824AC91FB964E000760C32 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		50824ACA1FB964E000760C32 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		508857EC1FC75A8C006EFBD3 /* AccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountVC.swift; sourceTree = "<group>"; };
+		508D37801FC98EB00001598F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		508D37821FC994890001598F /* SocialAuthBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialAuthBtn.swift; sourceTree = "<group>"; };
 		509076A91FB8BCCC00585348 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		50B2511B1FB80FC30083776E /* SocialApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SocialApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50B2511E1FB80FC30083776E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		50B251201FB80FC30083776E /* LaunchPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchPageVC.swift; sourceTree = "<group>"; };
 		50B251231FB80FC30083776E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		50B251251FB80FC30083776E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		50B251281FB80FC30083776E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		50B2512A1FB80FC30083776E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50B251301FB813680083776E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		50C9211E1FC96E2600E9048B /* Driver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Driver.swift; sourceTree = "<group>"; };
+		50C921221FC96F4A00E9048B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		50FFEAE11FC6D7F200A54BEB /* FeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedVC.swift; sourceTree = "<group>"; };
 		D789B9C7927729D56EDFA201 /* Pods-SocialApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SocialApp/Pods-SocialApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -139,7 +145,7 @@
 				50B251331FB813790083776E /* View */,
 				50B251321FB8136D0083776E /* Controller */,
 				50B2511E1FB80FC30083776E /* AppDelegate.swift */,
-				50B251251FB80FC30083776E /* Assets.xcassets */,
+				508D37801FC98EB00001598F /* Assets.xcassets */,
 				50B251221FB80FC30083776E /* Main.storyboard */,
 				50B251271FB80FC30083776E /* LaunchScreen.storyboard */,
 				50B251301FB813680083776E /* GoogleService-Info.plist */,
@@ -162,6 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				509076A91FB8BCCC00585348 /* TextField.swift */,
+				508D37821FC994890001598F /* SocialAuthBtn.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -169,6 +176,8 @@
 		50B251341FB8137D0083776E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				50C9211E1FC96E2600E9048B /* Driver.swift */,
+				50C921221FC96F4A00E9048B /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -274,10 +283,10 @@
 				503CEE601FB8497300AADC7B /* OpenSans-BoldItalic.ttf in Resources */,
 				50B251291FB80FC30083776E /* LaunchScreen.storyboard in Resources */,
 				503CEE671FB8497300AADC7B /* OpenSans-Semibold.ttf in Resources */,
+				508D37811FC98EB10001598F /* Assets.xcassets in Resources */,
 				503CEE611FB8497300AADC7B /* OpenSans-ExtraBold.ttf in Resources */,
 				50B251311FB813680083776E /* GoogleService-Info.plist in Resources */,
 				503CEE651FB8497300AADC7B /* OpenSans-LightItalic.ttf in Resources */,
-				50B251261FB80FC30083776E /* Assets.xcassets in Resources */,
 				503CEE5F1FB8497300AADC7B /* OpenSans-Bold.ttf in Resources */,
 				50B251241FB80FC30083776E /* Main.storyboard in Resources */,
 				503CEE681FB8497300AADC7B /* OpenSans-SemiboldItalic.ttf in Resources */,
@@ -362,7 +371,10 @@
 				509076AA1FB8BCCC00585348 /* TextField.swift in Sources */,
 				50FFEAE21FC6D7F200A54BEB /* FeedVC.swift in Sources */,
 				504600171FB8913100F5BED9 /* Designs.swift in Sources */,
+				50C9211F1FC96E2600E9048B /* Driver.swift in Sources */,
 				503CEE511FB8471500AADC7B /* Globals.swift in Sources */,
+				508D37831FC994890001598F /* SocialAuthBtn.swift in Sources */,
+				50C921231FC96F4A00E9048B /* User.swift in Sources */,
 				503CEE531FB8478100AADC7B /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -503,11 +515,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 649M8TPCDZ;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = SocialApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.unicorn.SocialApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -523,11 +537,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 649M8TPCDZ;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = SocialApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.unicorn.SocialApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
