@@ -163,9 +163,9 @@ extension LaunchPageVC {
     }
     
     func completeSignIn(uid: String) {
-        let passanger = Passanger.init("IS", "2", ["SportCar", "Starups", "iOS"])
-        let userData = ["name": passanger.displayName, "email": passanger.email]
-        DataService.ds.createFBDBUser(uid: uid, userData: userData)
+//        let user = User.init("IS", "2", ["SportCar", "Starups", "iOS"])
+//        let userData = ["name": user.displayName, "email": user.email]
+//        DataService.ds.createFBDBUser(uid: uid, userData: userData)
         
         let saveSuccessful: Bool = KeychainWrapper.standard.set(uid, forKey: keyUID)
         if saveSuccessful {

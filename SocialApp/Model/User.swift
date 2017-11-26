@@ -16,7 +16,7 @@ import Foundation
 import Firebase
 import SwiftKeychainWrapper
 
-class Passanger {
+class User {
     
     private var _uid: String
     private var _displayName: String
@@ -25,6 +25,9 @@ class Passanger {
     private var _phoneNumber: String
     private var _info: String
     private var _interests: [String]
+    private var _time: String
+    private var _destination: String
+    private var _hasSeat: String
     
     var uid: String {
         return _uid
@@ -47,23 +50,31 @@ class Passanger {
     var interests: [String] {
         return _interests
     }
+    var time: String {
+        return _time
+    }
+    var destination: String {
+        return _destination
+    }
+    var hasSeat: String {
+        return _hasSeat
+    }
 
-    init(_ faculty: String, _ course: String, _ interests: [String]) {
+    init(_ faculty: String, _ course: String, _ interests: [String], _ time: String, _ destination: String, _ hasSeat: String) {
         if let displayName = Auth.auth().currentUser?.displayName{
             _displayName = displayName
         } else {
-            _displayName = "No name"
+            _displayName = ""
         }
-        
         if let email = Auth.auth().currentUser?.email{
             _email = email
         } else {
-            _email = "No email"
+            _email = ""
         }
         if let phoneNumber = Auth.auth().currentUser?.phoneNumber {
             _phoneNumber = phoneNumber
         } else {
-            _phoneNumber = "No phone number"
+            _phoneNumber = ""
         }
         if let photoURL = Auth.auth().currentUser?.photoURL {
             _photoURL = "\(photoURL)"
@@ -73,6 +84,9 @@ class Passanger {
         _uid = (Auth.auth().currentUser?.uid)!
         _info = "\(faculty), \(course)"
         _interests = interests
+        _time = time
+        _destination = destination
+        _hasSeat = hasSeat
     }
  
     

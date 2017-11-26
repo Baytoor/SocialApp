@@ -13,7 +13,8 @@ class DataService {
     static let ds = DataService()
     
     private var _refBase = dataBase
-    private var _refPassangers = dataBase.child("passanger")
+    private var _refPassangers = dataBase.child("passangers")
+    private var _refDrivers = dataBase.child("drivers")
     
     var refBase: DatabaseReference {
         return _refBase
@@ -21,9 +22,33 @@ class DataService {
     var refPassangers: DatabaseReference {
         return _refPassangers
     }
+    var refDrivers: DatabaseReference {
+        return _refDrivers
+    }
+
     
-    func createFBDBUser(uid: String, userData: Dictionary<String, String>) {
-        refPassangers.child(uid).updateChildValues(userData)
+    func createDriver(_ user: User){
+        refDrivers.child(user.uid).updateChildValues(setUserData(user))
+        refDrivers.child(user.uid).child("interests").updateChildValues(setInterestsData(user.interests))
+    }
+    
+    func createPassanger(_ user: User) {
+        refPassangers.child(user.uid).updateChildValues(setUserData(user))
+//        let refInterests = refPassangers.child(user.uid)
+//        refInterests.child("interests").updateChildValues(setInterestsData(user.interests))
+    }
+    
+    private func setUserData(_ user: User) -> Dictionary<String, String>{
+        let userData = ["displayName": user.displayName, "email": user.email, "destination": user.destination, "hasSeat": user.hasSeat, "info": user.info, "phoneNumber": user.phoneNumber, "photoURL": user.photoURL, "time": user.time, "postedDay": "\(NSCalendar.current.component(.day, from: Date()))"]
+        return userData
+    }
+    
+    private func setInterestsData(_ interests: [String]) -> Dictionary<Int, String>{
+        var interestsData: Dictionary = [Int: String]()
+        for i in 0..<interests.count {
+            interestsData[i] = interests[i]
+        }
+        return interestsData
     }
     
 }
