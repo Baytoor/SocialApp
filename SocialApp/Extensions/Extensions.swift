@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 extension UIColor {
     convenience init(red: Int, green: Int, blue: Int) {
@@ -46,9 +47,6 @@ extension UIImage {
         }
     }
 }
-
-
-
 
 
 

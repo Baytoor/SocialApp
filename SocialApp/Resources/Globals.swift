@@ -17,16 +17,6 @@ let gray = 0xAEAEAE
 let dataBase = Database.database().reference()
 let keyUID = "kq8bQx2eMx01hAlv"
 
-//func getUserInfo() {
-//    let user = Auth.auth().currentUser
-//    if let user = user {
-//        let uid = user.uid
-//        let email = user.email
-//        let photoURL = user.photoURL
-//        let name = user.displayName
-//        let phoneNumber = user.phoneNumber
-//        print("UserID:\(uid)\nEmail:\(String(describing: email))\nPhoto:\(String(describing: photoURL))\nName:\(String(describing: name))\nPhoneNumber:\(String(describing: phoneNumber))")
-//    }
-//}
+var signedInUser = User.init()
 
 

@@ -23,11 +23,14 @@ class User {
     private var _email: String
     private var _photoURL: String
     private var _phoneNumber: String
+    private var _faculty: String
+    private var _course: String
     private var _info: String
-//    private var _interests: [String]
     private var _time: String
     private var _destination: String
     private var _hasSeat: String
+//    private var _interests: [String]
+    
     
     var uid: String {
         return _uid
@@ -47,9 +50,7 @@ class User {
     var info: String {
         return _info
     }
-//    var interests: [String] {
-//        return _interests
-//    }
+    
     var time: String {
         return _time
     }
@@ -59,8 +60,18 @@ class User {
     var hasSeat: String {
         return _hasSeat
     }
+    var faculty: String {
+        return _faculty
+    }
+    var course: String {
+        return _course
+    }
+//    var interests: [String] {
+//        return _interests
+//    }
+    
 
-    init(/*_ faculty: String, _ course: String, _ interests: [String], */_ time: String, _ destination: String, _ hasSeat: String) {
+    init() {
         if let displayName = Auth.auth().currentUser?.displayName{
             _displayName = displayName
         } else {
@@ -82,16 +93,27 @@ class User {
             _photoURL = "https://avpn.asia/wp-content/uploads/2015/05/empty_profile.png"
         }
         _uid = (Auth.auth().currentUser?.uid)!
-//        _info = "\(faculty), \(course)"
         _info = "SDU, student"
-//        _interests = interests
-        _time = time
-        _destination = destination
-        _hasSeat = hasSeat
+        _time = ""
+        _destination = ""
+        _hasSeat = ""
+        _faculty = ""
+        _course = ""
     }
- 
     
+    convenience init(_ faculty: String, _ course: String) {
+        self.init()
+        self._info = "\(faculty), \(course)"
+        self._faculty = faculty
+        self._course = course
+    }
     
+    convenience init(_ time: String, _ destination: String, _ hasSeat: String) {
+        self.init()
+        self._time = time
+        self._destination = destination
+        self._hasSeat = hasSeat
+    }
     
     
 }
