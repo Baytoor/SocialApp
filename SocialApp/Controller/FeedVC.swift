@@ -26,6 +26,7 @@ class FeedVC: UIViewController {
         super.viewDidLoad()
         closePopUp()
         view.backgroundColor = UIColor(darkBlue)
+        
         tableView.delegate = self
         tableView.dataSource = self
         

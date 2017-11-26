@@ -10,8 +10,10 @@ import UIKit
 import SwiftKeychainWrapper
 import Firebase
 
-class SettingsVC: UIViewController {
+class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    @IBOutlet weak var photoBg: UIView!
+    @IBOutlet weak var iconImage: UIImageView!
     @IBOutlet weak var profilePhotoView: UIImageView!
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var surNameField: UITextField!
@@ -19,12 +21,24 @@ class SettingsVC: UIViewController {
     @IBOutlet weak var facultyField: UITextField!
     @IBOutlet weak var courseField: UITextField!
     @IBOutlet weak var isDriverSC: UISegmentedControl!
+    
+    var imageUpdated = false
+    var imagePicker: UIImagePickerController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         getInfo()
-        isDriverSC.layer.borderWidth = 0
-        isDriverSC.layer.cornerRadius = 0
+        
+        imagePicker = UIImagePickerController()
+        imagePicker.allowsEditing = true
+        imagePicker.delegate = self
+        
+        profilePhotoView.layer.cornerRadius = profilePhotoView.frame.width/2
+        profilePhotoView.layer.masksToBounds = true
+        
+        photoBg.backgroundColor = UIColor(darkBlue)
+        photoBg.layer.opacity = 0.8
+        photoBg.layer.cornerRadius = photoBg.frame.width/2
     }
     
     func getInfo(){
@@ -32,9 +46,6 @@ class SettingsVC: UIViewController {
         if let data = NSData(contentsOf: URL(string: user.photoURL)!){
             profilePhotoView.image = UIImage(data: data as Data)
         }
-        profilePhotoView.layer.cornerRadius = profilePhotoView.frame.width/2
-        profilePhotoView.layer.masksToBounds = true
-        
         if user.displayName != ""{
             let displayName = user.displayName.components(separatedBy: " ")
             nameField.text = displayName[0]
@@ -67,7 +78,6 @@ class SettingsVC: UIViewController {
             let index = phoneNumberField.text!.index(phoneNumberField.text!.startIndex, offsetBy: 2)
             if String(self.phoneNumberField.text![..<index]) == "87" {
                 defaults.set(self.phoneNumberField.text, forKey: "phoneNumber")
-                
             }
         }
         if self.facultyField.text != "" {
@@ -81,8 +91,26 @@ class SettingsVC: UIViewController {
                 defaults.set("\(name) \(surname)", forKey: "displayName")
             }
         }
+        if imageUpdated {
+            
+        }
+        
         let user = User.init()
         DataService.ds.createUser(user)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
+            imageUpdated = true
+            profilePhotoView.image = image
+        } else {
+            print("MSG: A valid image wasn't selected")
+        }
+        imagePicker.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func addImageBtnPressed(_ sender: Any) {
+        present(imagePicker, animated: true, completion: nil)
     }
     
     @IBAction func doneBtnPressed(_ sender: Any) {

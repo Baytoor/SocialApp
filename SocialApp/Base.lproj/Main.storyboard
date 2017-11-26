@@ -611,17 +611,40 @@
                                             <constraint firstAttribute="height" constant="70" id="S0H-ke-UZx"/>
                                         </constraints>
                                     </stackView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zRG-hc-jlb">
+                                        <rect key="frame" x="16" y="10" width="70" height="70"/>
+                                        <subviews>
+                                            <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cameraIcon" translatesAutoresizingMaskIntoConstraints="NO" id="zqE-pX-WmG">
+                                                <rect key="frame" x="20" y="20" width="30" height="30"/>
+                                                <gestureRecognizers/>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="eOC-g7-Pfn" appends="YES" id="GY6-ne-cCc"/>
+                                                </connections>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="zqE-pX-WmG" firstAttribute="top" secondItem="zRG-hc-jlb" secondAttribute="top" constant="20" id="Hns-12-6yZ"/>
+                                            <constraint firstAttribute="width" constant="70" id="JZt-q4-dlw"/>
+                                            <constraint firstAttribute="trailing" secondItem="zqE-pX-WmG" secondAttribute="trailing" constant="20" id="ejW-E2-TnW"/>
+                                            <constraint firstAttribute="height" constant="70" id="gKu-bg-dTl"/>
+                                            <constraint firstAttribute="bottom" secondItem="zqE-pX-WmG" secondAttribute="bottom" constant="20" id="iTV-Y3-ddx"/>
+                                            <constraint firstItem="zqE-pX-WmG" firstAttribute="leading" secondItem="zRG-hc-jlb" secondAttribute="leading" constant="20" id="ntM-qC-U5c"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="w6u-8D-sH7" firstAttribute="leading" secondItem="pWf-K5-j1a" secondAttribute="leading" constant="16" id="0N4-Ks-iyz"/>
                                     <constraint firstAttribute="height" constant="90" id="C2b-Ui-3dH"/>
+                                    <constraint firstItem="zRG-hc-jlb" firstAttribute="top" secondItem="pWf-K5-j1a" secondAttribute="top" constant="10" id="FGd-iq-Fad"/>
                                     <constraint firstAttribute="bottom" secondItem="JkQ-SC-Cpx" secondAttribute="bottom" constant="10" id="ODT-xv-hb2"/>
                                     <constraint firstItem="JkQ-SC-Cpx" firstAttribute="top" secondItem="pWf-K5-j1a" secondAttribute="top" constant="10" id="Q4z-jA-YOR"/>
                                     <constraint firstItem="w6u-8D-sH7" firstAttribute="top" secondItem="pWf-K5-j1a" secondAttribute="top" constant="10" id="Qww-OF-MZ7"/>
                                     <constraint firstAttribute="trailing" secondItem="JkQ-SC-Cpx" secondAttribute="trailing" constant="16" id="TwX-ma-zdl"/>
                                     <constraint firstItem="JkQ-SC-Cpx" firstAttribute="leading" secondItem="w6u-8D-sH7" secondAttribute="trailing" constant="16" id="e91-oO-nCp"/>
                                     <constraint firstAttribute="bottom" secondItem="w6u-8D-sH7" secondAttribute="bottom" constant="10" id="fw4-CZ-BlS"/>
+                                    <constraint firstItem="zRG-hc-jlb" firstAttribute="leading" secondItem="pWf-K5-j1a" secondAttribute="leading" constant="16" id="hY1-Zk-qms"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LdU-HY-9gM">
@@ -723,14 +746,21 @@
                     <connections>
                         <outlet property="courseField" destination="9cA-bD-dS0" id="zl7-gE-gGq"/>
                         <outlet property="facultyField" destination="8Nv-98-8wQ" id="5x5-lh-0VC"/>
+                        <outlet property="iconImage" destination="zqE-pX-WmG" id="JE8-Q4-Dnr"/>
                         <outlet property="isDriverSC" destination="lWL-D1-NUJ" id="HBb-t8-IAK"/>
                         <outlet property="nameField" destination="eZt-pn-eQl" id="xPr-ZA-MuV"/>
                         <outlet property="phoneNumberField" destination="G1g-Ac-0jo" id="sjy-19-DjV"/>
+                        <outlet property="photoBg" destination="zRG-hc-jlb" id="u78-ap-GW4"/>
                         <outlet property="profilePhotoView" destination="w6u-8D-sH7" id="g3B-CG-hem"/>
                         <outlet property="surNameField" destination="1y7-hC-Z1F" id="LhF-wB-zmE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x9A-wH-fVp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="eOC-g7-Pfn">
+                    <connections>
+                        <action selector="addImageBtnPressed:" destination="hVa-Zo-jJq" id="jVU-Gp-Ye2"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3485.5999999999999" y="913.49325337331345"/>
         </scene>
@@ -804,6 +834,7 @@
     </scenes>
     <resources>
         <image name="SDU Logo" width="191" height="141"/>
+        <image name="cameraIcon" width="49" height="40"/>
         <image name="carIcon" width="28" height="25"/>
         <image name="closeBlue" width="50" height="50"/>
         <image name="facebook" width="27" height="50"/>

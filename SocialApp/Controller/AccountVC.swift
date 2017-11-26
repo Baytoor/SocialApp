@@ -21,6 +21,7 @@ class AccountVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         getInfo()
+        
         let user = User.init()
         DataService.ds.createUser(user)
     }
