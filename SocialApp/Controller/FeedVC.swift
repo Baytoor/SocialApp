@@ -30,9 +30,6 @@ class FeedVC: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        let user = User.init("Information System", "2", inter, "14:20 - 14:40", "Tolebi 21 ~> SDU", "1")
-        DataService.ds.createPassanger(user)
-        
     }
     
     @IBAction func addBtnPressed(_ sender: Any) {
@@ -41,7 +38,20 @@ class FeedVC: UIViewController {
     
     @IBAction func closeBtnPressed(_ sender: UIButton) {
         closePopUp()
-        self.view.endEditing(true)
+    }
+    
+    @IBAction func addPassangerBtnPressed(_ sender: Any){
+        if fromField.text != "" || toField.text != "" || timeFromField.text != "" {
+            let user = User.init(timeFromField.text!, "\(fromField.text!) ~> \(toField.text!)", "1")
+            DataService.ds.createPassanger(user)
+        }
+        closePopUp()
+    }
+    
+    @IBAction func swapDestination(_ sender: Any){
+        let temp = fromField.text
+        fromField.text = toField.text
+        toField.text = temp
     }
     
     func openPopUp() {
@@ -52,12 +62,18 @@ class FeedVC: UIViewController {
     }
     
     func closePopUp() {
+        self.view.endEditing(true)
         tableView.isScrollEnabled = true
         tableView.alpha = 1
         popUp.isHidden = true
+        fromField.text = ""
+        toField.text = ""
+        timeFromField.text = ""
+        timeTillField.text = ""
     }
     
     func updateList() {
+        passangers.removeAll()
         DataService.ds.refPassangers.observe(.value) { (snapshot) in
             if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
                 self.tableView.reloadData()
@@ -86,10 +102,10 @@ extension FeedVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "PassangerCell") as? PassangerCell {
-            cell.update(otherUser: passangers[indexPath.row])
+            cell.configureCell(otherUser: passangers[indexPath.row])
             return cell
         }
-        return UITableViewCell()
+        return PassangerCell()
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

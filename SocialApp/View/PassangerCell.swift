@@ -27,7 +27,7 @@ class PassangerCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    func update(otherUser: OtherUser) {
+    func configureCell(otherUser: OtherUser) {
         if let data = NSData(contentsOf: URL(string: otherUser.photoURL)!){
             personImage.image = UIImage(data: data as Data)
         }

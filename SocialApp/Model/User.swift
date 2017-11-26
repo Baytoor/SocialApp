@@ -24,7 +24,7 @@ class User {
     private var _photoURL: String
     private var _phoneNumber: String
     private var _info: String
-    private var _interests: [String]
+//    private var _interests: [String]
     private var _time: String
     private var _destination: String
     private var _hasSeat: String
@@ -47,9 +47,9 @@ class User {
     var info: String {
         return _info
     }
-    var interests: [String] {
-        return _interests
-    }
+//    var interests: [String] {
+//        return _interests
+//    }
     var time: String {
         return _time
     }
@@ -60,7 +60,7 @@ class User {
         return _hasSeat
     }
 
-    init(_ faculty: String, _ course: String, _ interests: [String], _ time: String, _ destination: String, _ hasSeat: String) {
+    init(/*_ faculty: String, _ course: String, _ interests: [String], */_ time: String, _ destination: String, _ hasSeat: String) {
         if let displayName = Auth.auth().currentUser?.displayName{
             _displayName = displayName
         } else {
@@ -82,8 +82,9 @@ class User {
             _photoURL = "https://avpn.asia/wp-content/uploads/2015/05/empty_profile.png"
         }
         _uid = (Auth.auth().currentUser?.uid)!
-        _info = "\(faculty), \(course)"
-        _interests = interests
+//        _info = "\(faculty), \(course)"
+        _info = "SDU, student"
+//        _interests = interests
         _time = time
         _destination = destination
         _hasSeat = hasSeat

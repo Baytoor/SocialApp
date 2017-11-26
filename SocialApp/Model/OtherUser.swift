@@ -24,7 +24,7 @@ class OtherUser {
     private var _photoURL: String
     private var _phoneNumber: String
     private var _info: String
-    private var _interests: [String]
+//    private var _interests: [String]
     private var _time: String
     private var _destination: String
     private var _hasSeat: String
@@ -47,9 +47,9 @@ class OtherUser {
     var info: String {
         return _info
     }
-    var interests: [String] {
-        return _interests
-    }
+//    var interests: [String] {
+//        return _interests
+//    }
     var time: String {
         return _time
     }
@@ -102,7 +102,7 @@ class OtherUser {
         } else {
             self._hasSeat = ""
         }
-        _interests = ["car", "mao"]
+//        _interests = ["car", "mao"]
     }
 
 

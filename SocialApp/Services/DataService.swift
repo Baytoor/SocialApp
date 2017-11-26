@@ -29,7 +29,6 @@ class DataService {
     
     func createDriver(_ user: User){
         refDrivers.child(user.uid).updateChildValues(setUserData(user))
-        refDrivers.child(user.uid).child("interests").updateChildValues(setInterestsData(user.interests))
     }
     
     func createPassanger(_ user: User) {
