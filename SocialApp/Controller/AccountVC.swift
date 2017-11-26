@@ -21,19 +21,25 @@ class AccountVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         getInfo()
+        let user = User.init()
+        DataService.ds.createUser(user)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        getInfo()
     }
     
     func getInfo(){
-        if let data = NSData(contentsOf: URL(string: signedInUser.photoURL)!){
+        let user = User.init()
+        if let data = NSData(contentsOf: URL(string: user.photoURL)!){
             profilePhotoView.image = UIImage(data: data as Data)
         }
-        
         profilePhotoView.layer.cornerRadius = profilePhotoView.frame.width/2
         profilePhotoView.layer.masksToBounds = true
-        displayNameLbl.text = signedInUser.displayName
-        emailLbl.text = signedInUser.email
-        phoneNumberLbl.text = signedInUser.phoneNumber
-        infoLbl.text = signedInUser.info
+        displayNameLbl.text = user.displayName
+        emailLbl.text = user.email
+        phoneNumberLbl.text = user.phoneNumber
+        infoLbl.text = user.info
     }
     
     @IBAction func settingsBtnPressed(_ sender: Any){

@@ -29,8 +29,12 @@ class User {
     private var _time: String
     private var _destination: String
     private var _hasSeat: String
+    private var _isDriver: Int
 //    private var _interests: [String]
     
+    var isDriver: Int {
+        return _isDriver
+    }
     
     var uid: String {
         return _uid
@@ -69,10 +73,11 @@ class User {
 //    var interests: [String] {
 //        return _interests
 //    }
-    
 
     init() {
-        if let displayName = Auth.auth().currentUser?.displayName{
+        if let displayName = defaults.string(forKey: "displayName"){
+            _displayName = displayName
+        } else if let displayName = Auth.auth().currentUser?.displayName{
             _displayName = displayName
         } else {
             _displayName = ""
@@ -82,8 +87,10 @@ class User {
         } else {
             _email = ""
         }
-        if let phoneNumber = Auth.auth().currentUser?.phoneNumber {
-            _phoneNumber = phoneNumber
+        if let phoneNumberFB = Auth.auth().currentUser?.phoneNumber {
+            _phoneNumber = phoneNumberFB
+        } else if let phoneNumberUD = defaults.string(forKey: "phoneNumber") {
+            _phoneNumber = phoneNumberUD
         } else {
             _phoneNumber = ""
         }
@@ -93,19 +100,31 @@ class User {
             _photoURL = "https://avpn.asia/wp-content/uploads/2015/05/empty_profile.png"
         }
         _uid = (Auth.auth().currentUser?.uid)!
-        _info = "SDU, student"
         _time = ""
         _destination = ""
         _hasSeat = ""
-        _faculty = ""
-        _course = ""
-    }
-    
-    convenience init(_ faculty: String, _ course: String) {
-        self.init()
-        self._info = "\(faculty), \(course)"
-        self._faculty = faculty
-        self._course = course
+        if let faculty = defaults.string(forKey: "faculty") {
+            _faculty = faculty
+        } else {
+            _faculty = ""
+        }
+        if let course = defaults.string(forKey: "course") {
+            _course = course
+        } else {
+            _course = ""
+        }
+        
+        let isDriverUD = defaults.integer(forKey: "isDriver") 
+        _isDriver = isDriverUD
+        
+        _info = ""
+        if _faculty != "" && _course != "" {
+            _info = "\(_faculty), \(_course) course"
+        } else if _faculty != "" {
+            _info = _faculty
+        } else if _course != "" {
+            _info = _course
+        }
     }
     
     convenience init(_ time: String, _ destination: String, _ hasSeat: String) {

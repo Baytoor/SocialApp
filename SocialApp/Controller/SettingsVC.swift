@@ -18,54 +18,76 @@ class SettingsVC: UIViewController {
     @IBOutlet weak var phoneNumberField: UITextField!
     @IBOutlet weak var facultyField: UITextField!
     @IBOutlet weak var courseField: UITextField!
+    @IBOutlet weak var isDriverSC: UISegmentedControl!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         getInfo()
-        
+        isDriverSC.layer.borderWidth = 0
+        isDriverSC.layer.cornerRadius = 0
     }
     
     func getInfo(){
-        if let data = NSData(contentsOf: URL(string: signedInUser.photoURL)!){
+        let user = User.init()
+        if let data = NSData(contentsOf: URL(string: user.photoURL)!){
             profilePhotoView.image = UIImage(data: data as Data)
         }
         profilePhotoView.layer.cornerRadius = profilePhotoView.frame.width/2
         profilePhotoView.layer.masksToBounds = true
         
-        if signedInUser.displayName != ""{
-            let displayName = signedInUser.displayName.components(separatedBy: " ")
+        if user.displayName != ""{
+            let displayName = user.displayName.components(separatedBy: " ")
             nameField.text = displayName[0]
             surNameField.text = displayName[1]
         } else {
             nameField.placeholder = "Name"
             surNameField.placeholder = "Surname"
         }
-        if signedInUser.faculty != "" {
-            facultyField.text = signedInUser.faculty
+        if user.faculty != "" {
+            facultyField.text = user.faculty
         } else {
             facultyField.placeholder = "Faculty"
         }
-        if signedInUser.course != "" {
-            courseField.text = signedInUser.course
+        if user.course != "" {
+            courseField.text = user.course
         } else {
             courseField.placeholder = "Course"
         }
-        if signedInUser.phoneNumber != "" {
-            phoneNumberField.text = signedInUser.phoneNumber
+        if user.phoneNumber != "" {
+            phoneNumberField.text = user.phoneNumber
         } else {
-            phoneNumberField.placeholder = "+7 (___) ___ __ __"
+            phoneNumberField.placeholder = "87*******"
         }
-        
-        
+        isDriverSC.selectedSegmentIndex = user.isDriver
+    }
+    
+    func updateInfo() {
+        defaults.set(isDriverSC.selectedSegmentIndex, forKey: "isDriver")
+        if self.phoneNumberField.text?.count==11  {
+            let index = phoneNumberField.text!.index(phoneNumberField.text!.startIndex, offsetBy: 2)
+            if String(self.phoneNumberField.text![..<index]) == "87" {
+                defaults.set(self.phoneNumberField.text, forKey: "phoneNumber")
+                
+            }
+        }
+        if self.facultyField.text != "" {
+            defaults.set(self.facultyField.text, forKey: "faculty")
+        }
+        if self.courseField.text != "" {
+            defaults.set(self.courseField.text, forKey: "course")
+        }
+        if let name = self.nameField.text, let surname = self.surNameField.text {
+            if name != "" && surname != "" {
+                defaults.set("\(name) \(surname)", forKey: "displayName")
+            }
+        }
+        let user = User.init()
+        DataService.ds.createUser(user)
     }
     
     @IBAction func doneBtnPressed(_ sender: Any) {
+        updateInfo()
         _ = navigationController?.popViewController(animated: true)
-        if self.facultyField.text != "" && self.courseField.text != "" {
-            let user = User.init(self.facultyField.text!, self.courseField.text!)
-            signedInUser = user
-        }
-        
     }
 
     @IBAction func signOutBtnPressed(_ sender: Any) {

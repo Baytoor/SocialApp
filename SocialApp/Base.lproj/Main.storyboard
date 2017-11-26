@@ -38,7 +38,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="G02-4E-VWk">
                                 <rect key="frame" x="30" y="283.5" width="315" height="180"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vmR-bj-Npg" customClass="TextField" customModule="SocialApp" customModuleProvider="target">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="vmR-bj-Npg" customClass="TextField" customModule="SocialApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="315" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="KnJ-3p-ieE"/>
@@ -47,7 +47,7 @@
                                         <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="15"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="next" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="email"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pcT-co-etu" customClass="TextField" customModule="SocialApp" customModuleProvider="target">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="pcT-co-etu" customClass="TextField" customModule="SocialApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="70" width="315" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="utd-O5-UQc"/>
@@ -278,7 +278,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New passanger" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CLP-Kr-9FE">
-                                        <rect key="frame" x="125.5" y="10" width="124" height="25"/>
+                                        <rect key="frame" x="126" y="10" width="124" height="25"/>
                                         <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -298,12 +298,12 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="СДУ" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qaf-6f-6nj" customClass="UnderlineField" customModule="SocialApp" customModuleProvider="target">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="СДУ" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="qaf-6f-6nj" customClass="UnderlineField" customModule="SocialApp" customModuleProvider="target">
                                                         <rect key="frame" x="57" y="0.0" width="272" height="30"/>
-                                                        <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                     </textField>
                                                 </subviews>
                                                 <constraints>
@@ -322,12 +322,12 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Аль-Фараби 74" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bsP-Iy-b8K" customClass="UnderlineField" customModule="SocialApp" customModuleProvider="target">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Аль-Фараби 74" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="bsP-Iy-b8K" customClass="UnderlineField" customModule="SocialApp" customModuleProvider="target">
                                                         <rect key="frame" x="56.5" y="0.0" width="272.5" height="30"/>
-                                                        <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                     </textField>
                                                 </subviews>
                                                 <constraints>
@@ -349,19 +349,19 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Z9u-WT-db1">
                                                         <rect key="frame" x="56.5" y="0.0" width="272.5" height="30"/>
                                                         <subviews>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="14:20" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="g0y-TW-Eyu" customClass="UnderlineField" customModule="SocialApp" customModuleProvider="target">
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="14:20" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="g0y-TW-Eyu" customClass="UnderlineField" customModule="SocialApp" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="126.5" height="30"/>
-                                                                <color key="backgroundColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="textColor"/>
                                                                 <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="14"/>
-                                                                <textInputTraits key="textInputTraits"/>
+                                                                <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
                                                             </textField>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="14:30" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sTF-e7-DTT" customClass="UnderlineField" customModule="SocialApp" customModuleProvider="target">
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="14:30" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="sTF-e7-DTT" customClass="UnderlineField" customModule="SocialApp" customModuleProvider="target">
                                                                 <rect key="frame" x="146.5" y="0.0" width="126" height="30"/>
-                                                                <color key="backgroundColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="textColor"/>
                                                                 <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="14"/>
-                                                                <textInputTraits key="textInputTraits"/>
+                                                                <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
                                                             </textField>
                                                         </subviews>
                                                     </stackView>
@@ -594,17 +594,17 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="JkQ-SC-Cpx">
                                         <rect key="frame" x="102" y="10" width="257" height="70"/>
                                         <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eZt-pn-eQl" customClass="UnderlineField" customModule="SocialApp" customModuleProvider="target">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="eZt-pn-eQl" customClass="UnderlineField" customModule="SocialApp" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="257" height="30"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="15"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                             </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Surname" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1y7-hC-Z1F" customClass="UnderlineField" customModule="SocialApp" customModuleProvider="target">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Surname" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="1y7-hC-Z1F" customClass="UnderlineField" customModule="SocialApp" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="40" width="257" height="30"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="15"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                             </textField>
                                         </subviews>
                                         <constraints>
@@ -630,23 +630,23 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="BcI-g0-g9g">
                                         <rect key="frame" x="16" y="10" width="343" height="110"/>
                                         <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="+7 (___) ___ __ __" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="G1g-Ac-0jo" customClass="UnderlineField" customModule="SocialApp" customModuleProvider="target">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="+7 (___) ___ __ __" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="G1g-Ac-0jo" customClass="UnderlineField" customModule="SocialApp" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="343" height="30"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="15"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                             </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Faculty" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8Nv-98-8wQ" customClass="UnderlineField" customModule="SocialApp" customModuleProvider="target">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Faculty" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="8Nv-98-8wQ" customClass="UnderlineField" customModule="SocialApp" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="40" width="343" height="30"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="15"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                             </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Course" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9cA-bD-dS0" customClass="UnderlineField" customModule="SocialApp" customModuleProvider="target">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Course" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="9cA-bD-dS0" customClass="UnderlineField" customModule="SocialApp" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="80" width="343" height="30"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="15"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                             </textField>
                                         </subviews>
                                         <constraints>
@@ -668,15 +668,27 @@
                                     <constraint firstItem="BcI-g0-g9g" firstAttribute="top" secondItem="LdU-HY-9gM" secondAttribute="top" constant="10" id="zUM-Re-Obm"/>
                                 </constraints>
                             </view>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="lWL-D1-NUJ">
+                                <rect key="frame" x="0.0" y="270" width="375" height="31"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="7bl-Er-Gvv"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="Passenger"/>
+                                    <segment title="Driver"/>
+                                </segments>
+                                <color key="tintColor" red="0.17804795503616333" green="0.24202510714530945" blue="0.30858874320983887" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XOu-si-eus">
-                                <rect key="frame" x="0.0" y="270" width="375" height="40"/>
+                                <rect key="frame" x="0.0" y="320" width="375" height="40"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Kjh-Oo-yb0"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="17"/>
                                 <state key="normal" title="Sign out">
-                                    <color key="titleColor" red="0.66274509800000003" green="0.1058823529" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="signOutBtnPressed:" destination="hVa-Zo-jJq" eventType="touchUpInside" id="vMq-l7-k8E"/>
@@ -686,14 +698,17 @@
                         <color key="backgroundColor" red="0.92146831750869751" green="0.92162626981735229" blue="0.92145836353302002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="XOu-si-eus" firstAttribute="leading" secondItem="1RS-Wl-c9e" secondAttribute="leading" id="36N-5b-eVF"/>
-                            <constraint firstItem="XOu-si-eus" firstAttribute="top" secondItem="LdU-HY-9gM" secondAttribute="bottom" constant="20" id="8Zp-c6-r7W"/>
                             <constraint firstItem="LdU-HY-9gM" firstAttribute="leading" secondItem="1RS-Wl-c9e" secondAttribute="leading" id="9XX-kq-Nsc"/>
                             <constraint firstItem="1RS-Wl-c9e" firstAttribute="trailing" secondItem="XOu-si-eus" secondAttribute="trailing" id="9kX-y7-Hpd"/>
                             <constraint firstItem="1RS-Wl-c9e" firstAttribute="trailing" secondItem="pWf-K5-j1a" secondAttribute="trailing" id="Dvz-aD-MCZ"/>
                             <constraint firstItem="pWf-K5-j1a" firstAttribute="top" secondItem="1RS-Wl-c9e" secondAttribute="top" constant="10" id="E1y-rF-LDt"/>
+                            <constraint firstItem="lWL-D1-NUJ" firstAttribute="leading" secondItem="1RS-Wl-c9e" secondAttribute="leading" id="Fo5-BT-vbG"/>
                             <constraint firstItem="pWf-K5-j1a" firstAttribute="leading" secondItem="1RS-Wl-c9e" secondAttribute="leading" id="L2x-pz-st8"/>
+                            <constraint firstItem="1RS-Wl-c9e" firstAttribute="trailing" secondItem="lWL-D1-NUJ" secondAttribute="trailing" id="dXp-1y-djh"/>
+                            <constraint firstItem="XOu-si-eus" firstAttribute="top" secondItem="lWL-D1-NUJ" secondAttribute="bottom" constant="20" id="gIb-g2-ZO9"/>
                             <constraint firstItem="LdU-HY-9gM" firstAttribute="top" secondItem="pWf-K5-j1a" secondAttribute="bottom" constant="20" id="hxd-xE-l6n"/>
                             <constraint firstItem="LdU-HY-9gM" firstAttribute="trailing" secondItem="1RS-Wl-c9e" secondAttribute="trailing" id="sSv-ah-dsH"/>
+                            <constraint firstItem="lWL-D1-NUJ" firstAttribute="top" secondItem="LdU-HY-9gM" secondAttribute="bottom" constant="20" id="zXo-ZK-bNj"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1RS-Wl-c9e"/>
                     </view>
@@ -708,6 +723,7 @@
                     <connections>
                         <outlet property="courseField" destination="9cA-bD-dS0" id="zl7-gE-gGq"/>
                         <outlet property="facultyField" destination="8Nv-98-8wQ" id="5x5-lh-0VC"/>
+                        <outlet property="isDriverSC" destination="lWL-D1-NUJ" id="HBb-t8-IAK"/>
                         <outlet property="nameField" destination="eZt-pn-eQl" id="xPr-ZA-MuV"/>
                         <outlet property="phoneNumberField" destination="G1g-Ac-0jo" id="sjy-19-DjV"/>
                         <outlet property="profilePhotoView" destination="w6u-8D-sH7" id="g3B-CG-hem"/>

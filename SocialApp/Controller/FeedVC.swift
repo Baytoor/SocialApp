@@ -24,12 +24,14 @@ class FeedVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateList()
         closePopUp()
         view.backgroundColor = UIColor(darkBlue)
         tableView.delegate = self
         tableView.dataSource = self
         
+        DispatchQueue.main.async {
+            self.updateList()
+        }
     }
     
     @IBAction func addBtnPressed(_ sender: Any) {
