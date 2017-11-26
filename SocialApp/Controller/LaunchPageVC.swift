@@ -101,7 +101,7 @@ extension LaunchPageVC {
                     if error == nil {
                         print("MSG: User authenticated with firebase using email")
                         if let user = user {
-                            self.completeSignIn(id: user.uid)
+                            self.completeSignIn(uid: user.uid)
                         }
                     } else {
                         let errCode = AuthErrorCode(rawValue: error!._code)
@@ -114,7 +114,7 @@ extension LaunchPageVC {
                                 } else {
                                     print("MSG: New user was created using email")
                                     if let user = user {
-                                        self.completeSignIn(id: user.uid)
+                                        self.completeSignIn(uid: user.uid)
                                     }
                                 }
                             })
@@ -156,14 +156,18 @@ extension LaunchPageVC {
             } else {
                 print("MSG: Succesfully authenticated with firebase")
                 if let user = user {
-                    self.completeSignIn(id: user.uid)
+                    self.completeSignIn(uid: user.uid)
                 }
             }
         }
     }
     
-    func completeSignIn(id: String) {
-        let saveSuccessful: Bool = KeychainWrapper.standard.set(id, forKey: keyUID)
+    func completeSignIn(uid: String) {
+        let passanger = Passanger.init("IS", "2", ["SportCar", "Starups", "iOS"])
+        let userData = ["name": passanger.displayName, "email": passanger.email]
+        DataService.ds.createFBDBUser(uid: uid, userData: userData)
+        
+        let saveSuccessful: Bool = KeychainWrapper.standard.set(uid, forKey: keyUID)
         if saveSuccessful {
             print("MSG: Data saved to keychain")
         }

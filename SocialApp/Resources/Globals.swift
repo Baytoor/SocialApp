@@ -14,6 +14,7 @@ let darkBlue = 0x2D3E4F
 let lightBlue = 0x1DB4DD
 let gray = 0xAEAEAE
 
+let dataBase = Database.database().reference()
 let keyUID = "uid"
 
 func getUserInfo() {
