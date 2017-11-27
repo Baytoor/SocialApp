@@ -24,7 +24,6 @@ class OtherUser {
     private var _photoURL: String
     private var _phoneNumber: String
     private var _info: String
-//    private var _interests: [String]
     private var _time: String
     private var _destination: String
     private var _hasSeat: String
@@ -47,9 +46,6 @@ class OtherUser {
     var info: String {
         return _info
     }
-//    var interests: [String] {
-//        return _interests
-//    }
     var time: String {
         return _time
     }
@@ -80,7 +76,7 @@ class OtherUser {
         if let photoURL = userData["photoURL"] as? String {
             self._photoURL = photoURL
         } else {
-            self._photoURL = "https://avpn.asia/wp-content/uploads/2015/05/empty_profile.png"
+            self._photoURL = ""
         }
         if let info = userData["info"] as? String {
             self._info = info
@@ -102,7 +98,7 @@ class OtherUser {
         } else {
             self._hasSeat = ""
         }
-//        _interests = ["car", "mao"]
+        
     }
 
 

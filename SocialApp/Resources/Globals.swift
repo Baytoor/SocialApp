@@ -15,8 +15,12 @@ let lightBlue = 0x1DB4DD
 let gray = 0xAEAEAE
 
 let dataBase = Database.database().reference()
+let storage = Storage.storage().reference()
+
 let keyUID = "kq8bQx2eMx01hAlv"
+
 let defaults = UserDefaults.standard
+
 
 func setUserDefaults() {
     let signedInUser = User.init()
@@ -36,12 +40,4 @@ func setUserDefaults() {
     } else if defaults.string(forKey: "course") != "" {
         defaults.set("\(defaults.string(forKey: "course")!)", forKey: "info")
     }
-    
-//    if defaults.string() != "" && _course != "" {
-//        defaults.set(signedInUser.info, forKey: "info") = "\(_faculty), \(_course)"
-//    } else if _faculty != "" {
-//        defaults.set(signedInUser.info, forKey: "info") = _faculty
-//    } else if _course != "" {
-//        defaults.set(signedInUser.info, forKey: "info") = _course
-//    }
 }

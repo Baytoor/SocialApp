@@ -26,6 +26,7 @@
 		508D37831FC994890001598F /* SocialAuthBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508D37821FC994890001598F /* SocialAuthBtn.swift */; };
 		509076AA1FB8BCCC00585348 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509076A91FB8BCCC00585348 /* TextField.swift */; };
 		50A8FAB21FCA6965008277F1 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A8FAB11FCA6965008277F1 /* SettingsVC.swift */; };
+		50AA00841FCBB33C000F5286 /* StorageServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50AA00831FCBB33C000F5286 /* StorageServices.swift */; };
 		50B2511F1FB80FC30083776E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B2511E1FB80FC30083776E /* AppDelegate.swift */; };
 		50B251211FB80FC30083776E /* LaunchPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B251201FB80FC30083776E /* LaunchPageVC.swift */; };
 		50B251241FB80FC30083776E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50B251221FB80FC30083776E /* Main.storyboard */; };
@@ -59,6 +60,7 @@
 		508D37821FC994890001598F /* SocialAuthBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialAuthBtn.swift; sourceTree = "<group>"; };
 		509076A91FB8BCCC00585348 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		50A8FAB11FCA6965008277F1 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
+		50AA00831FCBB33C000F5286 /* StorageServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageServices.swift; sourceTree = "<group>"; };
 		50B2511B1FB80FC30083776E /* SocialApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SocialApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50B2511E1FB80FC30083776E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		50B251201FB80FC30083776E /* LaunchPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchPageVC.swift; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				50C723CC1FCA2AC9002D0C73 /* DataService.swift */,
+				50AA00831FCBB33C000F5286 /* StorageServices.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -365,6 +368,7 @@
 				50C723CD1FCA2AC9002D0C73 /* DataService.swift in Sources */,
 				50B251211FB80FC30083776E /* LaunchPageVC.swift in Sources */,
 				50469F381FCA1512004639EB /* PassangerCell.swift in Sources */,
+				50AA00841FCBB33C000F5286 /* StorageServices.swift in Sources */,
 				50B2511F1FB80FC30083776E /* AppDelegate.swift in Sources */,
 				509076AA1FB8BCCC00585348 /* TextField.swift in Sources */,
 				50FFEAE21FC6D7F200A54BEB /* FeedVC.swift in Sources */,

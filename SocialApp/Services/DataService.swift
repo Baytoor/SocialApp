@@ -29,7 +29,6 @@ class DataService {
     var refUsers: DatabaseReference {
         return _refUsers
     }
-
     
     func createDriver(_ user: User){
         refDrivers.child(user.uid).updateChildValues(setUserData(user))

@@ -75,9 +75,9 @@ class User {
 //    }
 
     init() {
-        if let displayName = defaults.string(forKey: "displayName"){
+        if let displayName = Auth.auth().currentUser?.displayName{
             _displayName = displayName
-        } else if let displayName = Auth.auth().currentUser?.displayName{
+        } else if let displayName = defaults.string(forKey: "displayName") {
             _displayName = displayName
         } else {
             _displayName = ""
@@ -97,7 +97,7 @@ class User {
         if let photoURL = Auth.auth().currentUser?.photoURL {
             _photoURL = "\(photoURL)"
         } else {
-            _photoURL = "https://avpn.asia/wp-content/uploads/2015/05/empty_profile.png"
+            _photoURL = ""
         }
         _uid = (Auth.auth().currentUser?.uid)!
         _time = ""

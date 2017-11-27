@@ -26,17 +26,10 @@ class FeedVC: UIViewController {
         super.viewDidLoad()
         closePopUp()
         view.backgroundColor = UIColor(darkBlue)
-        
         tableView.delegate = self
         tableView.dataSource = self
         
         self.updateList()
-        
-        while true {
-            tableView.reloadData()
-            sleep(30)
-        }
-        
     }
     
     @IBAction func addBtnPressed(_ sender: Any) {
@@ -48,8 +41,8 @@ class FeedVC: UIViewController {
     }
     
     @IBAction func addPassangerBtnPressed(_ sender: Any){
-        if fromField.text != "" || toField.text != "" || timeFromField.text != "" {
-            let user = User.init(timeFromField.text!, "\(fromField.text!) ~> \(toField.text!)", "1")
+        if fromField.text != "" || toField.text != "" || timeFromField.text != ""  || timeTillField.text != "" {
+            let user = User.init("\(timeFromField.text!) - \(timeTillField.text!)", "\(fromField.text!) ~> \(toField.text!)", "1")
             DataService.ds.createPassanger(user)
         }
         closePopUp()
@@ -83,8 +76,8 @@ class FeedVC: UIViewController {
     }
     
     func updateList() {
-        passangers.removeAll()
         DataService.ds.refPassangers.observe(.value) { (snapshot) in
+            self.passangers.removeAll()
             if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
                 for snap in snapshot {
                     if let userData = snap.value as? Dictionary<String, Any> {
@@ -94,6 +87,7 @@ class FeedVC: UIViewController {
                     }
                 }
             }
+            self.tableView.reloadData()
         }
     }
     

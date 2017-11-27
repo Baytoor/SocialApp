@@ -17,25 +17,26 @@ class AccountVC: UIViewController {
     @IBOutlet weak var emailLbl: UILabel!
     @IBOutlet weak var phoneNumberLbl: UILabel!
     @IBOutlet weak var infoLbl: UILabel!
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        getInfo()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         getInfo()
-        let user = User.init()
-        DataService.ds.createUser(user)
     }
     
     func getInfo(){
-        let user = User.init()
-        if let data = NSData(contentsOf: URL(string: user.photoURL)!){
+        if let data = NSData(contentsOf: URL(string: User.init().photoURL)!){
             profilePhotoView.image = UIImage(data: data as Data)
         }
         profilePhotoView.layer.cornerRadius = profilePhotoView.frame.width/2
         profilePhotoView.layer.masksToBounds = true
-        displayNameLbl.text = user.displayName
-        emailLbl.text = user.email
-        phoneNumberLbl.text = user.phoneNumber
-        infoLbl.text = user.info
+        displayNameLbl.text = User.init().displayName
+        emailLbl.text = User.init().email
+        phoneNumberLbl.text = User.init().phoneNumber
+        infoLbl.text = User.init().info
     }
     
     @IBAction func settingsBtnPressed(_ sender: Any){
