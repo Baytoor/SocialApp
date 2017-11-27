@@ -45,13 +45,15 @@ class DriverVC: UIViewController {
             let user = User.init("\(timeFromField.text!) - \(timeTillField.text!)", "\(fromField.text!) ~> \(toField.text!)", "5")
             if user.phoneNumber != "" {
                 DataService.ds.createDriver(user)
+                closePopUp()
             } else if Auth.auth().currentUser?.isEmailVerified == false {
                 confirmAlert(message: "Please, verify your email")
             } else {
                 confirmAlert(message: "Please, fill your information in settings")
             }
+        } else {
+            confirmAlert(message: "Field is empty")
         }
-        closePopUp()
     }
     
     @IBAction func swapDestination(_ sender: Any){

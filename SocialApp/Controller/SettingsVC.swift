@@ -93,7 +93,7 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         if User.init().photoURL != "" {
             if let data = NSData(contentsOf: URL(string: User.init().photoURL)!){
                 let image = UIImage(data: data as Data)
-                if image != profilePhotoView.image {
+                if UIImagePNGRepresentation(image!) != UIImagePNGRepresentation(profilePhotoView.image!)  {
                     isSuccess = false
                     StorageServices.ss.uploadMedia(uid: User.init().uid, image: profilePhotoView.image!, completion:{ (url) in
                         changeRequest?.photoURL = url
