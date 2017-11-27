@@ -97,7 +97,7 @@ class User {
         if let photoURL = Auth.auth().currentUser?.photoURL {
             _photoURL = "\(photoURL)"
         } else {
-            _photoURL = ""
+            _photoURL = "https://github.com/Baytoor/SocialApp/blob/master/SocialApp/Assets.xcassets/noPhoto.imageset/noPhoto.png"
         }
         _uid = (Auth.auth().currentUser?.uid)!
         _time = ""

@@ -28,8 +28,12 @@ class AccountVC: UIViewController {
     }
     
     func getInfo(){
-        if let data = NSData(contentsOf: URL(string: User.init().photoURL)!){
-            profilePhotoView.image = UIImage(data: data as Data)
+        if User.init().photoURL != ""{
+            if let data = NSData(contentsOf: URL(string: User.init().photoURL)!){
+                profilePhotoView.image = UIImage(data: data as Data)
+            }
+        } else {
+            profilePhotoView.image = #imageLiteral(resourceName: "noPhoto")
         }
         profilePhotoView.layer.cornerRadius = profilePhotoView.frame.width/2
         profilePhotoView.layer.masksToBounds = true

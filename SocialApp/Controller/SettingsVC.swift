@@ -42,6 +42,15 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         
         profilePhotoView.layer.cornerRadius = profilePhotoView.frame.width/2
         profilePhotoView.layer.masksToBounds = true
+        
+        if Auth.auth().currentUser?.isEmailVerified == false {
+            Auth.auth().currentUser?.sendEmailVerification(completion: { (error) in
+                if error != nil {
+                    print("MSG: Unable to send verifiacation message")
+                }
+            })
+        }
+        
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
@@ -81,32 +90,33 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     func updateImage(completionHandler: (() -> Void)!) {
         let authUser = Auth.auth().currentUser
         let changeRequest = authUser?.createProfileChangeRequest()
-        if let data = NSData(contentsOf: URL(string: User.init().photoURL)!){
-            let image = UIImage(data: data as Data)
-            if image != profilePhotoView.image {
-                isSuccess = false
-                StorageServices.ss.uploadMedia(uid: User.init().uid, image: profilePhotoView.image!, completion:{ (url) in
-                    changeRequest?.photoURL = url
-                    changeRequest?.commitChanges { error in
-                        if error == nil {
-                            self.updateDisplayName(completionHandler: {
-                                completionHandler()
-                            })
-                        } else {
-                            self.errorDescription("Now it's not available to update profile image")
+        if User.init().photoURL != "" {
+            if let data = NSData(contentsOf: URL(string: User.init().photoURL)!){
+                let image = UIImage(data: data as Data)
+                if image != profilePhotoView.image {
+                    isSuccess = false
+                    StorageServices.ss.uploadMedia(uid: User.init().uid, image: profilePhotoView.image!, completion:{ (url) in
+                        changeRequest?.photoURL = url
+                        changeRequest?.commitChanges { error in
+                            if error == nil {
+                                self.updateDisplayName(completionHandler: {
+                                    completionHandler()
+                                })
+                            } else {
+                                self.errorDescription("Now it's not available to update profile image")
+                            }
                         }
-                    }
-                })
-            }  else {
-                self.updateDisplayName(completionHandler: {
-                    completionHandler()
-                })
+                    })
+                }  else {
+                    self.updateDisplayName(completionHandler: {
+                        completionHandler()
+                    })
+                }
             }
         }
     }
     
     func updateInfo() {
-        
         if self.phoneNumberField.text?.count==11  {
             let index = phoneNumberField.text!.index(phoneNumberField.text!.startIndex, offsetBy: 2)
             if String(self.phoneNumberField.text![..<index]) == "87" {
@@ -146,7 +156,15 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
             completionHandler()
         }
         updateInfo()
-        
+    }
+    
+    @IBAction func checkMaxLength() {
+        if (courseField.text?.count)! > 1 {
+            courseField.deleteBackward()
+        }
+        if (phoneNumberField.text?.count)! > 11 {
+            phoneNumberField.deleteBackward()
+        }
     }
     
     func inProcess() {
@@ -199,8 +217,12 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     
     func getInfo(){
         let user = User.init()
-        if let data = NSData(contentsOf: URL(string: user.photoURL)!){
-            profilePhotoView.image = UIImage(data: data as Data)
+        if User.init().photoURL != "" {
+            if let data = NSData(contentsOf: URL(string: User.init().photoURL)!){
+                profilePhotoView.image = UIImage(data: data as Data)
+            }
+        } else {
+            profilePhotoView.image = #imageLiteral(resourceName: "noPhoto")
         }
         profilePhotoView.layer.cornerRadius = profilePhotoView.frame.width/2
         profilePhotoView.layer.masksToBounds = true

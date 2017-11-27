@@ -21,7 +21,6 @@ let keyUID = "kq8bQx2eMx01hAlv"
 
 let defaults = UserDefaults.standard
 
-
 func setUserDefaults() {
     let signedInUser = User.init()
     defaults.set(signedInUser.displayName, forKey: "displayName")

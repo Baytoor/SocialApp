@@ -24,15 +24,12 @@ class LaunchPageVC: UIViewController {
     @IBOutlet weak var errorLbl: UILabel!
     @IBOutlet weak var signInBtn: UIButton!
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewDidLoad() {
+        super.viewDidLoad()
         outProcess()
         emailField.text = ""
         passField.text = ""
         errorLbl.text = ""
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
         outProcess()
         view.backgroundColor = UIColor(darkBlue)
         facebook.setImage(#imageLiteral(resourceName: "facebook").maskWithColor(color: UIColor(lightBlue)), for: .highlighted)
@@ -101,7 +98,13 @@ extension LaunchPageVC {
                     if error == nil {
                         print("MSG: User authenticated with firebase using email")
                         if let user = user {
-                            self.completeSignIn(uid: user.uid)
+                            user.sendEmailVerification(completion: { (error) in
+                                if error != nil {
+                                    print("MSG: Unable to send verifiacation message")
+                                } else {
+                                    self.completeSignIn(uid: user.uid)
+                                }
+                            })
                         }
                     } else {
                         let errCode = AuthErrorCode(rawValue: error!._code)
@@ -114,7 +117,13 @@ extension LaunchPageVC {
                                 } else {
                                     print("MSG: New user was created using email")
                                     if let user = user {
-                                        self.completeSignIn(uid: user.uid)
+                                        user.sendEmailVerification(completion: { (error) in
+                                            if error != nil {
+                                                print("MSG: Unable to send verifiacation message")
+                                            } else {
+                                                self.completeSignIn(uid: user.uid)
+                                            }
+                                        })
                                     }
                                 }
                             })
@@ -171,6 +180,29 @@ extension LaunchPageVC {
             print("MSG: Data saved to keychain")
         }
         performSegue(withIdentifier: "accessApp", sender: nil)
+    }
+    
+    @IBAction func resetPassword(_ sender: Any) {
+        if emailField.text != nil || emailField.text != "" {
+            Auth.auth().sendPasswordReset(withEmail: emailField.text!) { (error) in
+                if error != nil {
+                    print("MSG: Check correction of email. Unable to reset password")
+                    self.confirmAlert(message: "Enter your mail to email field")
+                } else {
+                    self.confirmAlert(message: "Check your email")
+                    print("MSG: Password reset message was sent")
+                }
+            }
+        } else {
+            confirmAlert(message: "Enter your email to email field")
+        }
+    }
+    
+    func confirmAlert(message: String) {
+        let refreshAlert = UIAlertController(title: "SDU companion", message: message, preferredStyle: UIAlertControllerStyle.alert)
+        refreshAlert.addAction(UIAlertAction(title: "Back", style: .cancel))
+        present(refreshAlert, animated: true, completion: nil)
+        view.endEditing(true)
     }
     
 }

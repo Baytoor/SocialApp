@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import SwiftKeychainWrapper
 
-class FeedVC: UIViewController {
+class PassengerVC: UIViewController {
     
     @IBOutlet weak var addBtn: UIBarButtonItem!
     @IBOutlet weak var popUp: UIView!
@@ -43,7 +43,13 @@ class FeedVC: UIViewController {
     @IBAction func addPassangerBtnPressed(_ sender: Any){
         if fromField.text != "" || toField.text != "" || timeFromField.text != ""  || timeTillField.text != "" {
             let user = User.init("\(timeFromField.text!) - \(timeTillField.text!)", "\(fromField.text!) ~> \(toField.text!)", "1")
-            DataService.ds.createPassanger(user)
+            if user.phoneNumber != "" {
+                DataService.ds.createPassanger(user)
+            } else if Auth.auth().currentUser?.isEmailVerified == false {
+                confirmAlert(message: "Please, verify your email")
+            } else {
+                confirmAlert(message: "Please, fill your information in settings")
+            }
         }
         closePopUp()
     }
@@ -52,6 +58,15 @@ class FeedVC: UIViewController {
         let temp = fromField.text
         fromField.text = toField.text
         toField.text = temp
+    }
+    
+    @IBAction func checkMaxLength() {
+        if (timeFromField.text?.count)! > 5 {
+            timeFromField.deleteBackward()
+        }
+        if (timeTillField.text?.count)! > 5 {
+            timeTillField.deleteBackward()
+        }
     }
     
     func openPopUp() {
@@ -91,10 +106,26 @@ class FeedVC: UIViewController {
         }
     }
     
+    func confirmAlert(message: String) {
+        let refreshAlert = UIAlertController(title: "SDU companion", message: message, preferredStyle: UIAlertControllerStyle.alert)
+        refreshAlert.addAction(UIAlertAction(title: "Back", style: .cancel))
+        present(refreshAlert, animated: true, completion: nil)
+        view.endEditing(true)
+    }
+    
+    func copyAlert(user: String, phone: String) {
+        let refreshAlert = UIAlertController(title: "SDU companion", message: "Copy number of \(user)?", preferredStyle: UIAlertControllerStyle.alert)
+        refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        refreshAlert.addAction(UIAlertAction(title: "Copy", style: .default, handler: { (action: UIAlertAction!) in
+            UIPasteboard.general.string = phone
+        }))
+        present(refreshAlert, animated: true, completion: nil)
+    }
+    
 }
 
 
-extension FeedVC: UITableViewDelegate, UITableViewDataSource {
+extension PassengerVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -115,6 +146,11 @@ extension FeedVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 132
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        copyAlert(user: passangers[indexPath.row].displayName, phone: passangers[indexPath.row].phoneNumber)
+    }
+    
 }
 
 

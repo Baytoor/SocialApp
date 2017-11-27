@@ -16,6 +16,7 @@ class PassangerCell: UITableViewCell {
     @IBOutlet weak var personTime: UILabel!
     @IBOutlet weak var personDestination: UILabel!
     @IBOutlet weak var personInfo: UILabel!
+    @IBOutlet weak var personPhone: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -35,6 +36,7 @@ class PassangerCell: UITableViewCell {
         } else {
             personImage.image = #imageLiteral(resourceName: "noPhoto")
         }
+        personPhone.text = otherUser.phoneNumber
         personName.text = otherUser.displayName
         personTime.text = otherUser.time
         personDestination.text = otherUser.destination

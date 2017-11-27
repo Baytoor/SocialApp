@@ -25,16 +25,17 @@
 		508D37811FC98EB10001598F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 508D37801FC98EB00001598F /* Assets.xcassets */; };
 		508D37831FC994890001598F /* SocialAuthBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508D37821FC994890001598F /* SocialAuthBtn.swift */; };
 		509076AA1FB8BCCC00585348 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509076A91FB8BCCC00585348 /* TextField.swift */; };
+		5098BE751FCBDA2900EF6125 /* DriverVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5098BE741FCBDA2900EF6125 /* DriverVC.swift */; };
 		50A8FAB21FCA6965008277F1 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A8FAB11FCA6965008277F1 /* SettingsVC.swift */; };
 		50AA00841FCBB33C000F5286 /* StorageServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50AA00831FCBB33C000F5286 /* StorageServices.swift */; };
 		50B2511F1FB80FC30083776E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B2511E1FB80FC30083776E /* AppDelegate.swift */; };
 		50B251211FB80FC30083776E /* LaunchPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B251201FB80FC30083776E /* LaunchPageVC.swift */; };
 		50B251241FB80FC30083776E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50B251221FB80FC30083776E /* Main.storyboard */; };
 		50B251291FB80FC30083776E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50B251271FB80FC30083776E /* LaunchScreen.storyboard */; };
-		50B251311FB813680083776E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 50B251301FB813680083776E /* GoogleService-Info.plist */; };
 		50C723CD1FCA2AC9002D0C73 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C723CC1FCA2AC9002D0C73 /* DataService.swift */; };
 		50C921231FC96F4A00E9048B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C921221FC96F4A00E9048B /* User.swift */; };
-		50FFEAE21FC6D7F200A54BEB /* FeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFEAE11FC6D7F200A54BEB /* FeedVC.swift */; };
+		50CFBE0E1FCC03C000B8D9DD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 50CFBE0D1FCC03C000B8D9DD /* GoogleService-Info.plist */; };
+		50FFEAE21FC6D7F200A54BEB /* PassengerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFEAE11FC6D7F200A54BEB /* PassengerVC.swift */; };
 		EBA1D15ADF8442E1F452E8A5 /* Pods_SocialApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A61FD965C9960807BB7482F /* Pods_SocialApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +60,7 @@
 		508D37801FC98EB00001598F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		508D37821FC994890001598F /* SocialAuthBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialAuthBtn.swift; sourceTree = "<group>"; };
 		509076A91FB8BCCC00585348 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
+		5098BE741FCBDA2900EF6125 /* DriverVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverVC.swift; sourceTree = "<group>"; };
 		50A8FAB11FCA6965008277F1 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		50AA00831FCBB33C000F5286 /* StorageServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageServices.swift; sourceTree = "<group>"; };
 		50B2511B1FB80FC30083776E /* SocialApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SocialApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -67,10 +69,10 @@
 		50B251231FB80FC30083776E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		50B251281FB80FC30083776E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		50B2512A1FB80FC30083776E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		50B251301FB813680083776E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		50C723CC1FCA2AC9002D0C73 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		50C921221FC96F4A00E9048B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		50FFEAE11FC6D7F200A54BEB /* FeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedVC.swift; sourceTree = "<group>"; };
+		50CFBE0D1FCC03C000B8D9DD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		50FFEAE11FC6D7F200A54BEB /* PassengerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassengerVC.swift; sourceTree = "<group>"; };
 		D789B9C7927729D56EDFA201 /* Pods-SocialApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SocialApp/Pods-SocialApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -140,7 +142,7 @@
 				508D37801FC98EB00001598F /* Assets.xcassets */,
 				50B251221FB80FC30083776E /* Main.storyboard */,
 				50B251271FB80FC30083776E /* LaunchScreen.storyboard */,
-				50B251301FB813680083776E /* GoogleService-Info.plist */,
+				50CFBE0D1FCC03C000B8D9DD /* GoogleService-Info.plist */,
 				50B2512A1FB80FC30083776E /* Info.plist */,
 			);
 			path = SocialApp;
@@ -150,7 +152,8 @@
 			isa = PBXGroup;
 			children = (
 				50B251201FB80FC30083776E /* LaunchPageVC.swift */,
-				50FFEAE11FC6D7F200A54BEB /* FeedVC.swift */,
+				50FFEAE11FC6D7F200A54BEB /* PassengerVC.swift */,
+				5098BE741FCBDA2900EF6125 /* DriverVC.swift */,
 				508857EC1FC75A8C006EFBD3 /* AccountVC.swift */,
 				50A8FAB11FCA6965008277F1 /* SettingsVC.swift */,
 			);
@@ -287,10 +290,10 @@
 				503CEE631FB8497300AADC7B /* OpenSans-Italic.ttf in Resources */,
 				50B251291FB80FC30083776E /* LaunchScreen.storyboard in Resources */,
 				508D37811FC98EB10001598F /* Assets.xcassets in Resources */,
-				50B251311FB813680083776E /* GoogleService-Info.plist in Resources */,
 				50B251241FB80FC30083776E /* Main.storyboard in Resources */,
 				503CEE641FB8497300AADC7B /* OpenSans-Light.ttf in Resources */,
 				503CEE661FB8497300AADC7B /* OpenSans-Regular.ttf in Resources */,
+				50CFBE0E1FCC03C000B8D9DD /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,8 +374,9 @@
 				50AA00841FCBB33C000F5286 /* StorageServices.swift in Sources */,
 				50B2511F1FB80FC30083776E /* AppDelegate.swift in Sources */,
 				509076AA1FB8BCCC00585348 /* TextField.swift in Sources */,
-				50FFEAE21FC6D7F200A54BEB /* FeedVC.swift in Sources */,
+				50FFEAE21FC6D7F200A54BEB /* PassengerVC.swift in Sources */,
 				504600171FB8913100F5BED9 /* Designs.swift in Sources */,
+				5098BE751FCBDA2900EF6125 /* DriverVC.swift in Sources */,
 				505803DA1FCA7C7F003859CD /* UnderlineField.swift in Sources */,
 				503CEE511FB8471500AADC7B /* Globals.swift in Sources */,
 				508D37831FC994890001598F /* SocialAuthBtn.swift in Sources */,
