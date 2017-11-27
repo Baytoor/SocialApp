@@ -58,7 +58,7 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         present(imagePicker, animated: true, completion: nil)
     }
     
-    func updateDisplayName() {
+    func updateDisplayName(completionHandler: (() -> Void)!) {
         let authUser = Auth.auth().currentUser
         let changeRequest = authUser?.createProfileChangeRequest()
         if let name = self.nameField.text, let surname = self.surNameField.text {
@@ -67,15 +67,18 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
                 changeRequest?.displayName = newName
                 changeRequest?.commitChanges { error in
                     if error == nil {
+                        completionHandler()
                     } else {
                         self.errorDescription("Now it's not available to update profile name")
                     }
                 }
+            } else {
+                completionHandler()
             }
         }
     }
     
-    func updateImage() {
+    func updateImage(completionHandler: (() -> Void)!) {
         let authUser = Auth.auth().currentUser
         let changeRequest = authUser?.createProfileChangeRequest()
         if let data = NSData(contentsOf: URL(string: User.init().photoURL)!){
@@ -86,15 +89,19 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
                     changeRequest?.photoURL = url
                     changeRequest?.commitChanges { error in
                         if error == nil {
-                            self.updateDisplayName()
+                            self.updateDisplayName(completionHandler: {
+                                completionHandler()
+                            })
                         } else {
                             self.errorDescription("Now it's not available to update profile image")
                         }
                     }
                 })
+            }  else {
+                self.updateDisplayName(completionHandler: {
+                    completionHandler()
+                })
             }
-        } else {
-            self.updateDisplayName()
         }
     }
     
@@ -135,8 +142,11 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     }
     
     func loadShows(completionHandler: (() -> Void)!) {
+        updateImage {
+            completionHandler()
+        }
         updateInfo()
-        completionHandler()
+        
     }
     
     func inProcess() {
