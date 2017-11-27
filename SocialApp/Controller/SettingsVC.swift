@@ -25,7 +25,6 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
 
     var imageUpdated = false
     var imagePicker: UIImagePickerController!
-    var isSuccess = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,15 +41,6 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         
         profilePhotoView.layer.cornerRadius = profilePhotoView.frame.width/2
         profilePhotoView.layer.masksToBounds = true
-        
-        if Auth.auth().currentUser?.isEmailVerified == false {
-            Auth.auth().currentUser?.sendEmailVerification(completion: { (error) in
-                if error != nil {
-                    print("MSG: Unable to send verifiacation message")
-                }
-            })
-        }
-        
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
@@ -92,9 +82,7 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         let changeRequest = authUser?.createProfileChangeRequest()
         if User.init().photoURL != "" {
             if let data = NSData(contentsOf: URL(string: User.init().photoURL)!){
-                let image = UIImage(data: data as Data)
-                if UIImagePNGRepresentation(image!) != UIImagePNGRepresentation(profilePhotoView.image!)  {
-                    isSuccess = false
+                if data != UIImagePNGRepresentation(profilePhotoView.image!)! as NSData  {
                     StorageServices.ss.uploadMedia(uid: User.init().uid, image: profilePhotoView.image!, completion:{ (url) in
                         changeRequest?.photoURL = url
                         changeRequest?.commitChanges { error in

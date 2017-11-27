@@ -18,13 +18,12 @@ class AccountVC: UIViewController {
     @IBOutlet weak var phoneNumberLbl: UILabel!
     @IBOutlet weak var infoLbl: UILabel!
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         getInfo()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getInfo()
     }
     
     func getInfo(){

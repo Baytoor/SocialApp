@@ -46,10 +46,6 @@ class DriverVC: UIViewController {
             if user.phoneNumber != "" {
                 DataService.ds.createDriver(user)
                 closePopUp()
-            } else if Auth.auth().currentUser?.isEmailVerified == false {
-                confirmAlert(message: "Please, verify your email")
-            } else {
-                confirmAlert(message: "Please, fill your information in settings")
             }
         } else {
             confirmAlert(message: "Field is empty")

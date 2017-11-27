@@ -29,7 +29,8 @@ func setUserDefaults() {
     defaults.set(signedInUser.course, forKey: "course")
     defaults.set(signedInUser.faculty, forKey: "faculty")
     defaults.set(signedInUser.uid, forKey: "uid")
-    defaults.set(signedInUser.photoURL, forKey: "photoURL")
+//    defaults.set(signedInUser.imageData, forKey: "imageData")
+    defaults.set(signedInUser.photoURL, forKey: "photoUrl")
     defaults.set(signedInUser.isDriver, forKey: "isDriver")
     
     if defaults.string(forKey: "faculty") != "" && defaults.string(forKey: "course") != "" {

@@ -24,6 +24,10 @@ class LaunchPageVC: UIViewController {
     @IBOutlet weak var errorLbl: UILabel!
     @IBOutlet weak var signInBtn: UIButton!
     
+    override func viewWillAppear(_ animated: Bool) {
+        outProcess()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         outProcess()

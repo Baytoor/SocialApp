@@ -41,7 +41,7 @@ class DataService {
     }
     
     func createUser(_ user: User){
-        let userData = ["displayName": user.displayName, "email": user.email, "info": user.info, "phoneNumber": user.phoneNumber, "photoURL": user.photoURL, "isDriver": user.isDriver] as [String : Any]
+        let userData = ["displayName": user.displayName, "email": user.email, "info": user.info, "phoneNumber": user.phoneNumber, "photoURL": user.photoURL, "isDriver": user.isDriver, "isVerified": Auth.auth().currentUser?.isEmailVerified as Any] as [String : Any]
         refUsers.child(user.uid).updateChildValues(userData)
     }
     

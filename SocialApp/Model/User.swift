@@ -30,15 +30,15 @@ class User {
     private var _destination: String
     private var _hasSeat: String
     private var _isDriver: Int
-    private var _imageData: NSData
+//    private var _imageData: Data
 //    private var _interests: [String]
     
     var isDriver: Int {
         return _isDriver
     }
-    var imageData: NSData {
-        return _imageData
-    }
+//    var imageData: Data {
+//        return _imageData
+//    }
     var uid: String {
         return _uid
     }
@@ -57,7 +57,6 @@ class User {
     var info: String {
         return _info
     }
-    
     var time: String {
         return _time
     }
@@ -97,15 +96,18 @@ class User {
         } else {
             _phoneNumber = ""
         }
+//        do {
+//            if let imageData = defaults.data(forKey: "imageData") {
+//                _imageData = imageData
+//            }  else {
+//                _imageData = try Data(contentsOf: (Auth.auth().currentUser?.photoURL)!)
+//            }
+//        } catch {
+//            _imageData = UIImagePNGRepresentation(#imageLiteral(resourceName: "noPhoto"))! as Data
+//        }
         if let photoURL = Auth.auth().currentUser?.photoURL {
             _photoURL = "\(photoURL)"
-            do{
-                _imageData = try NSData(contentsOf: photoURL)
-            } catch {
-                _imageData = UIImagePNGRepresentation(#imageLiteral(resourceName: "noPhoto"))! as NSData
-            }
         } else {
-            _imageData = UIImagePNGRepresentation(#imageLiteral(resourceName: "noPhoto"))! as NSData
             _photoURL = "https://github.com/Baytoor/SocialApp/blob/master/SocialApp/Assets.xcassets/noPhoto.imageset/noPhoto.png"
         }
         _uid = (Auth.auth().currentUser?.uid)!
