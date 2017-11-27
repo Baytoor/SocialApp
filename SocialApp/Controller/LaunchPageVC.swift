@@ -29,11 +29,11 @@ class LaunchPageVC: UIViewController {
         emailField.text = ""
         passField.text = ""
         errorLbl.text = ""
-        self.signInBtn.isEnabled = true
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        outProcess()
         view.backgroundColor = UIColor(darkBlue)
         facebook.setImage(#imageLiteral(resourceName: "facebook").maskWithColor(color: UIColor(lightBlue)), for: .highlighted)
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.textFieldShouldReturn(_:)))

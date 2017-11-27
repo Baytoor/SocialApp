@@ -21,13 +21,8 @@ class AccountVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         getInfo()
-        
         let user = User.init()
         DataService.ds.createUser(user)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        getInfo()
     }
     
     func getInfo(){

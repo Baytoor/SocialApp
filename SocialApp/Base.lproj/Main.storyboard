@@ -446,6 +446,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addBtn" destination="5hX-S1-mFe" id="3GE-Mw-0ml"/>
                         <outlet property="fromField" destination="qaf-6f-6nj" id="W6j-a4-Zbg"/>
                         <outlet property="popUp" destination="i4O-lE-KTP" id="m72-cW-UC0"/>
                         <outlet property="tableView" destination="heV-0x-faW" id="EQZ-4K-JrA"/>

@@ -12,6 +12,7 @@ import SwiftKeychainWrapper
 
 class FeedVC: UIViewController {
     
+    @IBOutlet weak var addBtn: UIBarButtonItem!
     @IBOutlet weak var popUp: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var fromField: UITextField!
@@ -19,7 +20,6 @@ class FeedVC: UIViewController {
     @IBOutlet weak var timeFromField: UITextField!
     @IBOutlet weak var timeTillField: UITextField!
     
-    let inter = ["car", "startup", "mercedes"]
     var passangers = [OtherUser]()
     
     override func viewDidLoad() {
@@ -30,9 +30,13 @@ class FeedVC: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        DispatchQueue.main.async {
-            self.updateList()
+        self.updateList()
+        
+        while true {
+            tableView.reloadData()
+            sleep(30)
         }
+        
     }
     
     @IBAction func addBtnPressed(_ sender: Any) {
@@ -62,6 +66,8 @@ class FeedVC: UIViewController {
         tableView.isScrollEnabled = false
         tableView.alpha = 0.5
         popUp.isHidden = false
+        addBtn.isEnabled = false
+        
     }
     
     func closePopUp() {
@@ -69,6 +75,7 @@ class FeedVC: UIViewController {
         tableView.isScrollEnabled = true
         tableView.alpha = 1
         popUp.isHidden = true
+        addBtn.isEnabled = true
         fromField.text = ""
         toField.text = ""
         timeFromField.text = ""
@@ -79,7 +86,6 @@ class FeedVC: UIViewController {
         passangers.removeAll()
         DataService.ds.refPassangers.observe(.value) { (snapshot) in
             if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
-                self.tableView.reloadData()
                 for snap in snapshot {
                     if let userData = snap.value as? Dictionary<String, Any> {
                         let uid = snap.key
@@ -88,13 +94,14 @@ class FeedVC: UIViewController {
                     }
                 }
             }
-            self.tableView.reloadData()
         }
     }
     
 }
 
+
 extension FeedVC: UITableViewDelegate, UITableViewDataSource {
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }

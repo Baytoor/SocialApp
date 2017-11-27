@@ -122,6 +122,7 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         KeychainWrapper.standard.removeObject(forKey: keyUID)
         try! Auth.auth().signOut()
         dismiss(animated: true, completion: nil)
+        defaults.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
         print("MSG: Signed out")
     }
     
