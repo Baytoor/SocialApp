@@ -12,6 +12,8 @@ import Firebase
 
 class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    @IBOutlet weak var verifyEmailBtn: UIButton!
+    @IBOutlet weak var signOutBtn: UIButton!
     @IBOutlet weak var doneBtn: UIBarButtonItem!
     @IBOutlet weak var bgView: UIView!
     @IBOutlet weak var errorLbl: UILabel!
@@ -29,8 +31,9 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     override func viewDidLoad() {
         super.viewDidLoad()
         getInfo()
-        
         errorLbl.isHidden = true
+        
+        isVerified()
         
         imagePicker = UIImagePickerController()
         imagePicker.allowsEditing = true
@@ -69,6 +72,7 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
                         completionHandler()
                     } else {
                         self.errorDescription("Now it's not available to update profile name")
+                        completionHandler()
                     }
                 }
             } else {
@@ -80,20 +84,21 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     func updateImage(completionHandler: (() -> Void)!) {
         let authUser = Auth.auth().currentUser
         let changeRequest = authUser?.createProfileChangeRequest()
-        if User.init().photoURL != "" {
-            if let data = NSData(contentsOf: URL(string: User.init().photoURL)!){
-                if data != UIImagePNGRepresentation(profilePhotoView.image!)! as NSData  {
-                    StorageServices.ss.uploadMedia(uid: User.init().uid, image: profilePhotoView.image!, completion:{ (url) in
-                        changeRequest?.photoURL = url
-                        changeRequest?.commitChanges { error in
-                            if error == nil {
-                                self.updateDisplayName(completionHandler: {
-                                    completionHandler()
-                                })
-                            } else {
-                                self.errorDescription("Now it's not available to update profile image")
+            if User.init().photoURL != "" {
+                if let data = NSData(contentsOf: URL(string: User.init().photoURL)!){
+                    let image = UIImage(data: data as Data)
+                    if image != profilePhotoView.image {
+                        StorageServices.ss.uploadMedia(uid: User.init().uid, image: profilePhotoView.image!, completion:{ (url) in
+                            changeRequest?.photoURL = url
+                            changeRequest?.commitChanges { error in
+                                if error == nil {
+                                    self.updateDisplayName(completionHandler: {
+                                        completionHandler()
+                                    })
+                                } else {
+                                    self.errorDescription("Now it's not available to update profile image")
+                                }
                             }
-                        }
                     })
                 }  else {
                     self.updateDisplayName(completionHandler: {
@@ -114,14 +119,9 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         if self.isDriverSC.selectedSegmentIndex != User.init().isDriver {
             defaults.set(isDriverSC.selectedSegmentIndex, forKey: "isDriver")
         }
-        if self.facultyField.text != "" && self.courseField.text != User.init().faculty{
-            defaults.set(self.facultyField.text, forKey: "faculty")
+        if self.facultyField.text != "" && self.courseField.text != "" {
+            defaults.set("\(self.facultyField.text!), \(self.courseField.text!) course", forKey: "info")
         }
-        if self.courseField.text != "" && self.courseField.text != User.init().course {
-            defaults.set(self.courseField.text, forKey: "course")
-        }
-        let user = User.init()
-        DataService.ds.createUser(user)
     }
     
     func errorDescription(_ error: String){
@@ -130,11 +130,24 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         errorLbl.textColor = UIColor.red
     }
     
+    @IBAction func verifyEmailBtnPressed(_ sender: Any) {
+        Auth.auth().currentUser?.sendEmailVerification(completion: { (error) in
+            if error != nil {
+                print("MSG: Enable to send verification message")
+                self.confirmAlert(message: "Verification message sent, check your email")
+            } else {
+                print("MSG: Verification letter was sent")
+            }
+        })
+    }
+    
     @IBAction func doneBtnPressed(_ sender: Any) {
         view.endEditing(true)
         inProcess()
         loadShows {
             self.outProcess()
+            let user = User.init()
+            DataService.ds.createUser(user)
             _ = self.navigationController?.popViewController(animated: true)
         }
     }
@@ -144,6 +157,18 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
             completionHandler()
         }
         updateInfo()
+    }
+    
+    func isVerified() {
+        if User.init().isVerified == true {
+            verifyEmailBtn.isEnabled = false
+            verifyEmailBtn.setTitle("Email verified", for: .normal)
+            verifyEmailBtn.layer.opacity = 0.5
+        } else {
+            verifyEmailBtn.layer.opacity = 1
+            verifyEmailBtn.isEnabled = true
+            verifyEmailBtn.setTitle("Verify email", for: .normal)
+        }
     }
     
     @IBAction func checkMaxLength() {
@@ -162,11 +187,29 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: uiBusy)
         view.layer.opacity = 0.5
         view.isExclusiveTouch = false
+        
+        nameField.isEnabled = false
+        surNameField.isEnabled = false
+        phoneNumberField.isEnabled = false
+        facultyField.isEnabled = false
+        courseField.isEnabled = false
+        verifyEmailBtn.isEnabled = false
+        isDriverSC.isEnabled = false
+        signOutBtn.isEnabled = false
     }
     
     func outProcess() {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: nil, style: .done, target: nil, action: nil)
         view.layer.opacity = 1
+        
+        nameField.isEnabled = true
+        surNameField.isEnabled = true
+        phoneNumberField.isEnabled = true
+        facultyField.isEnabled = true
+        courseField.isEnabled = true
+        verifyEmailBtn.isEnabled = true
+        isDriverSC.isEnabled = true
+        signOutBtn.isEnabled = true
     }
 
     @IBAction func signOutBtnPressed(_ sender: Any) {
@@ -223,15 +266,14 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
             nameField.placeholder = "Name"
             surNameField.placeholder = "Surname"
         }
-        if user.faculty != "" {
-            facultyField.text = user.faculty
+        
+        if user.info != ""{
+            let info = user.info.components(separatedBy: ",")
+            facultyField.text = info[0]
+            courseField.text = info[1]
         } else {
-            facultyField.placeholder = "Faculty"
-        }
-        if user.course != "" {
-            courseField.text = user.course
-        } else {
-            courseField.placeholder = "Course"
+            nameField.placeholder = "Name"
+            surNameField.placeholder = "Surname"
         }
         if user.phoneNumber != "" {
             phoneNumberField.text = user.phoneNumber
@@ -240,5 +282,28 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         }
         isDriverSC.selectedSegmentIndex = user.isDriver
     }
+    
+    func confirmAlert(message: String) {
+        let refreshAlert = UIAlertController(title: "SDU companion", message: message, preferredStyle: UIAlertControllerStyle.alert)
+        refreshAlert.addAction(UIAlertAction(title: "Back", style: .cancel))
+        present(refreshAlert, animated: true, completion: nil)
+        view.endEditing(true)
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 }

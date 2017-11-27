@@ -21,23 +21,73 @@ let keyUID = "kq8bQx2eMx01hAlv"
 
 let defaults = UserDefaults.standard
 
-func setUserDefaults() {
+func setUserDefaults(compilation: (() -> Void)!) {
     let signedInUser = User.init()
-    defaults.set(signedInUser.displayName, forKey: "displayName")
-    defaults.set(signedInUser.email, forKey: "email")
-    defaults.set(signedInUser.phoneNumber, forKey: "phoneNumber")
-    defaults.set(signedInUser.course, forKey: "course")
-    defaults.set(signedInUser.faculty, forKey: "faculty")
-    defaults.set(signedInUser.uid, forKey: "uid")
-//    defaults.set(signedInUser.imageData, forKey: "imageData")
-    defaults.set(signedInUser.photoURL, forKey: "photoUrl")
-    defaults.set(signedInUser.isDriver, forKey: "isDriver")
-    
-    if defaults.string(forKey: "faculty") != "" && defaults.string(forKey: "course") != "" {
-        defaults.set("\(defaults.string(forKey: "faculty")!), \(defaults.string(forKey: "course")!)", forKey: "info")
-    } else if defaults.string(forKey: "faculty") != "" {
-        defaults.set("\(defaults.string(forKey: "faculty")!)", forKey: "info")
-    } else if defaults.string(forKey: "course") != "" {
-        defaults.set("\(defaults.string(forKey: "course")!)", forKey: "info")
+    DataService.ds.refUsers.observe(.value) { (snapshot) in
+        if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
+            for snap in snapshot {
+                if snap.key == signedInUser.uid {
+                    if let userData = snap.value as? Dictionary<String, Any> {
+                        if let phoneNumber = userData["phoneNumber"] {
+                            defaults.set(phoneNumber, forKey: "phoneNumber")
+                        }
+                        if let info = userData["info"] {
+                            defaults.set(info, forKey: "info")
+                        }
+                        if let isDriver = userData["isDriver"] {
+                            defaults.set(isDriver, forKey: "isDriver")
+                        }
+                        if let isVerified = userData["isVerified"] {
+                            defaults.set(isVerified, forKey: "isVerified")
+                        }
+                    }
+                }
+            }
+            compilation()
+        } else {
+            compilation()
+        }
     }
 }
+
+func uploadUser(){
+    setUserDefaults {
+        let user = User.init()
+        DataService.ds.createUser(user)
+    }
+}
+
+
+//DataService.ds.refDrivers.observe(.value) { (snapshot) in
+//    self.drivers.removeAll()
+//    if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
+//        for snap in snapshot {
+//            if let userData = snap.value as? Dictionary<String, Any> {
+//                let uid = snap.key
+//                let passanger = OtherUser.init(uid, userData)
+//                self.drivers.append(passanger)
+//            }
+//        }
+//    }
+//    self.tableView.reloadData()
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

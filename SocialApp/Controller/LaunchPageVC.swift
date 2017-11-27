@@ -15,6 +15,7 @@ import SwiftKeychainWrapper
 
 class LaunchPageVC: UIViewController {
 
+    @IBOutlet weak var resetBtn: UIButton!
     @IBOutlet weak var processingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var logo: UIImageView!
@@ -26,6 +27,9 @@ class LaunchPageVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         outProcess()
+        emailField.text = ""
+        passField.text = ""
+        errorLbl.text = ""
     }
     
     override func viewDidLoad() {
@@ -34,7 +38,6 @@ class LaunchPageVC: UIViewController {
         emailField.text = ""
         passField.text = ""
         errorLbl.text = ""
-        outProcess()
         view.backgroundColor = UIColor(darkBlue)
         facebook.setImage(#imageLiteral(resourceName: "facebook").maskWithColor(color: UIColor(lightBlue)), for: .highlighted)
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.textFieldShouldReturn(_:)))
@@ -58,6 +61,8 @@ class LaunchPageVC: UIViewController {
         signInBtn.setTitle("", for: .normal)
         facebook.isEnabled = false
         facebook.alpha = 0.5
+        resetBtn.alpha = 0.5
+        resetBtn.isEnabled = false
         logo.alpha = 0.5
         stackView.alpha = 0.5
         processingIndicator.isHidden = false
@@ -69,6 +74,8 @@ class LaunchPageVC: UIViewController {
         signInBtn.setTitle("Sign In", for: .normal)
         facebook.isEnabled = true
         facebook.alpha = 1
+        resetBtn.alpha = 1
+        resetBtn.isEnabled = true
         logo.alpha = 1
         stackView.alpha = 1
         processingIndicator.isHidden = true
@@ -101,15 +108,10 @@ extension LaunchPageVC {
                 Auth.auth().signIn(withEmail: email, password: pass, completion: { (user, error) in
                     if error == nil {
                         print("MSG: User authenticated with firebase using email")
-                        if let user = user {
-                            user.sendEmailVerification(completion: { (error) in
-                                if error != nil {
-                                    print("MSG: Unable to send verifiacation message")
-                                } else {
-                                    self.completeSignIn(uid: user.uid)
-                                }
-                            })
-                        }
+                        self.completeSignIn(uid: (user?.uid)!)
+                        self.newUser(completionHandler: {
+                            self.performSegue(withIdentifier: "accessApp", sender: nil)
+                        })
                     } else {
                         let errCode = AuthErrorCode(rawValue: error!._code)
                         if errCode == AuthErrorCode.userNotFound{
@@ -117,18 +119,12 @@ extension LaunchPageVC {
                                 if error != nil {
                                     print("MSG: Unable to authenticate with firebase using email")
                                     self.errorDescription("Unable to authenticate with firebase")
-                                    self.signInBtn.isEnabled = true
                                 } else {
                                     print("MSG: New user was created using email")
-                                    if let user = user {
-                                        user.sendEmailVerification(completion: { (error) in
-                                            if error != nil {
-                                                print("MSG: Unable to send verifiacation message")
-                                            } else {
-                                                self.completeSignIn(uid: user.uid)
-                                            }
-                                        })
-                                    }
+                                    self.completeSignIn(uid: (user?.uid)!)
+                                    self.newUser(completionHandler: {
+                                        self.performSegue(withIdentifier: "accessApp", sender: nil)
+                                    })
                                 }
                             })
                         } else if errCode == AuthErrorCode.invalidEmail {
@@ -176,13 +172,12 @@ extension LaunchPageVC {
     }
     
     func completeSignIn(uid: String) {
-        setUserDefaults()
-        let user = User.init()
-        DataService.ds.createUser(user)
+        uploadUser()
         let saveSuccessful: Bool = KeychainWrapper.standard.set(uid, forKey: keyUID)
         if saveSuccessful {
             print("MSG: Data saved to keychain")
         }
+        uploadUser()
         performSegue(withIdentifier: "accessApp", sender: nil)
     }
     
@@ -193,7 +188,7 @@ extension LaunchPageVC {
                     print("MSG: Check correction of email. Unable to reset password")
                     self.confirmAlert(message: "Enter your mail to email field")
                 } else {
-                    self.confirmAlert(message: "Check your email")
+                    self.confirmAlert(message: "Check your email, verification message was sent")
                     print("MSG: Password reset message was sent")
                 }
             }
@@ -207,6 +202,33 @@ extension LaunchPageVC {
         refreshAlert.addAction(UIAlertAction(title: "Back", style: .cancel))
         present(refreshAlert, animated: true, completion: nil)
         view.endEditing(true)
+    }
+    
+    func newUser(completionHandler: (() -> Void)!) {
+        if let user = Auth.auth().currentUser {
+            if !user.isEmailVerified {
+                user.sendEmailVerification(completion: { (error) in
+                    if error != nil {
+                        print("MSG: Error was occured")
+                    } else {
+                        print("MSG: Verification message was sent")
+                        self.performSegue(withIdentifier: "accessApp", sender: nil)
+                    }
+                })
+            }
+        }
+        let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+        StorageServices.ss.uploadMedia(uid: User.init().uid, image: #imageLiteral(resourceName: "noPhoto"), completion:{ (url) in
+            changeRequest?.photoURL = url
+            changeRequest?.commitChanges { error in
+                if error == nil {
+                    completionHandler()
+                } else {
+                    self.errorDescription("Now it's not available to update profile image")
+                    completionHandler()
+                }
+            }
+        })
     }
     
 }

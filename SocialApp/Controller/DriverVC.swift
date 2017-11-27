@@ -41,14 +41,20 @@ class DriverVC: UIViewController {
     }
     
     @IBAction func addPassangerBtnPressed(_ sender: Any){
-        if fromField.text != "" || toField.text != "" || timeFromField.text != ""  || timeTillField.text != "" {
-            let user = User.init("\(timeFromField.text!) - \(timeTillField.text!)", "\(fromField.text!) ~> \(toField.text!)", "5")
-            if user.phoneNumber != "" {
-                DataService.ds.createDriver(user)
-                closePopUp()
+        if (Auth.auth().currentUser?.isEmailVerified)! {
+            if (fromField.text != "" || toField.text != "" || timeFromField.text != ""  || timeTillField.text != "")  {
+                let user = User.init("\(timeFromField.text!) - \(timeTillField.text!)", "\(fromField.text!) ~> \(toField.text!)", "5")
+                if user.phoneNumber != "" {
+                    DataService.ds.createDriver(user)
+                    closePopUp()
+                } else {
+                    confirmAlert(message: "Please, fill your information in settings")
+                }
+            } else {
+                confirmAlert(message: "Field is empty, please enter all fields")
             }
         } else {
-            confirmAlert(message: "Field is empty")
+            confirmAlert(message: "Please verify your email")
         }
     }
     
@@ -109,6 +115,7 @@ class DriverVC: UIViewController {
         refreshAlert.addAction(UIAlertAction(title: "Back", style: .cancel))
         present(refreshAlert, animated: true, completion: nil)
         view.endEditing(true)
+        closePopUp()
     }
     
     func copyAlert(user: String, phone: String) {
@@ -148,7 +155,6 @@ extension DriverVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         copyAlert(user: drivers[indexPath.row].displayName, phone: drivers[indexPath.row].phoneNumber)
-        print("MSG: TableView")
     }
     
 }

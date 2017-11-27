@@ -13,7 +13,7 @@ class DataService {
     static let ds = DataService()
     
     private var _refBase = dataBase
-    private var _refPassangers = dataBase.child("passangers")
+    private var _refPassangers = dataBase.child("passengers")
     private var _refDrivers = dataBase.child("drivers")
     private var _refUsers = dataBase.child("users")
     
@@ -41,7 +41,7 @@ class DataService {
     }
     
     func createUser(_ user: User){
-        let userData = ["displayName": user.displayName, "email": user.email, "info": user.info, "phoneNumber": user.phoneNumber, "photoURL": user.photoURL, "isDriver": user.isDriver, "isVerified": Auth.auth().currentUser?.isEmailVerified as Any] as [String : Any]
+        let userData = ["displayName": user.displayName, "email": user.email, "info": user.info, "phoneNumber": user.phoneNumber, "photoURL": user.photoURL, "isDriver": user.isDriver, "isVerified": user.isVerified as Any] as [String : Any]
         refUsers.child(user.uid).updateChildValues(userData)
     }
     

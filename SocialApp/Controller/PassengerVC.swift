@@ -20,7 +20,7 @@ class PassengerVC: UIViewController {
     @IBOutlet weak var timeFromField: UITextField!
     @IBOutlet weak var timeTillField: UITextField!
     
-    var passangers = [OtherUser]()
+    var passengers = [OtherUser]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,16 +41,20 @@ class PassengerVC: UIViewController {
     }
     
     @IBAction func addPassangerBtnPressed(_ sender: Any){
-        if fromField.text != "" || toField.text != "" || timeFromField.text != ""  || timeTillField.text != "" {
-            let user = User.init("\(timeFromField.text!) - \(timeTillField.text!)", "\(fromField.text!) ~> \(toField.text!)", "1")
-            if user.phoneNumber != "" {
-                DataService.ds.createPassanger(user)
-                closePopUp()
+        if (Auth.auth().currentUser?.isEmailVerified)! {
+            if (fromField.text != "" || toField.text != "" || timeFromField.text != ""  || timeTillField.text != "")  {
+                let user = User.init("\(timeFromField.text!) - \(timeTillField.text!)", "\(fromField.text!) ~> \(toField.text!)", "5")
+                if user.phoneNumber != "" {
+                    DataService.ds.createPassanger(user)
+                    closePopUp()
+                } else {
+                    confirmAlert(message: "Please, fill your information in settings")
+                }
             } else {
-                confirmAlert(message: "Please, fill your information in settings")
+                confirmAlert(message: "Field is empty, please enter all fields")
             }
         } else {
-            confirmAlert(message: "Field is empty")
+            confirmAlert(message: "Please verify your email")
         }
     }
     
@@ -92,13 +96,13 @@ class PassengerVC: UIViewController {
     
     func updateList() {
         DataService.ds.refPassangers.observe(.value) { (snapshot) in
-            self.passangers.removeAll()
+            self.passengers.removeAll()
             if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
                 for snap in snapshot {
                     if let userData = snap.value as? Dictionary<String, Any> {
                         let uid = snap.key
                         let passanger = OtherUser.init(uid, userData)
-                        self.passangers.append(passanger)
+                        self.passengers.append(passanger)
                     }
                 }
             }
@@ -110,10 +114,11 @@ class PassengerVC: UIViewController {
         let refreshAlert = UIAlertController(title: "SDU companion", message: message, preferredStyle: UIAlertControllerStyle.alert)
         refreshAlert.addAction(UIAlertAction(title: "Back", style: .cancel))
         present(refreshAlert, animated: true, completion: nil)
-        view.endEditing(true)
+        closePopUp()
     }
     
     func copyAlert(user: String, phone: String) {
+        print("MSG: Alert")
         let refreshAlert = UIAlertController(title: "SDU companion", message: "Copy number of \(user)?", preferredStyle: UIAlertControllerStyle.alert)
         refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         refreshAlert.addAction(UIAlertAction(title: "Copy", style: .default, handler: { (action: UIAlertAction!) in
@@ -132,12 +137,12 @@ extension PassengerVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return passangers.count
+        return passengers.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "PassangerCell") as? PassangerCell {
-            cell.configureCell(otherUser: passangers[indexPath.row])
+            cell.configureCell(otherUser: passengers[indexPath.row])
             return cell
         }
         return PassangerCell()
@@ -148,10 +153,11 @@ extension PassengerVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        copyAlert(user: passangers[indexPath.row].displayName, phone: passangers[indexPath.row].phoneNumber)
+        copyAlert(user: passengers[indexPath.row].displayName, phone: passengers[indexPath.row].phoneNumber)
     }
     
 }
+
 
 
 
