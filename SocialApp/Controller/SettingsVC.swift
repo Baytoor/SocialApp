@@ -33,7 +33,7 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         getInfo()
         errorLbl.isHidden = true
         
-        isVerified()
+        isVerificationNeeded()
         
         imagePicker = UIImagePickerController()
         imagePicker.allowsEditing = true
@@ -44,6 +44,10 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         
         profilePhotoView.layer.cornerRadius = profilePhotoView.frame.width/2
         profilePhotoView.layer.masksToBounds = true
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        Auth.auth().currentUser?.reload()
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
@@ -120,7 +124,7 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
             defaults.set(isDriverSC.selectedSegmentIndex, forKey: "isDriver")
         }
         if self.facultyField.text != "" && self.courseField.text != "" {
-            defaults.set("\(self.facultyField.text!), \(self.courseField.text!) course", forKey: "info")
+            defaults.set("\(self.facultyField.text!),\(self.courseField.text!)", forKey: "info")
         }
     }
     
@@ -131,14 +135,7 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     }
     
     @IBAction func verifyEmailBtnPressed(_ sender: Any) {
-        Auth.auth().currentUser?.sendEmailVerification(completion: { (error) in
-            if error != nil {
-                print("MSG: Enable to send verification message")
-                self.confirmAlert(message: "Verification message sent, check your email")
-            } else {
-                print("MSG: Verification letter was sent")
-            }
-        })
+        sendEmailVerification()
     }
     
     @IBAction func doneBtnPressed(_ sender: Any) {
@@ -159,7 +156,7 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         updateInfo()
     }
     
-    func isVerified() {
+    func isVerificationNeeded() {
         if User.init().isVerified == true {
             verifyEmailBtn.isEnabled = false
             verifyEmailBtn.setTitle("Email verified", for: .normal)
@@ -213,11 +210,8 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     }
 
     @IBAction func signOutBtnPressed(_ sender: Any) {
-        KeychainWrapper.standard.removeObject(forKey: keyUID)
-        try! Auth.auth().signOut()
+        signOut()
         dismiss(animated: true, completion: nil)
-        defaults.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
-        print("MSG: Signed out")
     }
     
     func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {

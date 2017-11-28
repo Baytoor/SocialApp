@@ -20,6 +20,7 @@ class AccountVC: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         getInfo()
+        Auth.auth().currentUser?.reload()
     }
     
     override func viewDidLoad() {
@@ -39,7 +40,7 @@ class AccountVC: UIViewController {
         displayNameLbl.text = User.init().displayName
         emailLbl.text = User.init().email
         phoneNumberLbl.text = User.init().phoneNumber
-        infoLbl.text = User.init().info
+        infoLbl.text = "\(User.init().info) course"
     }
     
     @IBAction func settingsBtnPressed(_ sender: Any){

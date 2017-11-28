@@ -24,12 +24,17 @@ class DriverVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         closePopUp()
         view.backgroundColor = UIColor(darkBlue)
         tableView.delegate = self
         tableView.dataSource = self
         
         self.updateList()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        Auth.auth().currentUser?.reload()
     }
     
     @IBAction func addBtnPressed(_ sender: Any) {
@@ -40,11 +45,11 @@ class DriverVC: UIViewController {
         closePopUp()
     }
     
-    @IBAction func addPassangerBtnPressed(_ sender: Any){
+    @IBAction func addDriverBtnPressed(_ sender: Any){
         if (Auth.auth().currentUser?.isEmailVerified)! {
             if (fromField.text != "" || toField.text != "" || timeFromField.text != ""  || timeTillField.text != "")  {
                 let user = User.init("\(timeFromField.text!) - \(timeTillField.text!)", "\(fromField.text!) ~> \(toField.text!)", "5")
-                if user.phoneNumber != "" {
+                if user.phoneNumber != "" || user.displayName != "" {
                     DataService.ds.createDriver(user)
                     closePopUp()
                 } else {
@@ -54,7 +59,7 @@ class DriverVC: UIViewController {
                 confirmAlert(message: "Field is empty, please enter all fields")
             }
         } else {
-            confirmAlert(message: "Please verify your email")
+            emailVerifyAlert()
         }
     }
     
@@ -110,17 +115,25 @@ class DriverVC: UIViewController {
         }
     }
     
-    func confirmAlert(message: String) {
-        let refreshAlert = UIAlertController(title: "SDU companion", message: message, preferredStyle: UIAlertControllerStyle.alert)
-        refreshAlert.addAction(UIAlertAction(title: "Back", style: .cancel))
+    func emailVerifyAlert() {
+        let refreshAlert = UIAlertController(title: "Error", message: "Your email address has not yet been verified. Do you want us to send another verification email to \(User.init().email).", preferredStyle: .alert)
+        refreshAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (_) in
+            sendEmailVerification()
+        }))
+        refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         present(refreshAlert, animated: true, completion: nil)
-        view.endEditing(true)
+        closePopUp()
+    }
+    
+    func confirmAlert(message: String) {
+        let refreshAlert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        refreshAlert.addAction(UIAlertAction(title: "Okay", style: .default))
+        present(refreshAlert, animated: true, completion: nil)
         closePopUp()
     }
     
     func copyAlert(user: String, phone: String) {
-        print("MSG: Alert")
-        let refreshAlert = UIAlertController(title: "SDU companion", message: "Copy number of \(user)?", preferredStyle: UIAlertControllerStyle.alert)
+        let refreshAlert = UIAlertController(title: "Copy phone number?", message: user, preferredStyle: UIAlertControllerStyle.alert)
         refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         refreshAlert.addAction(UIAlertAction(title: "Copy", style: .default, handler: { (action: UIAlertAction!) in
             UIPasteboard.general.string = phone

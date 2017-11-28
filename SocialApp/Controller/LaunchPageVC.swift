@@ -91,10 +91,9 @@ class LaunchPageVC: UIViewController {
     }
     
     
-    
-    
 }
 
+//Authentication functions
 extension LaunchPageVC {
     @IBAction func signInPressed(_ sender: Any) {
         inProcess()
@@ -186,37 +185,26 @@ extension LaunchPageVC {
             Auth.auth().sendPasswordReset(withEmail: emailField.text!) { (error) in
                 if error != nil {
                     print("MSG: Check correction of email. Unable to reset password")
-                    self.confirmAlert(message: "Enter your mail to email field")
+                    self.alert(message: "Enter your mail to email field")
                 } else {
-                    self.confirmAlert(message: "Check your email, verification message was sent")
+                    self.alert(message: "Check your email, verification message was sent")
                     print("MSG: Password reset message was sent")
                 }
             }
         } else {
-            confirmAlert(message: "Enter your email to email field")
+            alert(message: "Enter your email to email field")
         }
     }
     
-    func confirmAlert(message: String) {
-        let refreshAlert = UIAlertController(title: "SDU companion", message: message, preferredStyle: UIAlertControllerStyle.alert)
-        refreshAlert.addAction(UIAlertAction(title: "Back", style: .cancel))
+    func alert(message: String) {
+        let refreshAlert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        refreshAlert.addAction(UIAlertAction(title: "Okay", style: .cancel))
         present(refreshAlert, animated: true, completion: nil)
         view.endEditing(true)
     }
     
     func newUser(completionHandler: (() -> Void)!) {
-        if let user = Auth.auth().currentUser {
-            if !user.isEmailVerified {
-                user.sendEmailVerification(completion: { (error) in
-                    if error != nil {
-                        print("MSG: Error was occured")
-                    } else {
-                        print("MSG: Verification message was sent")
-                        self.performSegue(withIdentifier: "accessApp", sender: nil)
-                    }
-                })
-            }
-        }
+        sendEmailVerification()
         let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
         StorageServices.ss.uploadMedia(uid: User.init().uid, image: #imageLiteral(resourceName: "noPhoto"), completion:{ (url) in
             changeRequest?.photoURL = url

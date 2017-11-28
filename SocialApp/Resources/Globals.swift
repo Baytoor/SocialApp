@@ -21,6 +21,13 @@ let keyUID = "kq8bQx2eMx01hAlv"
 
 let defaults = UserDefaults.standard
 
+func uploadUser(){
+    setUserDefaults {
+        let user = User.init()
+        DataService.ds.createUser(user)
+    }
+}
+
 func setUserDefaults(compilation: (() -> Void)!) {
     let signedInUser = User.init()
     DataService.ds.refUsers.observe(.value) { (snapshot) in
@@ -30,15 +37,23 @@ func setUserDefaults(compilation: (() -> Void)!) {
                     if let userData = snap.value as? Dictionary<String, Any> {
                         if let phoneNumber = userData["phoneNumber"] {
                             defaults.set(phoneNumber, forKey: "phoneNumber")
+                        } else {
+                            defaults.set("", forKey: "phoneNumber")
                         }
                         if let info = userData["info"] {
                             defaults.set(info, forKey: "info")
+                        } else {
+                            defaults.set("", forKey: "info")
                         }
                         if let isDriver = userData["isDriver"] {
                             defaults.set(isDriver, forKey: "isDriver")
+                        } else {
+                            defaults.set("", forKey: "isDriver")
                         }
                         if let isVerified = userData["isVerified"] {
                             defaults.set(isVerified, forKey: "isVerified")
+                        } else {
+                            defaults.set("", forKey: "isVerified")
                         }
                     }
                 }
@@ -50,33 +65,35 @@ func setUserDefaults(compilation: (() -> Void)!) {
     }
 }
 
-func uploadUser(){
-    setUserDefaults {
-        let user = User.init()
-        DataService.ds.createUser(user)
+func reloadUser() {
+    Auth.auth().currentUser?.reload(completion: { (error) in
+        if error != nil {
+            print("MSG: Unable to reload user")
+        } else {
+            
+            
+        }
+    })
+}
+
+func sendEmailVerification() {
+    if !User.init().isVerified {
+        Auth.auth().currentUser?.sendEmailVerification(completion: { (error) in
+            if error != nil {
+                print("MSG: Enable to send verification message")
+            } else {
+                print("MSG: Verification letter was sent")
+            }
+        })
     }
 }
 
-
-//DataService.ds.refDrivers.observe(.value) { (snapshot) in
-//    self.drivers.removeAll()
-//    if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
-//        for snap in snapshot {
-//            if let userData = snap.value as? Dictionary<String, Any> {
-//                let uid = snap.key
-//                let passanger = OtherUser.init(uid, userData)
-//                self.drivers.append(passanger)
-//            }
-//        }
-//    }
-//    self.tableView.reloadData()
-//}
-
-
-
-
-
-
+func signOut() {
+    KeychainWrapper.standard.removeObject(forKey: keyUID)
+    try! Auth.auth().signOut()
+    defaults.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
+    print("MSG: Signed out")
+}
 
 
 

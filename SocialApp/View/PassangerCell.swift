@@ -40,7 +40,7 @@ class PassangerCell: UITableViewCell {
         personName.text = otherUser.displayName
         personTime.text = otherUser.time
         personDestination.text = otherUser.destination
-        personInfo.text = otherUser.info
+        personInfo.text = "\(otherUser.info) course"
     }
 
 }

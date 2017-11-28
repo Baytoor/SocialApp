@@ -998,7 +998,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New driver" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RFH-hF-nxN">
-                                        <rect key="frame" x="144.5" y="10" width="87.5" height="25"/>
+                                        <rect key="frame" x="144" y="10" width="87.5" height="25"/>
                                         <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -1110,7 +1110,7 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="addPassangerBtnPressed:" destination="zuS-1Y-UqL" eventType="touchUpInside" id="t1o-p9-W8E"/>
+                                                            <action selector="addDriverBtnPressed:" destination="zuS-1Y-UqL" eventType="touchUpInside" id="Yxo-h2-WMD"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7GL-wC-J1l" customClass="RoundedBtn" customModule="SocialApp" customModuleProvider="target">
