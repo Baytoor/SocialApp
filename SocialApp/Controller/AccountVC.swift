@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import Firebase
-import SwiftKeychainWrapper
 
 class AccountVC: UIViewController {
     
@@ -28,12 +26,8 @@ class AccountVC: UIViewController {
     }
     
     func getInfo(){
-        if User.init().photoURL != ""{
-            if let data = NSData(contentsOf: URL(string: User.init().photoURL)!){
-                profilePhotoView.image = UIImage(data: data as Data)
-            }
-        } else {
-            profilePhotoView.image = #imageLiteral(resourceName: "noPhoto")
+        if let data = NSData(contentsOf: URL(string: User.init().photoURL)!){
+            profilePhotoView.image = UIImage(data: data as Data)
         }
         profilePhotoView.layer.cornerRadius = profilePhotoView.frame.width/2
         profilePhotoView.layer.masksToBounds = true

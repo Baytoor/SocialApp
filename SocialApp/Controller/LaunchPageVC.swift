@@ -220,18 +220,6 @@ extension LaunchPageVC {
     //Creates new user if email is new
     func newUser(completionHandler: (() -> Void)!) {
         sendEmailVerification()
-        let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
-        StorageServices.ss.uploadMedia(uid: User.init().uid, image: #imageLiteral(resourceName: "noPhoto"), completion:{ (url) in
-            changeRequest?.photoURL = url
-            changeRequest?.commitChanges { error in
-                if error == nil {
-                    completionHandler()
-                } else {
-                    self.errorDescription("Now it's not available to update profile image")
-                    completionHandler()
-                }
-            }
-        })
     }
     
 }
