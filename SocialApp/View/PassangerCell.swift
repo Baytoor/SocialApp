@@ -15,7 +15,7 @@ class PassangerCell: UITableViewCell {
     @IBOutlet weak var personName: UILabel!
     @IBOutlet weak var personTime: UILabel!
     @IBOutlet weak var personDestination: UILabel!
-    @IBOutlet weak var personInfo: UILabel!
+//    @IBOutlet weak var personInfo: UILabel!
     @IBOutlet weak var personPhone: UILabel!
     
     override func awakeFromNib() {
@@ -40,7 +40,7 @@ class PassangerCell: UITableViewCell {
         personName.text = otherUser.displayName
         personTime.text = otherUser.time
         personDestination.text = otherUser.destination
-        personInfo.text = "\(otherUser.info) course"
+//        personInfo.text = "\(otherUser.info) course"
     }
 
 }

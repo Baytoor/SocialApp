@@ -27,17 +27,13 @@ class LaunchPageVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         outProcess()
-        emailField.text = ""
-        passField.text = ""
-        errorLbl.text = ""
+        resetFields()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         outProcess()
-        emailField.text = ""
-        passField.text = ""
-        errorLbl.text = ""
+        resetFields()
         view.backgroundColor = UIColor(darkBlue)
         facebook.setImage(#imageLiteral(resourceName: "facebook").maskWithColor(color: UIColor(lightBlue)), for: .highlighted)
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.textFieldShouldReturn(_:)))
@@ -56,6 +52,13 @@ class LaunchPageVC: UIViewController {
         return false
     }
 
+    func resetFields(){
+        emailField.text = ""
+        passField.text = ""
+        errorLbl.text = ""
+    }
+    
+    //Shows while authenticating
     func inProcess() {
         signInBtn.isEnabled = false
         signInBtn.setTitle("", for: .normal)
@@ -68,7 +71,7 @@ class LaunchPageVC: UIViewController {
         processingIndicator.isHidden = false
         processingIndicator.startAnimating()
     }
-    
+    //To quite processing state
     func outProcess(){
         signInBtn.isEnabled = true
         signInBtn.setTitle("Sign In", for: .normal)
@@ -95,6 +98,7 @@ class LaunchPageVC: UIViewController {
 
 //Authentication functions
 extension LaunchPageVC {
+    //Email authentication
     @IBAction func signInPressed(_ sender: Any) {
         inProcess()
         self.view.endEditing(true)
@@ -103,7 +107,7 @@ extension LaunchPageVC {
                 errorDescription("Field is empty")
             } else if pass.count < 6 {
                 errorDescription("Password must have at least 6 characters")
-            } else {
+            } else if checkSDUEmail() {
                 Auth.auth().signIn(withEmail: email, password: pass, completion: { (user, error) in
                     if error == nil {
                         print("MSG: User authenticated with firebase using email")
@@ -133,10 +137,12 @@ extension LaunchPageVC {
                         }
                     }
                 })
+            } else {
+                errorDescription("You have to log in with SDU email")
             }
         }
     }
-    
+    //Authenticating with facebook
     @IBAction func fbRegisterBtn(_ sender: Any){
         inProcess()
         let facebookLogin = FBSDKLoginManager()
@@ -154,7 +160,7 @@ extension LaunchPageVC {
             }
         }
     }
-    
+    //Firebase authentication with credential
     func firebaseAuth(_ credential: AuthCredential ) {
         inProcess()
         Auth.auth().signIn(with: credential) { (user, error) in
@@ -169,7 +175,7 @@ extension LaunchPageVC {
             }
         }
     }
-    
+    //Goes to main page if authentication is successful
     func completeSignIn(uid: String) {
         uploadUser()
         let saveSuccessful: Bool = KeychainWrapper.standard.set(uid, forKey: keyUID)
@@ -179,7 +185,7 @@ extension LaunchPageVC {
         uploadUser()
         performSegue(withIdentifier: "accessApp", sender: nil)
     }
-    
+    //Sends password reset message to email from textField
     @IBAction func resetPassword(_ sender: Any) {
         if emailField.text != nil || emailField.text != "" {
             Auth.auth().sendPasswordReset(withEmail: emailField.text!) { (error) in
@@ -196,13 +202,22 @@ extension LaunchPageVC {
         }
     }
     
+    func checkSDUEmail() -> Bool {
+        let mail = emailField.text?.components(separatedBy: "@")
+        if mail![1].contains("sdu.edu.kz") {
+            return true
+        } else {
+            return false
+        }
+    }
+    
     func alert(message: String) {
         let refreshAlert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         refreshAlert.addAction(UIAlertAction(title: "Okay", style: .cancel))
         present(refreshAlert, animated: true, completion: nil)
         view.endEditing(true)
     }
-    
+    //Creates new user if email is new
     func newUser(completionHandler: (() -> Void)!) {
         sendEmailVerification()
         let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()

@@ -21,45 +21,74 @@ class DriverVC: UIViewController {
     @IBOutlet weak var timeTillField: UITextField!
     
     var drivers = [OtherUser]()
+    var refreshControl: UIRefreshControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        refreshControl = UIRefreshControl()
+        if !isInternetAvailable() {
+            refreshControl.attributedTitle = NSAttributedString(string: "Check your internet connection")
+        } else {
+            refreshControl.attributedTitle = NSAttributedString(string: "")
+        }
+        refreshControl.addTarget(self, action: #selector(self.refresh(sender:)), for: UIControlEvents.valueChanged)
+        tableView.addSubview(refreshControl) // not required when using UITableViewController
+        
+        refresh(sender: self)
         closePopUp()
         view.backgroundColor = UIColor(darkBlue)
         tableView.delegate = self
         tableView.dataSource = self
-        
-        self.updateList()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         Auth.auth().currentUser?.reload()
     }
     
-    @IBAction func addBtnPressed(_ sender: Any) {
-        openPopUp()
-    }
-    
-    @IBAction func closeBtnPressed(_ sender: UIButton) {
-        closePopUp()
+    @objc func refresh(sender: AnyObject) {
+        if !isInternetAvailable() {
+            refreshControl.attributedTitle = NSAttributedString(string: "Check your internet connection")
+        } else {
+            refreshControl.attributedTitle = NSAttributedString(string: "")
+        }
+        updateList {
+            if (Auth.auth().currentUser?.isEmailVerified)!{}
+            self.refreshControl.endRefreshing()
+            self.tableView.reloadData()
+        }
     }
     
     @IBAction func addDriverBtnPressed(_ sender: Any){
-        if (Auth.auth().currentUser?.isEmailVerified)! {
-            if (fromField.text != "" || toField.text != "" || timeFromField.text != ""  || timeTillField.text != "")  {
-                let user = User.init("\(timeFromField.text!) - \(timeTillField.text!)", "\(fromField.text!) ~> \(toField.text!)", "5")
-                if user.phoneNumber != "" || user.displayName != "" {
-                    DataService.ds.createDriver(user)
-                    closePopUp()
-                } else {
-                    confirmAlert(message: "Please, fill your information in settings")
-                }
-            } else {
-                confirmAlert(message: "Field is empty, please enter all fields")
+        if (fromField.text!.count>1 && toField.text!.count>1 && timeFromField.text!.count>1)  {
+            var user = User.init()
+            if  checkDate(time: timeFromField.text!) && checkDate(time: timeTillField.text!) {
+                user = User.init("\(timeFromField.text!) - \(timeTillField.text!)", "\(fromField.text!) ~> \(toField.text!)", "1")
+                DataService.ds.createPassanger(user)
+                closePopUp()
+            } else if checkDate(time: timeFromField.text!) {
+                user = User.init("\(timeFromField.text!)", "\(fromField.text!) ~> \(toField.text!)", "1")
+                DataService.ds.createPassanger(user)
+                closePopUp()
             }
         } else {
-            emailVerifyAlert()
+            confirmAlert(message: "Field is empty, please enter all fields")
+        }
+    }
+    
+    func updateList(completion: (()->Void)!) {
+        DataService.ds.refDrivers.observe(.value) { (snapshot) in
+            self.drivers.removeAll()
+            if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
+                for snap in snapshot {
+                    if let userData = snap.value as? Dictionary<String, Any> {
+                        let uid = snap.key
+                        let passanger = OtherUser.init(uid, userData)
+                        self.drivers.append(passanger)
+                    }
+                }
+            }
+            completion()
         }
     }
     
@@ -78,13 +107,45 @@ class DriverVC: UIViewController {
         }
     }
     
+    @IBAction func addBtnPressed(_ sender: Any) {
+        if (Auth.auth().currentUser?.isEmailVerified)!{
+            if User.init().phoneNumber.count>1 || User.init().displayName.count>1  {
+                openPopUp()
+            } else {
+                confirmAlert(message: "Please, fill your information in settings")
+            }
+        } else {
+            emailVerifyAlert()
+        }
+    }
+    
+    @IBAction func closeBtnPressed(_ sender: UIButton) {
+        closePopUp()
+    }
+    
+    func checkDate(time: String) -> Bool {
+        if time.count == 5 {
+            let hm = time.components(separatedBy: ":")
+            if let hour = Int(hm[0]), let min = Int(hm[1]){
+                if hour>24 && min>60 {
+                    confirmAlert(message: "Wrong format of time")
+                    return false
+                } else {
+                    return true
+                }
+            }
+            
+        }
+        confirmAlert(message: "Wrong format of time")
+        return false
+    }
+    
     func openPopUp() {
         fromField.becomeFirstResponder()
         tableView.isScrollEnabled = false
         tableView.alpha = 0.5
         popUp.isHidden = false
         addBtn.isEnabled = false
-        
     }
     
     func closePopUp() {
@@ -99,22 +160,7 @@ class DriverVC: UIViewController {
         timeTillField.text = ""
     }
     
-    func updateList() {
-        DataService.ds.refDrivers.observe(.value) { (snapshot) in
-            self.drivers.removeAll()
-            if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
-                for snap in snapshot {
-                    if let userData = snap.value as? Dictionary<String, Any> {
-                        let uid = snap.key
-                        let passanger = OtherUser.init(uid, userData)
-                        self.drivers.append(passanger)
-                    }
-                }
-            }
-            self.tableView.reloadData()
-        }
-    }
-    
+    //Alerts and sends email verification
     func emailVerifyAlert() {
         let refreshAlert = UIAlertController(title: "Error", message: "Your email address has not yet been verified. Do you want us to send another verification email to \(User.init().email).", preferredStyle: .alert)
         refreshAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (_) in
@@ -122,14 +168,12 @@ class DriverVC: UIViewController {
         }))
         refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         present(refreshAlert, animated: true, completion: nil)
-        closePopUp()
     }
     
     func confirmAlert(message: String) {
         let refreshAlert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         refreshAlert.addAction(UIAlertAction(title: "Okay", style: .default))
         present(refreshAlert, animated: true, completion: nil)
-        closePopUp()
     }
     
     func copyAlert(user: String, phone: String) {
@@ -143,7 +187,7 @@ class DriverVC: UIViewController {
     
 }
 
-
+//Delegate and DataSource functions
 extension DriverVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {

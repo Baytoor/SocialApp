@@ -40,7 +40,9 @@ class AccountVC: UIViewController {
         displayNameLbl.text = User.init().displayName
         emailLbl.text = User.init().email
         phoneNumberLbl.text = User.init().phoneNumber
-        infoLbl.text = "\(User.init().info) course"
+        if User.init().info.count > 1 {
+            infoLbl.text = "\(User.init().info) course"
+        }
     }
     
     @IBAction func settingsBtnPressed(_ sender: Any){

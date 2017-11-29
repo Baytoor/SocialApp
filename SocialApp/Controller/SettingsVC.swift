@@ -60,10 +60,6 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         imagePicker.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func addImageBtnPressed(_ sender: Any) {
-        present(imagePicker, animated: true, completion: nil)
-    }
-    
     func updateDisplayName(completionHandler: (() -> Void)!) {
         let authUser = Auth.auth().currentUser
         let changeRequest = authUser?.createProfileChangeRequest()
@@ -138,6 +134,24 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         sendEmailVerification()
     }
     
+    @IBAction func addImageBtnPressed(_ sender: Any) {
+        present(imagePicker, animated: true, completion: nil)
+    }
+    
+    @IBAction func checkMaxLength() {
+        if (courseField.text?.count)! > 1 {
+            courseField.deleteBackward()
+        }
+        if (phoneNumberField.text?.count)! > 11 {
+            phoneNumberField.deleteBackward()
+        }
+    }
+    
+    @IBAction func signOutBtnPressed(_ sender: Any) {
+        signOut()
+        dismiss(animated: true, completion: nil)
+    }
+    
     @IBAction func doneBtnPressed(_ sender: Any) {
         view.endEditing(true)
         inProcess()
@@ -154,90 +168,6 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
             completionHandler()
         }
         updateInfo()
-    }
-    
-    func isVerificationNeeded() {
-        if User.init().isVerified == true {
-            verifyEmailBtn.isEnabled = false
-            verifyEmailBtn.setTitle("Email verified", for: .normal)
-            verifyEmailBtn.layer.opacity = 0.5
-        } else {
-            verifyEmailBtn.layer.opacity = 1
-            verifyEmailBtn.isEnabled = true
-            verifyEmailBtn.setTitle("Verify email", for: .normal)
-        }
-    }
-    
-    @IBAction func checkMaxLength() {
-        if (courseField.text?.count)! > 1 {
-            courseField.deleteBackward()
-        }
-        if (phoneNumberField.text?.count)! > 11 {
-            phoneNumberField.deleteBackward()
-        }
-    }
-    
-    func inProcess() {
-        let uiBusy = UIActivityIndicatorView(activityIndicatorStyle: .white)
-        uiBusy.hidesWhenStopped = true
-        uiBusy.startAnimating()
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: uiBusy)
-        view.layer.opacity = 0.5
-        view.isExclusiveTouch = false
-        
-        nameField.isEnabled = false
-        surNameField.isEnabled = false
-        phoneNumberField.isEnabled = false
-        facultyField.isEnabled = false
-        courseField.isEnabled = false
-        verifyEmailBtn.isEnabled = false
-        isDriverSC.isEnabled = false
-        signOutBtn.isEnabled = false
-    }
-    
-    func outProcess() {
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: nil, style: .done, target: nil, action: nil)
-        view.layer.opacity = 1
-        
-        nameField.isEnabled = true
-        surNameField.isEnabled = true
-        phoneNumberField.isEnabled = true
-        facultyField.isEnabled = true
-        courseField.isEnabled = true
-        verifyEmailBtn.isEnabled = true
-        isDriverSC.isEnabled = true
-        signOutBtn.isEnabled = true
-    }
-
-    @IBAction func signOutBtnPressed(_ sender: Any) {
-        signOut()
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
-        let size = image.size
-        
-        let widthRatio  = targetSize.width  / size.width
-        let heightRatio = targetSize.height / size.height
-        
-        // Figure out what our orientation is, and use that to form the rectangle
-        var newSize: CGSize
-        if(widthRatio > heightRatio) {
-            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
-        } else {
-            newSize = CGSize(width: size.width * widthRatio,  height: size.height * widthRatio)
-        }
-        
-        // This is the rect that we've calculated out and this is what is actually used below
-        let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
-        
-        // Actually do the resizing to the rect using the ImageContext stuff
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
-        image.draw(in: rect)
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return newImage!
     }
     
     func getInfo(){
@@ -277,9 +207,79 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         isDriverSC.selectedSegmentIndex = user.isDriver
     }
     
-    func confirmAlert(message: String) {
+    func isVerificationNeeded() {
+        if User.init().isVerified == true {
+            verifyEmailBtn.isEnabled = false
+            verifyEmailBtn.setTitle("Email verified", for: .normal)
+            verifyEmailBtn.layer.opacity = 0.5
+        } else {
+            verifyEmailBtn.layer.opacity = 1
+            verifyEmailBtn.isEnabled = true
+            verifyEmailBtn.setTitle("Verify email", for: .normal)
+        }
+    }
+    
+    func inProcess() {
+        let uiBusy = UIActivityIndicatorView(activityIndicatorStyle: .white)
+        uiBusy.hidesWhenStopped = true
+        uiBusy.startAnimating()
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: uiBusy)
+        view.layer.opacity = 0.5
+        view.isExclusiveTouch = false
+        
+        nameField.isEnabled = false
+        surNameField.isEnabled = false
+        phoneNumberField.isEnabled = false
+        facultyField.isEnabled = false
+        courseField.isEnabled = false
+        verifyEmailBtn.isEnabled = false
+        isDriverSC.isEnabled = false
+        signOutBtn.isEnabled = false
+    }
+    
+    func outProcess() {
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: nil, style: .done, target: nil, action: nil)
+        view.layer.opacity = 1
+        
+        nameField.isEnabled = true
+        surNameField.isEnabled = true
+        phoneNumberField.isEnabled = true
+        facultyField.isEnabled = true
+        courseField.isEnabled = true
+        verifyEmailBtn.isEnabled = true
+        isDriverSC.isEnabled = true
+        signOutBtn.isEnabled = true
+    }
+
+    func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
+        let size = image.size
+        
+        let widthRatio  = targetSize.width  / size.width
+        let heightRatio = targetSize.height / size.height
+        
+        // Figure out what our orientation is, and use that to form the rectangle
+        var newSize: CGSize
+        if(widthRatio > heightRatio) {
+            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
+        } else {
+            newSize = CGSize(width: size.width * widthRatio,  height: size.height * widthRatio)
+        }
+        
+        // This is the rect that we've calculated out and this is what is actually used below
+        let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
+        
+        // Actually do the resizing to the rect using the ImageContext stuff
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+        image.draw(in: rect)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage!
+    }
+    
+    func alert(message: String) {
         let refreshAlert = UIAlertController(title: "SDU companion", message: message, preferredStyle: UIAlertControllerStyle.alert)
-        refreshAlert.addAction(UIAlertAction(title: "Back", style: .cancel))
+        refreshAlert.addAction(UIAlertAction(title: "Okay", style: .cancel))
         present(refreshAlert, animated: true, completion: nil)
         view.endEditing(true)
     }

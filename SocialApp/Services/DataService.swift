@@ -39,12 +39,12 @@ class DataService {
     }
     
     func createUser(_ user: User){
-        let userData = ["displayName": user.displayName, "email": user.email, "info": "\(user.info) course", "phoneNumber": user.phoneNumber, "photoURL": user.photoURL, "isDriver": user.isDriver, "isVerified": user.isVerified as Any] as [String : Any]
+        let userData = ["displayName": user.displayName, "email": user.email, "info": user.info, "phoneNumber": user.phoneNumber, "photoURL": user.photoURL, "isDriver": user.isDriver, "isVerified": user.isVerified as Any] as [String : Any]
         refUsers.child(user.uid).updateChildValues(userData)
     }
     
     private func setUserData(_ user: User) -> Dictionary<String, String>{
-        let userData = ["displayName": user.displayName, "email": user.email, "destination": user.destination, "hasSeat": user.hasSeat, "info": "\(user.info) course", "phoneNumber": user.phoneNumber, "photoURL": user.photoURL, "time": user.time, "postedDay": "\(NSCalendar.current.component(.day, from: Date()))"]
+        let userData = ["displayName": user.displayName, "email": user.email, "destination": user.destination, "hasSeat": user.hasSeat, "info": user.info, "phoneNumber": user.phoneNumber, "photoURL": user.photoURL, "time": user.time, "postedDay": "\(NSCalendar.current.component(.day, from: Date()))"]
         return userData
     }
     
