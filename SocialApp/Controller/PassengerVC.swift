@@ -35,7 +35,6 @@ class PassengerVC: UIViewController {
         refreshControl.addTarget(self, action: #selector(self.refresh(sender:)), for: UIControlEvents.valueChanged)
         tableView.addSubview(refreshControl)
         
-        refresh(sender: self)
         closePopUp()
         view.backgroundColor = UIColor(darkBlue)
         tableView.delegate = self
@@ -44,6 +43,7 @@ class PassengerVC: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         reloadUser()
+        refresh(sender: self)
     }
     
     @objc func refresh(sender: AnyObject) {

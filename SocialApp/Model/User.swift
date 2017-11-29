@@ -90,7 +90,7 @@ class User {
         if let photoURL = Auth.auth().currentUser?.photoURL {
             _photoURL = "\(photoURL)"
         } else {
-            _photoURL = "https://github.com/Baytoor/SocialApp/blob/master/SocialApp/Assets.xcassets/noPhoto.imageset/noPhoto.png"
+            _photoURL = "https://firebasestorage.googleapis.com/v0/b/socialapp-242da.appspot.com/o/noPhoto.png?alt=media&token=47ff2717-8c38-4347-8b68-dc166ac9130a"
         }
         _uid = (Auth.auth().currentUser?.uid)!
         _time = ""

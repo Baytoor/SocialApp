@@ -84,27 +84,25 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     func updateImage(completionHandler: (() -> Void)!) {
         let authUser = Auth.auth().currentUser
         let changeRequest = authUser?.createProfileChangeRequest()
-            if User.init().photoURL != "" {
-                if let data = NSData(contentsOf: URL(string: User.init().photoURL)!){
-                    let image = UIImage(data: data as Data)
-                    if image != profilePhotoView.image {
-                        StorageServices.ss.uploadMedia(uid: User.init().uid, image: profilePhotoView.image!, completion:{ (url) in
-                            changeRequest?.photoURL = url
-                            changeRequest?.commitChanges { error in
-                                if error == nil {
-                                    self.updateDisplayName(completionHandler: {
-                                        completionHandler()
-                                    })
-                                } else {
-                                    self.errorDescription("Now it's not available to update profile image")
-                                }
+            if let data = NSData(contentsOf: URL(string: User.init().photoURL)!){
+                let image = UIImage(data: data as Data)
+                if image != profilePhotoView.image {
+                    StorageServices.ss.uploadMedia(uid: User.init().uid, image: profilePhotoView.image!, completion:{ (url) in
+                        changeRequest?.photoURL = url
+                        changeRequest?.commitChanges { error in
+                            if error == nil {
+                                self.updateDisplayName(completionHandler: {
+                                    completionHandler()
+                                })
+                            } else {
+                                self.errorDescription("Now it's not available to update profile image")
                             }
-                    })
-                }  else {
-                    self.updateDisplayName(completionHandler: {
-                        completionHandler()
-                    })
-                }
+                        }
+                })
+            }  else {
+                self.updateDisplayName(completionHandler: {
+                    completionHandler()
+                })
             }
         }
     }
@@ -172,12 +170,8 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     
     func getInfo(){
         let user = User.init()
-        if User.init().photoURL != "" {
-            if let data = NSData(contentsOf: URL(string: User.init().photoURL)!){
-                profilePhotoView.image = UIImage(data: data as Data)
-            }
-        } else {
-            profilePhotoView.image = #imageLiteral(resourceName: "noPhoto")
+        if let data = NSData(contentsOf: URL(string: User.init().photoURL)!){
+            profilePhotoView.image = UIImage(data: data as Data)
         }
         profilePhotoView.layer.cornerRadius = profilePhotoView.frame.width/2
         profilePhotoView.layer.masksToBounds = true
