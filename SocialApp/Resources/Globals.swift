@@ -51,11 +51,6 @@ func setUserDefaults(compilation: (() -> Void)!) {
                         } else {
                             defaults.set("", forKey: "isDriver")
                         }
-                        if let isVerified = userData["isVerified"] {
-                            defaults.set(isVerified, forKey: "isVerified")
-                        } else {
-                            defaults.set("", forKey: "isVerified")
-                        }
                     }
                 }
             }
@@ -71,8 +66,7 @@ func reloadUser() {
         if error != nil {
             print("MSG: Unable to reload user")
         } else {
-            
-            
+            return
         }
     })
 }

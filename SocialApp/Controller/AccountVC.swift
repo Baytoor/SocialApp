@@ -20,7 +20,7 @@ class AccountVC: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         getInfo()
-        Auth.auth().currentUser?.reload()
+        reloadUser()
     }
     
     override func viewDidLoad() {

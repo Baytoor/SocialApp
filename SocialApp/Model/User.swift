@@ -75,7 +75,7 @@ class User {
         } else {
             _email = ""
         }
-        if defaults.bool(forKey: "isVerified") == true {
+        if (Auth.auth().currentUser?.isEmailVerified)! {
             _isVerified = true
         } else {
             _isVerified = false

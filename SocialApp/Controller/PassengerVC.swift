@@ -43,7 +43,7 @@ class PassengerVC: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        Auth.auth().currentUser?.reload()
+        reloadUser()
     }
     
     @objc func refresh(sender: AnyObject) {
@@ -53,9 +53,12 @@ class PassengerVC: UIViewController {
             refreshControl.attributedTitle = NSAttributedString(string: "")
         }
         updateList {
-            if (Auth.auth().currentUser?.isEmailVerified)!{}
-            self.refreshControl.endRefreshing()
-            self.tableView.reloadData()
+            if (Auth.auth().currentUser?.isEmailVerified)! {
+                self.refreshControl.endRefreshing()
+                self.tableView.reloadData()
+            } else {
+                self.refreshControl.attributedTitle = NSAttributedString(string: "Please, verify your email")
+            }
         }
     }
     
