@@ -991,7 +991,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New driver" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RFH-hF-nxN">
-                                        <rect key="frame" x="144.5" y="10" width="86.5" height="23.5"/>
+                                        <rect key="frame" x="145" y="10" width="86.5" height="23.5"/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -1151,11 +1151,11 @@
                                     <constraint firstItem="RJB-Cf-q69" firstAttribute="leading" secondItem="fN5-FH-YbC" secondAttribute="leadingMargin" constant="15" id="lv5-3I-3xK"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="swapIcon" translatesAutoresizingMaskIntoConstraints="NO" id="2Gm-ld-5jM">
-                                <rect key="frame" x="323.5" y="306" width="20" height="20"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="companion" translatesAutoresizingMaskIntoConstraints="NO" id="2Gm-ld-5jM">
+                                <rect key="frame" x="321.5" y="304" width="24" height="24"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="20" id="85h-er-l3C"/>
-                                    <constraint firstAttribute="height" constant="20" id="xAT-bu-OWw"/>
+                                    <constraint firstAttribute="width" constant="24" id="85h-er-l3C"/>
+                                    <constraint firstAttribute="height" constant="24" id="xAT-bu-OWw"/>
                                 </constraints>
                             </imageView>
                         </subviews>
@@ -1206,7 +1206,6 @@
         <image name="facebook" width="27" height="50"/>
         <image name="homeIcon" width="22" height="24"/>
         <image name="settingsIcon" width="20" height="20"/>
-        <image name="swapIcon" width="50" height="51"/>
     </resources>
     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

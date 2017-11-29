@@ -67,7 +67,7 @@ class DriverVC: UIViewController {
             var user = User.init()
             if  checkDate(time: timeFromField.text!) && checkDate(time: timeTillField.text!) {
                 user = User.init("\(timeFromField.text!) - \(timeTillField.text!)", "\(fromField.text!) ~> \(toField.text!)", "1")
-                DataService.ds.createPassanger(user)
+                DataService.ds.createDriver(user)
                 closePopUp()
             } else if checkDate(time: timeFromField.text!) {
                 user = User.init("\(timeFromField.text!)", "\(fromField.text!) ~> \(toField.text!)", "1")
