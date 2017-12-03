@@ -33,6 +33,8 @@ class DriverVC: UIViewController {
             refreshControl.attributedTitle = NSAttributedString(string: "")
         }
         refreshControl.addTarget(self, action: #selector(self.refresh(sender:)), for: UIControlEvents.valueChanged)
+        refresh(sender: self)
+        
         tableView.addSubview(refreshControl) // not required when using UITableViewController
         
         closePopUp()
@@ -43,7 +45,6 @@ class DriverVC: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         reloadUser()
-        refresh(sender: self)
     }
     
     @objc func refresh(sender: AnyObject) {

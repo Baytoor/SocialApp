@@ -28,9 +28,17 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     var imageUpdated = false
     var imagePicker: UIImagePickerController!
     
+    var photoData: Data?
+    var displayName: String?
+    var phoneNumber: String?
+    var info: String?
+    var isDriver: Int?
+    var isVerified: Bool?
+    var email: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        getInfo()
+        getInfoFromSegue()
         errorLbl.isHidden = true
         
         isVerificationNeeded()
@@ -47,7 +55,7 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        Auth.auth().currentUser?.reload()
+        reloadUser()
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
@@ -168,6 +176,22 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         updateInfo()
     }
     
+    
+    func getInfoFromSegue() {
+        if photoData != nil {
+            profilePhotoView.image = UIImage(data: photoData!)
+        }
+        let ns = displayName?.components(separatedBy: " ")
+        nameField.text = ns?[0] ?? ""
+        surNameField.text = ns?[1] ?? ""
+        let information = info?.components(separatedBy: ",")
+        facultyField.text = information?[0] ?? ""
+        courseField.text = information?[1] ?? ""
+        phoneNumberField.text = phoneNumber ?? ""
+        isDriverSC.selectedSegmentIndex = isDriver ?? 0
+    }
+    
+    
     func getInfo(){
         let user = User.init()
         if let data = NSData(contentsOf: URL(string: User.init().photoURL)!){
@@ -277,9 +301,6 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         present(refreshAlert, animated: true, completion: nil)
         view.endEditing(true)
     }
-    
-    
-    
     
     
     

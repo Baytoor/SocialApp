@@ -29,12 +29,8 @@ class PassangerCell: UITableViewCell {
     }
     
     func configureCell(otherUser: OtherUser) {
-        if otherUser.photoURL != "" {
         if let data = NSData(contentsOf: URL(string: otherUser.photoURL)!){
             personImage.image = UIImage(data: data as Data)
-            }
-        } else {
-            personImage.image = #imageLiteral(resourceName: "noPhoto")
         }
         personPhone.text = otherUser.phoneNumber
         personName.text = otherUser.displayName

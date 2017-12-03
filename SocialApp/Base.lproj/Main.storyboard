@@ -375,7 +375,7 @@
                                                                     <action selector="checkMaxLength" destination="HkG-0F-0m5" eventType="editingChanged" id="jbt-0L-1fp"/>
                                                                 </connections>
                                                             </textField>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="HH:MM" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="sTF-e7-DTT" customClass="UnderlineField" customModule="SocialApp" customModuleProvider="target">
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="HH:MM (Optional)" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="sTF-e7-DTT" customClass="UnderlineField" customModule="SocialApp" customModuleProvider="target">
                                                                 <rect key="frame" x="146.5" y="0.0" width="126" height="30"/>
                                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <color key="textColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1072,7 +1072,7 @@
                                                                     <action selector="checkMaxLength" destination="zuS-1Y-UqL" eventType="editingChanged" id="MF2-YO-nyg"/>
                                                                 </connections>
                                                             </textField>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="HH:MM" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ll2-dN-HzA" customClass="UnderlineField" customModule="SocialApp" customModuleProvider="target">
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="HH:MM (Optional)" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ll2-dN-HzA" customClass="UnderlineField" customModule="SocialApp" customModuleProvider="target">
                                                                 <rect key="frame" x="146.5" y="0.0" width="126" height="30"/>
                                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <color key="textColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1136,12 +1136,21 @@
                                             <constraint firstAttribute="width" constant="16" id="c5O-Yq-J2X"/>
                                         </constraints>
                                     </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="companion" translatesAutoresizingMaskIntoConstraints="NO" id="2Gm-ld-5jM">
+                                        <rect key="frame" x="321.5" y="180" width="24" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="24" id="85h-er-l3C"/>
+                                            <constraint firstAttribute="height" constant="24" id="xAT-bu-OWw"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="RFH-hF-nxN" firstAttribute="top" secondItem="fN5-FH-YbC" secondAttribute="top" constant="10" id="Agj-FB-bZd"/>
                                     <constraint firstItem="jHg-ib-prM" firstAttribute="top" secondItem="fN5-FH-YbC" secondAttribute="top" id="BpW-B0-qsj"/>
+                                    <constraint firstItem="2Gm-ld-5jM" firstAttribute="centerX" secondItem="7GL-wC-J1l" secondAttribute="centerX" id="CuX-2v-GcT"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="RJB-Cf-q69" secondAttribute="trailing" constant="15" id="HRr-UL-zY7"/>
+                                    <constraint firstItem="2Gm-ld-5jM" firstAttribute="centerY" secondItem="7GL-wC-J1l" secondAttribute="centerY" id="WIF-Jz-557"/>
                                     <constraint firstItem="j9j-zw-6K8" firstAttribute="centerX" secondItem="jHg-ib-prM" secondAttribute="centerX" id="Xc9-yY-I44"/>
                                     <constraint firstAttribute="trailing" secondItem="jHg-ib-prM" secondAttribute="trailing" id="Ywb-2M-bZB"/>
                                     <constraint firstItem="j9j-zw-6K8" firstAttribute="centerY" secondItem="jHg-ib-prM" secondAttribute="centerY" id="ciY-sQ-cpu"/>
@@ -1151,25 +1160,16 @@
                                     <constraint firstItem="RJB-Cf-q69" firstAttribute="leading" secondItem="fN5-FH-YbC" secondAttribute="leadingMargin" constant="15" id="lv5-3I-3xK"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="companion" translatesAutoresizingMaskIntoConstraints="NO" id="2Gm-ld-5jM">
-                                <rect key="frame" x="321.5" y="304" width="24" height="24"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="24" id="85h-er-l3C"/>
-                                    <constraint firstAttribute="height" constant="24" id="xAT-bu-OWw"/>
-                                </constraints>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="fN5-FH-YbC" firstAttribute="leading" secondItem="5Sl-Rf-oX4" secondAttribute="leading" id="0dv-ir-7fC"/>
-                            <constraint firstItem="2Gm-ld-5jM" firstAttribute="centerX" secondItem="7GL-wC-J1l" secondAttribute="centerX" id="Bbb-hp-cOi"/>
                             <constraint firstItem="neq-v1-FDK" firstAttribute="top" secondItem="5Sl-Rf-oX4" secondAttribute="top" id="CTP-vd-ArI"/>
                             <constraint firstItem="neq-v1-FDK" firstAttribute="bottom" secondItem="5Sl-Rf-oX4" secondAttribute="bottom" id="X2U-gP-bSY"/>
                             <constraint firstItem="neq-v1-FDK" firstAttribute="trailing" secondItem="5Sl-Rf-oX4" secondAttribute="trailing" id="X9W-Oe-per"/>
                             <constraint firstItem="neq-v1-FDK" firstAttribute="leading" secondItem="5Sl-Rf-oX4" secondAttribute="leading" id="aRb-jT-4Hn"/>
                             <constraint firstItem="5Sl-Rf-oX4" firstAttribute="bottom" secondItem="fN5-FH-YbC" secondAttribute="bottom" constant="160" id="gQW-wN-tVV"/>
                             <constraint firstItem="5Sl-Rf-oX4" firstAttribute="trailing" secondItem="fN5-FH-YbC" secondAttribute="trailing" id="iJT-f1-pbT"/>
-                            <constraint firstItem="2Gm-ld-5jM" firstAttribute="centerY" secondItem="7GL-wC-J1l" secondAttribute="centerY" id="lNZ-6i-FSp"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="5Sl-Rf-oX4"/>
                     </view>
