@@ -138,7 +138,8 @@ class PassengerVC: UIViewController {
                     return true
                 }
             }
-            
+        } else if time.count == 0 {
+            return false
         }
         confirmAlert(message: "Wrong format of time")
         return false

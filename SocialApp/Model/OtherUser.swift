@@ -76,7 +76,7 @@ class OtherUser {
         if let photoURL = userData["photoURL"] as? String {
             self._photoURL = photoURL
         } else {
-            self._photoURL = ""
+            self._photoURL = "https://firebasestorage.googleapis.com/v0/b/socialapp-242da.appspot.com/o/noPhoto.png?alt=media&token=47ff2717-8c38-4347-8b68-dc166ac9130a"
         }
         if let info = userData["info"] as? String {
             self._info = info

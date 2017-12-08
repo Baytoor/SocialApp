@@ -72,7 +72,7 @@ class DriverVC: UIViewController {
                 closePopUp()
             } else if checkDate(time: timeFromField.text!) {
                 user = User.init("\(timeFromField.text!)", "\(fromField.text!) ~> \(toField.text!)", "1")
-                DataService.ds.createPassanger(user)
+                DataService.ds.createDriver(user)
                 closePopUp()
             }
         } else {
@@ -138,7 +138,8 @@ class DriverVC: UIViewController {
                     return true
                 }
             }
-            
+        } else if time.count == 0 {
+            return false
         }
         confirmAlert(message: "Wrong format of time")
         return false

@@ -220,6 +220,9 @@ extension LaunchPageVC {
     //Creates new user if email is new
     func newUser(completionHandler: (() -> Void)!) {
         sendEmailVerification()
+        let verifyAlert = UIAlertController(title: "Email verification", message: "Verification letter was sent to your email, please verify your email, otherwise you will not have access to passengers and drivers information", preferredStyle: .alert)
+        verifyAlert.addAction(UIAlertAction(title: "Dissmiss", style: .cancel, handler: nil))
+        present(verifyAlert, animated: true, completion: nil)
     }
     
 }

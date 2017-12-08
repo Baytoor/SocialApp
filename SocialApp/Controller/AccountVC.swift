@@ -59,31 +59,11 @@ class AccountVC: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destination: SettingsVC = segue.destination as! SettingsVC
         destination.photoData = UIImagePNGRepresentation(profilePhotoView.image!)
-        if displayNameLbl.text != nil {
-            destination.displayName = displayNameLbl.text
-        } else {
-            destination.displayName = "Name Surname"
-        }
-        if phoneNumberLbl.text != nil{
-            destination.phoneNumber = phoneNumberLbl.text
-        } else {
-            destination.phoneNumber = ""
-        }
-        if infoLbl.text != nil {
-            destination.info = infoLbl.text
-        } else {
-            destination.info = "Faculty Course"
-        }
-        if isVerified != nil {
-           destination.isVerified = isVerified
-        } else {
-            destination.isVerified = false
-        }
-        if isDriver != nil {
-           destination.isDriver = isDriver
-        } else {
-            destination.isDriver = 0
-        }
+        destination.displayName = displayNameLbl.text
+        destination.phoneNumber = phoneNumberLbl.text
+        destination.info = infoLbl.text
+        destination.isVerified = isVerified
+        destination.isDriver = isDriver
         destination.email = emailLbl.text
     }
     

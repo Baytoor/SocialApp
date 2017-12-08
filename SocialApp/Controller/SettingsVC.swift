@@ -182,11 +182,15 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
             profilePhotoView.image = UIImage(data: photoData!)
         }
         let ns = displayName?.components(separatedBy: " ")
-        nameField.text = ns?[0] ?? ""
-        surNameField.text = ns?[1] ?? ""
+        if ns!.count > 1 {
+            nameField.text = ns?[0]
+            surNameField.text = ns?[1]
+        }
         let information = info?.components(separatedBy: ",")
-        facultyField.text = information?[0] ?? ""
-        courseField.text = information?[1] ?? ""
+        if information!.count > 1 {
+            facultyField.text = information?[0]
+            courseField.text = information?[1]
+        }
         phoneNumberField.text = phoneNumber ?? ""
         isDriverSC.selectedSegmentIndex = isDriver ?? 0
     }
