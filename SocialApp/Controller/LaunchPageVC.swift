@@ -13,7 +13,7 @@ import Firebase
 import FirebaseAuth
 import SwiftKeychainWrapper
 
-class LaunchPageVC: UIViewController {
+class LaunchPageVC: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var resetBtn: UIButton!
     @IBOutlet weak var processingIndicator: UIActivityIndicatorView!
@@ -25,19 +25,11 @@ class LaunchPageVC: UIViewController {
     @IBOutlet weak var errorLbl: UILabel!
     @IBOutlet weak var signInBtn: UIButton!
     
+    var bottomConstraints: NSLayoutConstraint?
+    
     override func viewWillAppear(_ animated: Bool) {
         outProcess()
         resetFields()
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        outProcess()
-        resetFields()
-        view.backgroundColor = UIColor(darkBlue)
-        facebook.setImage(#imageLiteral(resourceName: "facebook").maskWithColor(color: UIColor(lightBlue)), for: .highlighted)
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.textFieldShouldReturn(_:)))
-        view.addGestureRecognizer(tap)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -47,9 +39,45 @@ class LaunchPageVC: UIViewController {
         }
     }
     
-    @objc func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        outProcess()
+        resetFields()
+        view.backgroundColor = UIColor(darkBlue)
+        facebook.setImage(#imageLiteral(resourceName: "facebook").maskWithColor(color: UIColor(lightBlue)), for: .highlighted)
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.hideKeyboard(_ :)))
+        view.addGestureRecognizer(tap)
+        
+        emailField.delegate = self
+        passField.delegate = self
+        facebook.isHidden = true
+        
+//        let bottomConstaints = NSLayoutConstraint(item: stackView, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: 1, constant: 40)
+//        view.addConstraint(bottomConstaints)
+//
+//        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: Notification.Name.UIKeyboardWillShow, object: nil)
+        
+    }
+    
+//    @objc func handleKeyboardNotification(notification: Notification) {
+//        if let userInfo = notification.userInfo {
+//            let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+//            let isKeyboardShowing = notification.name == Notification.Name.UIKeyboardWillShow
+//
+//            if isKeyboardShowing {
+//                bottomConstraints?.constant = -keyboardFrame!.height + (self.tabBarController?.tabBar.frame.size.height)!
+//            } else {
+//                bottomConstraints?.constant = +keyboardFrame!.height - (self.tabBarController?.tabBar.frame.size.height)!
+//            }
+//            UIView.animate(withDuration: 0, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
+//                self.view.layoutIfNeeded()
+//            }, completion: nil)
+//        }
+//
+//    }
+
+    @objc func hideKeyboard(_ textField: UITextField){
         self.view.endEditing(true)
-        return false
     }
 
     func resetFields(){
@@ -91,6 +119,20 @@ class LaunchPageVC: UIViewController {
         errorLbl.text = error
         errorLbl.textColor = UIColor.red
         signInBtn.isEnabled = true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+        case emailField:
+            passField.becomeFirstResponder()
+            break
+        case passField:
+            signInPressed(self)
+            break
+        default:
+            textField.resignFirstResponder()
+        }
+        return true
     }
     
     

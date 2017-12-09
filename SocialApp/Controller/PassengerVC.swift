@@ -22,6 +22,7 @@ class PassengerVC: UIViewController {
     
     var passengers = [OtherUser]()
     var refreshControl: UIRefreshControl!
+    var bottomConstraints: NSLayoutConstraint?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,8 +40,38 @@ class PassengerVC: UIViewController {
         
         closePopUp()
         view.backgroundColor = UIColor(darkBlue)
+        
         tableView.delegate = self
         tableView.dataSource = self
+        fromField.delegate = self
+        toField.delegate = self
+        timeFromField.delegate = self
+        timeTillField.delegate = self
+        
+        
+        bottomConstraints = NSLayoutConstraint(item: popUp, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0)
+        view.addConstraint(bottomConstraints!)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: Notification.Name.UIKeyboardWillShow, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: Notification.Name.UIKeyboardWillHide, object: nil)
+
+    }
+    
+    @objc func handleKeyboardNotification(notification: Notification) {
+        if let userInfo = notification.userInfo {
+            let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+            let isKeyboardShowing = notification.name == Notification.Name.UIKeyboardWillShow
+            
+            if isKeyboardShowing {
+                bottomConstraints?.constant = -keyboardFrame!.height + (self.tabBarController?.tabBar.frame.size.height)!
+            } else {
+                bottomConstraints?.constant = +keyboardFrame!.height - (self.tabBarController?.tabBar.frame.size.height)!
+            }
+            UIView.animate(withDuration: 0, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
+                self.view.layoutIfNeeded()
+            }, completion: nil)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -148,6 +179,7 @@ class PassengerVC: UIViewController {
     func openPopUp() {
         fromField.becomeFirstResponder()
         tableView.isScrollEnabled = false
+        tableView.isUserInteractionEnabled = false
         tableView.alpha = 0.5
         popUp.isHidden = false
         addBtn.isEnabled = false
@@ -157,6 +189,7 @@ class PassengerVC: UIViewController {
     func closePopUp() {
         self.view.endEditing(true)
         tableView.isScrollEnabled = true
+        tableView.isUserInteractionEnabled = true
         tableView.alpha = 1
         popUp.isHidden = true
         addBtn.isEnabled = true
@@ -194,7 +227,23 @@ class PassengerVC: UIViewController {
 }
 
 //Delegate and DataSource functions
-extension PassengerVC: UITableViewDelegate, UITableViewDataSource {
+extension PassengerVC: UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+            case fromField:
+                toField.becomeFirstResponder()
+                break
+            case toField:
+                timeFromField.becomeFirstResponder()
+                break
+            case timeFromField:
+                timeTillField.becomeFirstResponder()
+            default:
+                textField.resignFirstResponder()
+        }
+        return true
+    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1

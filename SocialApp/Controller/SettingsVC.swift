@@ -10,13 +10,12 @@ import UIKit
 import SwiftKeychainWrapper
 import Firebase
 
-class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var verifyEmailBtn: UIButton!
     @IBOutlet weak var signOutBtn: UIButton!
     @IBOutlet weak var doneBtn: UIBarButtonItem!
     @IBOutlet weak var bgView: UIView!
-    @IBOutlet weak var errorLbl: UILabel!
     @IBOutlet weak var profilePhotoView: UIImageView!
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var surNameField: UITextField!
@@ -24,6 +23,7 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     @IBOutlet weak var facultyField: UITextField!
     @IBOutlet weak var courseField: UITextField!
     @IBOutlet weak var isDriverSC: UISegmentedControl!
+    @IBOutlet weak var mainView: UIScrollView!
 
     var imageUpdated = false
     var imagePicker: UIImagePickerController!
@@ -35,11 +35,11 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     var isDriver: Int?
     var isVerified: Bool?
     var email: String?
+    var bottomConstraints: NSLayoutConstraint?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         getInfoFromSegue()
-        errorLbl.isHidden = true
         
         isVerificationNeeded()
         
@@ -47,11 +47,50 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         imagePicker.allowsEditing = true
         imagePicker.delegate = self
         
+        nameField.delegate = self
+        surNameField.delegate = self
+        phoneNumberField.delegate = self
+        facultyField.delegate = self
+        courseField.delegate = self
+        
         bgView.layer.cornerRadius = bgView.frame.width/2
         bgView.layer.opacity = 0.7
         
+        isDriverSC.layer.cornerRadius = 0.0;
+        isDriverSC.layer.borderColor = UIColor.white.cgColor
+        isDriverSC.layer.borderWidth = 1.0
+        isDriverSC.layer.masksToBounds = true
+        
         profilePhotoView.layer.cornerRadius = profilePhotoView.frame.width/2
         profilePhotoView.layer.masksToBounds = true
+        
+        bottomConstraints = NSLayoutConstraint(item: mainView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0)
+        view.addConstraint(bottomConstraints!)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: Notification.Name.UIKeyboardWillShow, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: Notification.Name.UIKeyboardWillHide, object: nil)
+        
+    }
+    
+    @objc func handleKeyboardNotification(notification: Notification) {
+        if let userInfo = notification.userInfo {
+            let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+            let isKeyboardShowing = notification.name == Notification.Name.UIKeyboardWillShow
+            
+            if mainView.layer.frame.height - keyboardFrame!.height < 420 {
+                if isKeyboardShowing {
+//                    bottomConstraints?.constant = +keyboardFrame!.height + (self.tabBarController?.tabBar.frame.size.height)!
+                    mainView.bounces = true
+                } else {
+//                    bottomConstraints?.constant = -keyboardFrame!.height - (self.tabBarController?.tabBar.frame.size.height)!
+                    mainView.bounces = false
+                }
+                UIView.animate(withDuration: 0, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
+                    self.view.layoutIfNeeded()
+                }, completion: nil)
+            }
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -79,7 +118,7 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
                     if error == nil {
                         completionHandler()
                     } else {
-                        self.errorDescription("Now it's not available to update profile name")
+                        self.alert(message: "Now it's not available to update profile name")
                         completionHandler()
                     }
                 }
@@ -93,8 +132,7 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         let authUser = Auth.auth().currentUser
         let changeRequest = authUser?.createProfileChangeRequest()
             if let data = NSData(contentsOf: URL(string: User.init().photoURL)!){
-                let image = UIImage(data: data as Data)
-                if image != profilePhotoView.image {
+                if data as Data != UIImagePNGRepresentation(profilePhotoView.image!) {
                     StorageServices.ss.uploadMedia(uid: User.init().uid, image: profilePhotoView.image!, completion:{ (url) in
                         changeRequest?.photoURL = url
                         changeRequest?.commitChanges { error in
@@ -103,11 +141,11 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
                                     completionHandler()
                                 })
                             } else {
-                                self.errorDescription("Now it's not available to update profile image")
+                                self.alert(message: "Now it's not available to update profile image")
                             }
                         }
                 })
-            }  else {
+            } else {
                 self.updateDisplayName(completionHandler: {
                     completionHandler()
                 })
@@ -128,12 +166,6 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         if self.facultyField.text != "" && self.courseField.text != "" {
             defaults.set("\(self.facultyField.text!),\(self.courseField.text!)", forKey: "info")
         }
-    }
-    
-    func errorDescription(_ error: String){
-        errorLbl.isHidden = false
-        errorLbl.text = error
-        errorLbl.textColor = UIColor.red
     }
     
     @IBAction func verifyEmailBtnPressed(_ sender: Any) {
@@ -193,6 +225,26 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         }
         phoneNumberField.text = phoneNumber ?? ""
         isDriverSC.selectedSegmentIndex = isDriver ?? 0
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+//            case nameField:
+//                surNameField.becomeFirstResponder()
+//                break
+//            case surNameField:
+//                phoneNumberField.becomeFirstResponder()
+//                break
+//            case phoneNumberField:
+//                facultyField.becomeFirstResponder()
+//                break
+//            case facultyField:
+//                courseField.becomeFirstResponder()
+//                break
+            default:
+                textField.resignFirstResponder()
+            }
+        return true
     }
     
     
