@@ -249,7 +249,8 @@ extension LaunchPageVC {
         if mail![1].contains("sdu.edu.kz") {
             return true
         } else {
-            return false
+            // For testing correct it after
+            return true
         }
     }
     

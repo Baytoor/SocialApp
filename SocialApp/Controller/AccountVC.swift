@@ -26,14 +26,14 @@ class AccountVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        profilePhotoView.layer.cornerRadius = profilePhotoView.frame.width/2
+        profilePhotoView.layer.masksToBounds = true
     }
     
     func getInfo(){
         if let data = NSData(contentsOf: URL(string: User.init().photoURL)!){
             profilePhotoView.image = UIImage(data: data as Data)
         }
-        profilePhotoView.layer.cornerRadius = profilePhotoView.frame.width/2
-        profilePhotoView.layer.masksToBounds = true
         displayNameLbl.text = User.init().displayName
         emailLbl.text = User.init().email
         phoneNumberLbl.text = User.init().phoneNumber
@@ -42,6 +42,12 @@ class AccountVC: UIViewController {
         }
         isDriver = User.init().isDriver
         isVerified = User.init().isVerified
+        
+        displayNameLbl.backgroundColor = UIColor.white
+        emailLbl.backgroundColor = UIColor.white
+        phoneNumberLbl.backgroundColor = UIColor.white
+        infoLbl.backgroundColor = UIColor.white
+        
     }
     
     @IBAction func settingsBtnPressed(_ sender: Any){

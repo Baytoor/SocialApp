@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import SwiftKeychainWrapper
 
-class DriverVC: UIViewController {
+class PassengersVC: UIViewController {
     
     @IBOutlet weak var addBtn: UIBarButtonItem!
     @IBOutlet weak var popUp: UIView!
@@ -20,7 +20,7 @@ class DriverVC: UIViewController {
     @IBOutlet weak var timeFromField: UITextField!
     @IBOutlet weak var timeTillField: UITextField!
     
-    var drivers = [OtherUser]()
+    var passengers = [OtherUser]()
     var refreshControl: UIRefreshControl!
     var bottomConstraints: NSLayoutConstraint?
     
@@ -34,9 +34,9 @@ class DriverVC: UIViewController {
             refreshControl.attributedTitle = NSAttributedString(string: "")
         }
         refreshControl.addTarget(self, action: #selector(self.refresh(sender:)), for: UIControlEvents.valueChanged)
-        refresh(sender: self)
+//        refresh(sender: self)
         
-        tableView.addSubview(refreshControl) // not required when using UITableViewController
+        tableView.addSubview(refreshControl)
         
         closePopUp()
         view.backgroundColor = UIColor(darkBlue)
@@ -54,6 +54,7 @@ class DriverVC: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: Notification.Name.UIKeyboardWillShow, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: Notification.Name.UIKeyboardWillHide, object: nil)
+
     }
     
     @objc func handleKeyboardNotification(notification: Notification) {
@@ -77,14 +78,18 @@ class DriverVC: UIViewController {
     }
     
     @objc func refresh(sender: AnyObject) {
+        
         if !isInternetAvailable() {
             refreshControl.attributedTitle = NSAttributedString(string: "Check your internet connection")
         } else {
             refreshControl.attributedTitle = NSAttributedString(string: "")
         }
+        
         updateList {
             if (Auth.auth().currentUser?.isEmailVerified)! {
-                self.refreshControl.endRefreshing()
+                UIView.animate(withDuration: 0, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
+                    self.refreshControl.endRefreshing()
+                }, completion: nil)
                 self.tableView.reloadData()
             } else {
                 self.refreshControl.attributedTitle = NSAttributedString(string: "Please, verify your email")
@@ -92,16 +97,16 @@ class DriverVC: UIViewController {
         }
     }
     
-    @IBAction func addDriverBtnPressed(_ sender: Any){
+    @IBAction func addPassangerBtnPressed(_ sender: Any){
         if (fromField.text!.count>1 && toField.text!.count>1 && timeFromField.text!.count>1)  {
             var user = User.init()
             if  checkDate(time: timeFromField.text!) && checkDate(time: timeTillField.text!) {
                 user = User.init("\(timeFromField.text!) - \(timeTillField.text!)", "\(fromField.text!) ~> \(toField.text!)", "1")
-                DataService.ds.createDriver(user)
+                DataService.ds.createPassanger(user)
                 closePopUp()
             } else if checkDate(time: timeFromField.text!) {
-                user = User.init("\(timeFromField.text!)", "\(fromField.text!) ~> \(toField.text!)", "1")
-                DataService.ds.createDriver(user)
+                user = User.init("\(timeFromField.text!)", "\(fromField.text!) ~> \(toField.text!)", "3")
+                DataService.ds.createPassanger(user)
                 closePopUp()
             }
         } else {
@@ -110,14 +115,14 @@ class DriverVC: UIViewController {
     }
     
     func updateList(completion: (()->Void)!) {
-        DataService.ds.refDrivers.observe(.value) { (snapshot) in
-            self.drivers.removeAll()
+        DataService.ds.refPassangers.observeSingleEvent(of: .value) { (snapshot) in
+            self.passengers.removeAll()
             if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
                 for snap in snapshot {
                     if let userData = snap.value as? Dictionary<String, Any> {
                         let uid = snap.key
                         let passanger = OtherUser.init(uid, userData)
-                        self.drivers.append(passanger)
+                        self.passengers.append(passanger)
                     }
                 }
             }
@@ -177,14 +182,17 @@ class DriverVC: UIViewController {
     func openPopUp() {
         fromField.becomeFirstResponder()
         tableView.isScrollEnabled = false
+        tableView.isUserInteractionEnabled = false
         tableView.alpha = 0.5
         popUp.isHidden = false
         addBtn.isEnabled = false
+        
     }
     
     func closePopUp() {
         self.view.endEditing(true)
         tableView.isScrollEnabled = true
+        tableView.isUserInteractionEnabled = true
         tableView.alpha = 1
         popUp.isHidden = true
         addBtn.isEnabled = true
@@ -219,23 +227,28 @@ class DriverVC: UIViewController {
         present(refreshAlert, animated: true, completion: nil)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destination: PassengerVC = segue.destination as! PassengerVC
+        destination.passenger = passengers[(tableView.indexPathForSelectedRow?.row)!]
+    }
+    
 }
 
 //Delegate and DataSource functions
-extension DriverVC: UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
+extension PassengersVC: UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         switch textField {
-        case fromField:
-            toField.becomeFirstResponder()
-            break
-        case toField:
-            timeFromField.becomeFirstResponder()
-            break
-        case timeFromField:
-            timeTillField.becomeFirstResponder()
-        default:
-            textField.resignFirstResponder()
+            case fromField:
+                toField.becomeFirstResponder()
+                break
+            case toField:
+                timeFromField.becomeFirstResponder()
+                break
+            case timeFromField:
+                timeTillField.becomeFirstResponder()
+            default:
+                textField.resignFirstResponder()
         }
         return true
     }
@@ -245,12 +258,12 @@ extension DriverVC: UITableViewDelegate, UITableViewDataSource, UITextFieldDeleg
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return drivers.count
+        return passengers.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "PassangerCell") as? PassangerCell {
-            cell.configureCell(otherUser: drivers[indexPath.row])
+            cell.configureCell(otherUser: passengers[indexPath.row])
             return cell
         }
         return PassangerCell()
@@ -261,7 +274,12 @@ extension DriverVC: UITableViewDelegate, UITableViewDataSource, UITextFieldDeleg
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        copyAlert(user: drivers[indexPath.row].displayName, phone: drivers[indexPath.row].phoneNumber)
+//        copyAlert(user: passengers[indexPath.row].displayName, phone: passengers[indexPath.row].phoneNumber)
+        if isInternetAvailable() {
+            self.performSegue(withIdentifier: "PassengerVC", sender: self)
+        } else {
+            refresh(sender: self)
+        }
     }
     
 }

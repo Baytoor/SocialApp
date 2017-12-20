@@ -138,6 +138,7 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
                         changeRequest?.commitChanges { error in
                             if error == nil {
                                 self.updateDisplayName(completionHandler: {
+                                    self.setProfileImage()
                                     completionHandler()
                                 })
                             } else {
@@ -151,6 +152,35 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
                 })
             }
         }
+    }
+    
+    func setProfileImage() {
+        DataService.ds.refPassangers.observe(.value, with: { (snapshot) in
+            if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
+                for snap in snapshot {
+                    if snap.key == User.init().uid {
+                        if let userData = snap.value as? Dictionary<String, Any> {
+                            if let _ = userData["photoURL"] {
+                                DataService.ds.refPassangers.child(snap.key).updateChildValues(["photoURL": "\(User.init().photoURL)"])
+                            }
+                        }
+                    }
+                }
+            }
+        })
+        DataService.ds.refDrivers.observe(.value, with: { (snapshot) in
+            if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
+                for snap in snapshot {
+                    if snap.key == User.init().uid {
+                        if let userData = snap.value as? Dictionary<String, Any> {
+                            if let _ = userData["photoURL"] {
+                                DataService.ds.refDrivers.child(snap.key).updateChildValues(["photoURL": "\(User.init().photoURL)"])
+                            }
+                        }
+                    }
+                }
+            }
+        })
     }
     
     func updateInfo() {

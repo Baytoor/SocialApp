@@ -1,5 +1,5 @@
 //
-//  PassangerCell.swift
+//  PassengerCell.swift
 //  SocialApp
 //
 //  Created by baytoor on 11/26/17.
