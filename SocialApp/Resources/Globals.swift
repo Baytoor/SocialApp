@@ -14,6 +14,8 @@ import SystemConfiguration
 let darkBlue = 0x2D3E4F
 let lightBlue = 0x1DB4DD
 let gray = 0xAEAEAE
+let red = 0xFF5144
+let green = 0x0E9D58
 
 let dataBase = Database.database().reference()
 let storage = Storage.storage().reference()
@@ -107,7 +109,6 @@ func isInternetAvailable() -> Bool {
     let needsConnection = flags.contains(.connectionRequired)
     return (isReachable && !needsConnection)
 }
-
 
 
 

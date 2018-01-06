@@ -200,6 +200,7 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     
     @IBAction func verifyEmailBtnPressed(_ sender: Any) {
         sendEmailVerification()
+        alert(message: "Verification was send to \((Auth.auth().currentUser?.email)!)")
     }
     
     @IBAction func addImageBtnPressed(_ sender: Any) {
@@ -314,12 +315,13 @@ class SettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     func isVerificationNeeded() {
         if User.init().isVerified == true {
             verifyEmailBtn.isEnabled = false
+            verifyEmailBtn.isHidden = true
             verifyEmailBtn.setTitle("Email verified", for: .normal)
             verifyEmailBtn.layer.opacity = 0.5
         } else {
             verifyEmailBtn.layer.opacity = 1
             verifyEmailBtn.isEnabled = true
-            verifyEmailBtn.setTitle("Verify email", for: .normal)
+            verifyEmailBtn.setTitle("Send verification", for: .normal)
         }
     }
     

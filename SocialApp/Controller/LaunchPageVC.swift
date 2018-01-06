@@ -43,8 +43,8 @@ class LaunchPageVC: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         outProcess()
         resetFields()
-        view.backgroundColor = UIColor(darkBlue)
-        facebook.setImage(#imageLiteral(resourceName: "facebook").maskWithColor(color: UIColor(lightBlue)), for: .highlighted)
+        view.backgroundColor = UIColor(hex: darkBlue)
+        facebook.setImage(#imageLiteral(resourceName: "facebook").maskWithColor(color: UIColor(hex: lightBlue)), for: .highlighted)
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.hideKeyboard(_ :)))
         view.addGestureRecognizer(tap)
         
@@ -249,7 +249,7 @@ extension LaunchPageVC {
         if mail![1].contains("sdu.edu.kz") {
             return true
         } else {
-            // For testing correct it after
+            // For testing. Correct it after to false
             return true
         }
     }

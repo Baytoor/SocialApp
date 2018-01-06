@@ -19,28 +19,41 @@ class PassengersVC: UIViewController {
     @IBOutlet weak var toField: UITextField!
     @IBOutlet weak var timeFromField: UITextField!
     @IBOutlet weak var timeTillField: UITextField!
+    @IBOutlet weak var buttonView: UIView!
+    @IBOutlet weak var buttonTF: UITextField!
     
+    var cells: [PassangerCell] = []
     var passengers = [OtherUser]()
     var refreshControl: UIRefreshControl!
     var bottomConstraints: NSLayoutConstraint?
     
+    override func viewDidAppear(_ animated: Bool) {
+        reloadUser()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        buttonView.isHidden = true
+        buttonTF.isHidden = true
+        buttonTF.backgroundColor = UIColor.clear
+        buttonTF.textColor = UIColor.white
+        
         refreshControl = UIRefreshControl()
         if !isInternetAvailable() {
-            refreshControl.attributedTitle = NSAttributedString(string: "Check your internet connection")
+            refreshControl.attributedTitle = NSAttributedString(string: "")
         } else {
             refreshControl.attributedTitle = NSAttributedString(string: "")
         }
         refreshControl.addTarget(self, action: #selector(self.refresh(sender:)), for: UIControlEvents.valueChanged)
-//        refresh(sender: self)
         
-        tableView.addSubview(refreshControl)
+        refresh(sender: self)
+        buttonInfoAppear(msg: "Uploading...", color: UIColor(hex: green))
         
         closePopUp()
-        view.backgroundColor = UIColor(darkBlue)
+        view.backgroundColor = UIColor(hex: darkBlue)
         
+        tableView.addSubview(refreshControl)
         tableView.delegate = self
         tableView.dataSource = self
         fromField.delegate = self
@@ -52,7 +65,6 @@ class PassengersVC: UIViewController {
         view.addConstraint(bottomConstraints!)
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: Notification.Name.UIKeyboardWillShow, object: nil)
-        
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: Notification.Name.UIKeyboardWillHide, object: nil)
 
     }
@@ -73,44 +85,47 @@ class PassengersVC: UIViewController {
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        reloadUser()
-    }
-    
     @objc func refresh(sender: AnyObject) {
-        
+        buttonInfoDisappear()
         if !isInternetAvailable() {
-            refreshControl.attributedTitle = NSAttributedString(string: "Check your internet connection")
+            refreshControl.endRefreshing()
+            buttonInfoAppear(msg: "No internet connection", color: UIColor(hex: red))
         } else {
             refreshControl.attributedTitle = NSAttributedString(string: "")
         }
-        
         updateList {
             if (Auth.auth().currentUser?.isEmailVerified)! {
                 UIView.animate(withDuration: 0, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
                     self.refreshControl.endRefreshing()
                 }, completion: nil)
                 self.tableView.reloadData()
+                self.buttonInfoDisappear()
             } else {
-                self.refreshControl.attributedTitle = NSAttributedString(string: "Please, verify your email")
+                self.refreshControl.attributedTitle = NSAttributedString(string: "")
+                self.refreshControl.endRefreshing()
+                self.buttonInfoAppear(msg: "Verify your email, you can resend verification in settings", color: UIColor(hex: red))
             }
         }
     }
     
     @IBAction func addPassangerBtnPressed(_ sender: Any){
-        if (fromField.text!.count>1 && toField.text!.count>1 && timeFromField.text!.count>1)  {
+        if (fromField.text!.count>0 && toField.text!.count>0 && timeFromField.text!.count>0)  {
             var user = User.init()
-            if  checkDate(time: timeFromField.text!) && checkDate(time: timeTillField.text!) {
-                user = User.init("\(timeFromField.text!) - \(timeTillField.text!)", "\(fromField.text!) ~> \(toField.text!)", "1")
-                DataService.ds.createPassanger(user)
-                closePopUp()
-            } else if checkDate(time: timeFromField.text!) {
-                user = User.init("\(timeFromField.text!)", "\(fromField.text!) ~> \(toField.text!)", "3")
-                DataService.ds.createPassanger(user)
-                closePopUp()
+            if timeTillField.text != "" || timeTillField.text == nil {
+                if  checkDate(time: timeFromField.text!) && checkDate(time: timeTillField.text!) {
+                    user = User.init("\(timeFromField.text!) - \(timeTillField.text!)", "\(fromField.text!) ~> \(toField.text!)", "1")
+                    DataService.ds.createPassanger(user)
+                    closePopUp()
+                }
+            } else {
+                if checkDate(time: timeFromField.text!) && (timeTillField.text == "") {
+                    user = User.init("\(timeFromField.text!)", "\(fromField.text!) ~> \(toField.text!)", "3")
+                    DataService.ds.createPassanger(user)
+                    closePopUp()
+                }
             }
         } else {
-            confirmAlert(message: "Field is empty, please enter all fields")
+            errorAlert(message: "Field is empty, please enter all fields")
         }
     }
     
@@ -128,6 +143,20 @@ class PassengersVC: UIViewController {
             }
             completion()
         }
+    }
+    
+    func buttonInfoAppear(msg: String, color: UIColor) {
+        buttonView.isHidden = false
+        buttonTF.isHidden = false
+        buttonView.backgroundColor = color
+        buttonTF.text = msg
+    }
+    
+    func buttonInfoDisappear() {
+        buttonView.isHidden = true
+        buttonTF.isHidden = true
+        buttonView.backgroundColor = UIColor.clear
+        buttonTF.text = ""
     }
     
     @IBAction func swapDestination(_ sender: Any){
@@ -150,7 +179,7 @@ class PassengersVC: UIViewController {
             if User.init().phoneNumber.count>1 || User.init().displayName.count>1  {
                 openPopUp()
             } else {
-                confirmAlert(message: "Please, fill your information in settings")
+                errorAlert(message: "Please, fill your information in settings")
             }
         } else {
             emailVerifyAlert()
@@ -165,17 +194,16 @@ class PassengersVC: UIViewController {
         if time.count == 5 {
             let hm = time.components(separatedBy: ":")
             if let hour = Int(hm[0]), let min = Int(hm[1]){
-                if hour>24 && min>60 {
-                    confirmAlert(message: "Wrong format of time")
-                    return false
-                } else {
+                if hour<24 && hour>=0 && min<60 && min>=0 && (String(format: "%02d", hour)==hm[0]) && (String(format: "%02d", min)==hm[1]) {
+                    print("MSG: \(hm[0]) is \(String(format: "%02d", hour)). \(hm[1]) is \(String(format: "%02d", min))")
                     return true
                 }
             }
-        } else if time.count == 0 {
+        } else if time.count != 5{
+            errorAlert(message: "Wrong format of time")
             return false
         }
-        confirmAlert(message: "Wrong format of time")
+        errorAlert(message: "Wrong format of time")
         return false
     }
     
@@ -205,31 +233,24 @@ class PassengersVC: UIViewController {
     //Alerts and sends email verification
     func emailVerifyAlert() {
         let refreshAlert = UIAlertController(title: "Error", message: "Your email address has not yet been verified. Do you want us to send another verification email to \(User.init().email).", preferredStyle: .alert)
-        refreshAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (_) in
+        refreshAlert.addAction(UIAlertAction(title: "Send", style: .default, handler: { (_) in
             sendEmailVerification()
         }))
         refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         present(refreshAlert, animated: true, completion: nil)
     }
     
-    func confirmAlert(message: String) {
+    func errorAlert(message: String) {
         let refreshAlert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         refreshAlert.addAction(UIAlertAction(title: "Okay", style: .default))
         present(refreshAlert, animated: true, completion: nil)
     }
     
-    func copyAlert(user: String, phone: String) {
-        let refreshAlert = UIAlertController(title: "Copy phone number?", message: user, preferredStyle: UIAlertControllerStyle.alert)
-        refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        refreshAlert.addAction(UIAlertAction(title: "Copy", style: .default, handler: { (action: UIAlertAction!) in
-            UIPasteboard.general.string = phone
-        }))
-        present(refreshAlert, animated: true, completion: nil)
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destination: PassengerVC = segue.destination as! PassengerVC
-        destination.passenger = passengers[(tableView.indexPathForSelectedRow?.row)!]
+        let indexPath = sender as! IndexPath
+        let cell = cells[indexPath.row]
+        destination.passenger = cell.person
     }
     
 }
@@ -264,6 +285,7 @@ extension PassengersVC: UITableViewDelegate, UITableViewDataSource, UITextFieldD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "PassangerCell") as? PassangerCell {
             cell.configureCell(otherUser: passengers[indexPath.row])
+            cells.insert(cell, at: indexPath.row)
             return cell
         }
         return PassangerCell()
@@ -274,12 +296,7 @@ extension PassengersVC: UITableViewDelegate, UITableViewDataSource, UITextFieldD
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        copyAlert(user: passengers[indexPath.row].displayName, phone: passengers[indexPath.row].phoneNumber)
-        if isInternetAvailable() {
-            self.performSegue(withIdentifier: "PassengerVC", sender: self)
-        } else {
-            refresh(sender: self)
-        }
+        self.performSegue(withIdentifier: "PassengerVC", sender: indexPath)
     }
     
 }

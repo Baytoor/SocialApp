@@ -16,7 +16,9 @@ class PassangerCell: UITableViewCell {
     @IBOutlet weak var personTime: UILabel!
     @IBOutlet weak var personDestination: UILabel!
 //    @IBOutlet weak var personInfo: UILabel!
-    @IBOutlet weak var personPhone: UILabel!
+    @IBOutlet weak var personInfo: UILabel!
+    
+    var person: OtherUser?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,10 +34,13 @@ class PassangerCell: UITableViewCell {
         if let data = NSData(contentsOf: URL(string: otherUser.photoURL)!){
             personImage.image = UIImage(data: data as Data)
         }
-        personPhone.text = otherUser.phoneNumber
+        personInfo.text = otherUser.info
         personName.text = otherUser.displayName
         personTime.text = otherUser.time
         personDestination.text = otherUser.destination
+        
+        person = OtherUser(uid: otherUser.uid,displayName: personName.text!, photo: personImage.image!, phoneNumber: otherUser.phoneNumber, info: personInfo.text!, time: personTime.text!, destination: personDestination.text!, hasSeat: otherUser.hasSeat)
+        
 //        personInfo.text = "\(otherUser.info) course"
     }
 

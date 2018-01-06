@@ -39,7 +39,7 @@ class DriversVC: UIViewController {
         tableView.addSubview(refreshControl)
         
         closePopUp()
-        view.backgroundColor = UIColor(darkBlue)
+        view.backgroundColor = UIColor(hex: darkBlue)
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -227,10 +227,10 @@ class DriversVC: UIViewController {
         present(refreshAlert, animated: true, completion: nil)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destination: PassengerVC = segue.destination as! PassengerVC
-        destination.passenger = drivers[(tableView.indexPathForSelectedRow?.row)!]
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        let destination: PassengerVC = segue.destination as! PassengerVC
+//        destination.passenger = drivers[(tableView.indexPathForSelectedRow?.row)!]
+//    }
     
 }
 
@@ -274,12 +274,12 @@ extension DriversVC: UITableViewDelegate, UITableViewDataSource, UITextFieldDele
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //        copyAlert(user: passengers[indexPath.row].displayName, phone: passengers[indexPath.row].phoneNumber)
-        if isInternetAvailable() {
-            self.performSegue(withIdentifier: "PassengerVC", sender: self)
-        } else {
-            refresh(sender: self)
-        }
+//        copyAlert(user: passengers[indexPath.row].displayName, phone: passengers[indexPath.row].phoneNumber)
+//        if isInternetAvailable() {
+//            self.performSegue(withIdentifier: "PassengerVC", sender: self)
+//        } else {
+//            refresh(sender: self)
+//        }
     }
     
 }

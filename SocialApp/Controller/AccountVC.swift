@@ -31,17 +31,19 @@ class AccountVC: UIViewController {
     }
     
     func getInfo(){
-        if let data = NSData(contentsOf: URL(string: User.init().photoURL)!){
+        let user = User.init()
+        
+        if let data = NSData(contentsOf: URL(string:user.photoURL)!){
             profilePhotoView.image = UIImage(data: data as Data)
         }
-        displayNameLbl.text = User.init().displayName
-        emailLbl.text = User.init().email
-        phoneNumberLbl.text = User.init().phoneNumber
-        if User.init().info.count > 1 {
-            infoLbl.text = "\(User.init().info)"
+        displayNameLbl.text = user.displayName
+        emailLbl.text = user.email
+        phoneNumberLbl.text = user.phoneNumber
+        if user.info.count > 1 {
+            infoLbl.text = "\(user.info)"
         }
-        isDriver = User.init().isDriver
-        isVerified = User.init().isVerified
+        isDriver = user.isDriver
+        isVerified = user.isVerified
         
         displayNameLbl.backgroundColor = UIColor.white
         emailLbl.backgroundColor = UIColor.white

@@ -33,9 +33,9 @@ class RoundedBtn: UIButton {
 //        if imageColor == "white" {
 //            self.imageView?.image = self.imageView?.image?.maskWithColor(color: UIColor.white)
 //        } else if imageColor == "lightblue" {
-//            self.imageView?.image = self.imageView?.image?.maskWithColor(color: UIColor(lightBlue))
+//            self.imageView?.image = self.imageView?.image?.maskWithColor(color: UIColor(hex: lightBlue))
 //        } else {
-//            self.imageView?.image = self.imageView?.image?.maskWithColor(color: UIColor(darkBlue))
+//            self.imageView?.image = self.imageView?.image?.maskWithColor(color: UIColor(hex: darkBlue))
 //        }
 //    }
 //}

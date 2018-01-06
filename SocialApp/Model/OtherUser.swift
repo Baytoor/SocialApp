@@ -27,6 +27,7 @@ class OtherUser {
     private var _time: String
     private var _destination: String
     private var _hasSeat: String
+    private var _image: UIImage
 
     var uid: String {
         return _uid
@@ -55,7 +56,10 @@ class OtherUser {
     var hasSeat: String {
         return _hasSeat
     }
-
+    var image: UIImage {
+        return _image
+    }
+    
     init(_ uid: String, _ userData: Dictionary<String, Any>) {
         self._uid = uid
         if let displayName = userData["displayName"] as? String {
@@ -98,7 +102,20 @@ class OtherUser {
         } else {
             self._hasSeat = ""
         }
-        
+        self._image = UIImage()
+    }
+    
+    init(uid: String, displayName: String, photo: UIImage, phoneNumber: String, info: String, time: String, destination: String, hasSeat: String) {
+        self._uid = uid
+        self._displayName = displayName
+        self._photoURL = ""
+        self._phoneNumber = phoneNumber
+        self._info = info
+        self._time = time
+        self._destination = destination
+        self._hasSeat = hasSeat
+        self._email = ""
+        self._image = photo
     }
 
 

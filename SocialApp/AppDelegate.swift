@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FirebaseApp.configure()
         UIApplication.shared.statusBarStyle = .lightContent
-        UITextField.appearance().tintColor = UIColor(darkBlue)
+        UITextField.appearance().tintColor = UIColor(hex: darkBlue)
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         return true
     }
