@@ -15,7 +15,6 @@ class PassangerCell: UITableViewCell {
     @IBOutlet weak var personName: UILabel!
     @IBOutlet weak var personTime: UILabel!
     @IBOutlet weak var personDestination: UILabel!
-//    @IBOutlet weak var personInfo: UILabel!
     @IBOutlet weak var personInfo: UILabel!
     
     var person: OtherUser?
@@ -31,17 +30,15 @@ class PassangerCell: UITableViewCell {
     }
     
     func configureCell(otherUser: OtherUser) {
-        if let data = NSData(contentsOf: URL(string: otherUser.photoURL)!){
-            personImage.image = UIImage(data: data as Data)
-        }
         personInfo.text = otherUser.info
         personName.text = otherUser.displayName
         personTime.text = otherUser.time
         personDestination.text = otherUser.destination
+        personImage.imageFromUrl(urlString: otherUser.photoURL) {
+            self.person = OtherUser(uid: otherUser.uid,displayName: self.personName.text!, photo: self.personImage.image!, phoneNumber: otherUser.phoneNumber, info: self.personInfo.text!, time: self.personTime.text!, destination: self.personDestination.text!, hasSeat: otherUser.hasSeat)
+        }
         
-        person = OtherUser(uid: otherUser.uid,displayName: personName.text!, photo: personImage.image!, phoneNumber: otherUser.phoneNumber, info: personInfo.text!, time: personTime.text!, destination: personDestination.text!, hasSeat: otherUser.hasSeat)
-        
-//        personInfo.text = "\(otherUser.info) course"
+       
     }
 
 }

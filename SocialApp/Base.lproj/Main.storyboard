@@ -198,7 +198,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" canCancelContentTouches="NO" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="heV-0x-faW">
+                            <tableView clipsSubviews="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" canCancelContentTouches="NO" bouncesZoom="NO" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="heV-0x-faW">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="sectionIndexBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -488,7 +488,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="heV-0x-faW" firstAttribute="bottom" secondItem="9uI-76-VHs" secondAttribute="bottom" id="2YX-Jh-AhW"/>
-                            <constraint firstItem="heV-0x-faW" firstAttribute="top" secondItem="9uI-76-VHs" secondAttribute="top" id="XvC-uT-Kc1"/>
+                            <constraint firstItem="heV-0x-faW" firstAttribute="top" secondItem="9uI-76-VHs" secondAttribute="top" id="GGf-HA-rh6"/>
                             <constraint firstItem="heV-0x-faW" firstAttribute="trailing" secondItem="9uI-76-VHs" secondAttribute="trailing" id="aIS-AI-T3q"/>
                             <constraint firstItem="9uI-76-VHs" firstAttribute="bottom" secondItem="i4O-lE-KTP" secondAttribute="bottom" id="eRX-ts-lgT"/>
                             <constraint firstItem="1rD-KK-3a0" firstAttribute="leading" secondItem="9uI-76-VHs" secondAttribute="leading" id="fjz-c0-Il1"/>

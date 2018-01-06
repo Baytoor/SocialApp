@@ -48,7 +48,19 @@ extension UIImage {
     }
 }
 
-
+extension UIImageView {
+    public func imageFromUrl(urlString: String, complition: (()-> Void)!) {
+        if let url = NSURL(string: urlString) {
+            let requset = NSURLRequest(url: url as URL)
+            NSURLConnection.sendAsynchronousRequest(requset as URLRequest, queue: OperationQueue.main, completionHandler: { (response, data, error) -> Void in
+                if let imageData = data as NSData? {
+                    self.image = UIImage(data: imageData as Data)
+                    complition()
+                }
+            })
+        }
+    }
+}
 
 
 

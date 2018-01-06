@@ -94,15 +94,11 @@ class PassengersVC: UIViewController {
             refreshControl.attributedTitle = NSAttributedString(string: "")
         }
         updateList {
+            self.refreshControl.endRefreshing()
             if (Auth.auth().currentUser?.isEmailVerified)! {
-                UIView.animate(withDuration: 0, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
-                    self.refreshControl.endRefreshing()
-                }, completion: nil)
                 self.tableView.reloadData()
                 self.buttonInfoDisappear()
             } else {
-                self.refreshControl.attributedTitle = NSAttributedString(string: "")
-                self.refreshControl.endRefreshing()
                 self.buttonInfoAppear(msg: "Verify your email, you can resend verification in settings", color: UIColor(hex: red))
             }
         }
