@@ -128,6 +128,7 @@ class PassengersVC: UIViewController {
     func updateList(completion: (()->Void)!) {
         DataService.ds.refPassangers.observeSingleEvent(of: .value) { (snapshot) in
             self.passengers.removeAll()
+            self.cells.removeAll()
             if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
                 for snap in snapshot {
                     if let userData = snap.value as? Dictionary<String, Any> {
@@ -191,7 +192,6 @@ class PassengersVC: UIViewController {
             let hm = time.components(separatedBy: ":")
             if let hour = Int(hm[0]), let min = Int(hm[1]){
                 if hour<24 && hour>=0 && min<60 && min>=0 && (String(format: "%02d", hour)==hm[0]) && (String(format: "%02d", min)==hm[1]) {
-                    print("MSG: \(hm[0]) is \(String(format: "%02d", hour)). \(hm[1]) is \(String(format: "%02d", min))")
                     return true
                 }
             }
@@ -244,8 +244,7 @@ class PassengersVC: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destination: PassengerVC = segue.destination as! PassengerVC
-        let indexPath = sender as! IndexPath
-        let cell = cells[indexPath.row]
+        let cell = cells[(tableView.indexPathForSelectedRow?.row)!]
         destination.passenger = cell.person
     }
     
@@ -281,7 +280,8 @@ extension PassengersVC: UITableViewDelegate, UITableViewDataSource, UITextFieldD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "PassangerCell") as? PassangerCell {
             cell.configureCell(otherUser: passengers[indexPath.row])
-            cells.insert(cell, at: indexPath.row)
+            cells.append(cell)
+//            cells.insert(cell, at: indexPath.row)
             return cell
         }
         return PassangerCell()
@@ -292,7 +292,7 @@ extension PassengersVC: UITableViewDelegate, UITableViewDataSource, UITextFieldD
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.performSegue(withIdentifier: "PassengerVC", sender: indexPath)
+        self.performSegue(withIdentifier: "PassengerVC", sender: self)
     }
     
 }

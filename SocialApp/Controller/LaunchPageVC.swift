@@ -154,9 +154,6 @@ extension LaunchPageVC {
                     if error == nil {
                         print("MSG: User authenticated with firebase using email")
                         self.completeSignIn(uid: (user?.uid)!)
-                        self.newUser(completionHandler: {
-                            self.performSegue(withIdentifier: "accessApp", sender: nil)
-                        })
                     } else {
                         let errCode = AuthErrorCode(rawValue: error!._code)
                         if errCode == AuthErrorCode.userNotFound{
@@ -250,7 +247,7 @@ extension LaunchPageVC {
             return true
         } else {
             // For testing. Correct it after to false
-            return true
+            return false
         }
     }
     

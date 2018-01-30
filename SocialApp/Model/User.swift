@@ -29,6 +29,7 @@ class User {
     private var _hasSeat: String
     private var _isDriver: Int
     private var _isVerified: Bool
+//    private var _interests: [String]
     
     var isVerified: Bool {
         return _isVerified
@@ -63,6 +64,9 @@ class User {
     var hasSeat: String {
         return _hasSeat
     }
+//    var interests: [String] {
+//        return _interests
+//    }
     
     init() {
         if let displayName = Auth.auth().currentUser?.displayName{
@@ -106,6 +110,7 @@ class User {
         let isDriverUD = defaults.integer(forKey: "isDriver") 
         _isDriver = isDriverUD
         
+//        _interests = ["Football", "Basketball", "Starup", "iOS"]
     }
     
     convenience init(_ time: String, _ destination: String, _ hasSeat: String) {

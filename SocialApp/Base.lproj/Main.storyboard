@@ -198,7 +198,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" canCancelContentTouches="NO" bouncesZoom="NO" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="heV-0x-faW">
+                            <tableView clipsSubviews="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" canCancelContentTouches="NO" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="heV-0x-faW">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="sectionIndexBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -215,6 +215,7 @@
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3aE-iT-dIE">
                                                             <rect key="frame" x="10" y="10" width="92" height="92"/>
+                                                            <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="92" id="0DI-oC-eny"/>
                                                             </constraints>
@@ -294,7 +295,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New passenger" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CLP-Kr-9FE">
-                                        <rect key="frame" x="127" y="10" width="122" height="23.5"/>
+                                        <rect key="frame" x="126.5" y="10" width="122" height="23.5"/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -580,7 +581,7 @@
                             </stackView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dDh-ut-ei6">
                                 <rect key="frame" x="15" y="20" width="100" height="100"/>
-                                <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="nKf-ua-zsq"/>
                                     <constraint firstAttribute="width" constant="100" id="um9-kv-z0Z"/>
@@ -919,7 +920,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New driver" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RFH-hF-nxN">
-                                        <rect key="frame" x="145" y="10" width="86.5" height="23.5"/>
+                                        <rect key="frame" x="144.5" y="10" width="86.5" height="23.5"/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -1266,7 +1267,7 @@
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N7W-MG-PYm">
-                                                <rect key="frame" x="0.0" y="310" width="375" height="40"/>
+                                                <rect key="frame" x="0.0" y="444" width="375" height="40"/>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="uBv-lQ-9qL"/>
@@ -1299,7 +1300,7 @@
                                             <constraint firstItem="Ret-c0-1MJ" firstAttribute="top" secondItem="64e-nY-dcN" secondAttribute="bottom" constant="15" id="2LP-QA-JUs"/>
                                             <constraint firstAttribute="trailing" secondItem="SpB-4z-gkj" secondAttribute="trailing" id="4eX-12-rSd"/>
                                             <constraint firstAttribute="trailing" secondItem="kzN-Sy-Kju" secondAttribute="trailing" id="ESc-a1-mbu"/>
-                                            <constraint firstItem="N7W-MG-PYm" firstAttribute="top" secondItem="Ret-c0-1MJ" secondAttribute="bottom" constant="15" id="ETm-Df-Pfg"/>
+                                            <constraint firstItem="kzN-Sy-Kju" firstAttribute="top" secondItem="N7W-MG-PYm" secondAttribute="bottom" constant="15" id="Iq6-4e-VAJ"/>
                                             <constraint firstAttribute="trailing" secondItem="64e-nY-dcN" secondAttribute="trailing" constant="-3" id="Me0-C8-OF1"/>
                                             <constraint firstItem="kzN-Sy-Kju" firstAttribute="leading" secondItem="6CD-tZ-dpI" secondAttribute="leading" id="NUf-18-FjW"/>
                                             <constraint firstItem="64e-nY-dcN" firstAttribute="leading" secondItem="6CD-tZ-dpI" secondAttribute="leading" constant="-3" id="fwB-0j-dSv"/>

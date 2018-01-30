@@ -36,6 +36,7 @@ class DataService {
     
     func createPassanger(_ user: User) {
         refPassangers.child(user.uid).updateChildValues(setUserData(user))
+//        refPassangers.child(user.uid).child("interests").updateChildValues(setInterestsData(user.interests))
     }
     
     func createUser(_ user: User){
@@ -48,10 +49,10 @@ class DataService {
         return userData
     }
     
-    private func setInterestsData(_ interests: [String]) -> Dictionary<Int, String>{
-        var interestsData: Dictionary = [Int: String]()
+    private func setInterestsData(_ interests: [String]) -> Dictionary<String, String>{
+        var interestsData = Dictionary<String, String>()
         for i in 0..<interests.count {
-            interestsData[i] = interests[i]
+            interestsData["\(i)"] = interests[i]
         }
         return interestsData
     }

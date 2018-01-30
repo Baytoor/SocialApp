@@ -51,6 +51,7 @@ class PassengerVC: UIViewController {
                 seatLeft -= 1
             }
             seatRef.parent?.updateChildValues(["hasSeat": "\(seatLeft)"])
+            seatRef.parent?.child("driver").updateChildValues([User.init().uid: "me"])
         }
     }
     

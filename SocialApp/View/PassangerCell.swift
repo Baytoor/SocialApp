@@ -30,6 +30,7 @@ class PassangerCell: UITableViewCell {
     }
     
     func configureCell(otherUser: OtherUser) {
+        personImage.image = UIImage()
         personInfo.text = otherUser.info
         personName.text = otherUser.displayName
         personTime.text = otherUser.time
